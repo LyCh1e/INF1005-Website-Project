@@ -1,8 +1,3 @@
-<?php
-// Start the session if needed
-session_start();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -35,10 +30,10 @@ session_start();
         </nav>
         
         <!-- Main Content -->
-        <div class="container mt-4">
+        <main class="container mt-4">
             <h1>Welcome to My PHP Webpage</h1>
             <p>This is a simple webpage built with PHP and Bootstrap.</p>
-        </div>
+        </main>
         
         <!-- Footer -->
         <footer class="bg-dark text-light text-center py-3 mt-4">
