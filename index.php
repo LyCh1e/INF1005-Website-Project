@@ -33,13 +33,8 @@
         <main class="container mt-4">
             <h1>Welcome to My PHP Webpage</h1>
             <p>This is a simple webpage built with PHP and Bootstrap.</p>
-        </main>
-        
-        <!-- Footer -->
-        <footer class="bg-dark text-light text-center py-3 mt-4">
-            <p>&copy; <?php echo date('Y'); ?> MyWebsite. All rights reserved.</p>
-        </footer>
-        
+        </main>   
+        <?php include 'inc/footer.inc.php'; ?>     
     </body>
     </html>
     
