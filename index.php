@@ -16,11 +16,11 @@
         
         <!-- Main Content -->
         <main class="container mt-4">
-            <h1>Wlecome to The Gastronome's Guide</h1>
+            <h1>Welcome to The Gastronome's Guide</h1>
             <p class="title">Our website provides information on the top restaurants of the month</p>
             <p class="intro">We provide booking services as well as </p>
         </main>   
         <?php include 'inc/footer.inc.php'; ?>     
     </body>
-    </html>
+</html>
     
