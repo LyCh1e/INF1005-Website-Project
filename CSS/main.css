@@ -1,0 +1,107 @@
+.logo {
+  width: 60px;
+  border: #ddd;
+  border-radius: 50px;
+  margin-left: 20px;
+}
+
+.account-image,
+.logout-image {
+  width: 50px;
+  border: #ddd;
+  border-radius: 10px;
+  margin: 0px;
+}
+
+.nav-link {
+  color: black; /* Default text color */
+  text-decoration: none; /* Remove default link underline */
+  padding: 5px 10px; /* Add some padding for visual appeal */
+  text-decoration: none; /* Remove underline */
+  margin: 0 5px; /* Add space between links */
+  font-size: large; /* Larger font size */
+  font-weight: bold; /* Larger font weight */
+}
+
+.nav-link:hover {
+  background-color: darkslategray; /* Black background on hover */
+  color: white; /* White text on hover */
+  transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  background-color: teal;
+  position: fixed; /* Fixes the navbar in place */
+  top: 0; /* Positions it at the top of the viewport */
+  width: 100%; /* Ensures it spans the full width */
+  height: 70px;
+  z-index: 1000; /* Ensures it's above other elements */
+}
+
+.footer-container {
+  border-top: 3px solid #555; /* Add a border at the top */
+  padding: 10px; /* Add some padding */
+  text-align: center; /* Center the text */
+  font-size: small; /* Smaller font size */
+  font-style: italic; /* Italic font style */
+  background-color: teal; /* Light gray background color */
+}
+
+.homeimage {
+  position: relative; /* Make the header the reference point */
+}
+
+.display-image {
+  width: 100%; /* Make the image fill the container */
+  height: 700px; /* Set the height */
+  object-fit: cover; /* Cover the container */
+}
+
+.display-text {
+  position: absolute; /* Position the text absolutely */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the text */
+  text-align: center; /* Center the text within the div */
+  z-index: 1;
+  outline: solid;
+  background-color: rgba(3, 3, 3, 0.628); /* Add a semi-transparent background */
+    padding: 20px; /* Add some padding */
+}
+
+.website-name {
+  text-align: center;
+  font-size: 100px;
+  font-weight: bold;
+  color: aquamarine;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.website-slogan {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 500;
+  color: gainsboro;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header {
+  margin-top: 70px;
+}
+
+main {
+  margin-top: 20px; /* Add space at the top */
+  padding: 40px; /* Add padding */
+}
