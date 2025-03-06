@@ -23,6 +23,10 @@
                 <input required maxlength="45" type="email" id="email" name="email" class="form-control" placeholder="Enter email" required>
             </div>
             <div class="mb-3">
+                <label for="ph" class="form-label">Phone Number:</label>
+                <input required type="ph" id="ph" name="ph" class="form-control" placeholder="Enter phone number">
+            </div>
+            <div class="mb-3">
                 <label for="pwd" class="form-label">Password:</label>
                 <input required maxlength="45" type="password" id="pwd" name="pwd" class="form-control" placeholder="Enter password" required>
             </div>

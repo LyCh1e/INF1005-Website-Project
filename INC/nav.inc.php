@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <nav class="navbar navbar-expand-sm" id="nav-bar">
     <a class="navbar-brand" href="images/logo.png">
         <img class="logo" src="images/logo.png" alt="LOGO">
@@ -13,8 +14,15 @@
             <li class="nav-item">
                 <a class="nav-link" href="index.php#about">About</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="index.php#services">Services</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="aboutServicesDropdown" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Services
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="aboutServicesDropdown">
+                    <li><a class="dropdown-item" href="reviews.php">Restaurant Reviews</a></li>
+                    <li><a class="dropdown-item" href="booking.php">Booking</a></li>
+                </ul>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="index.php#rankings">Rankings</a>
@@ -22,15 +30,33 @@
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link account-image" href="account.php">
-                    <img class="account-image" src="images/account.png" alt="Account" title="Account">
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link logout-image" href="login.php" href="images/logout.png">
-                    <img class="logout-image" src="images/logout.png" alt="Logout" title="Logout">
-                </a>
+                <?php if (isset($_SESSION['fname'])): ?>
+                    <h3><b>Welcome, <?php echo $_SESSION['fname']; ?>!</b></h3>
+                </li>
+                <li class="nav-item">
+                    <a href="logout.php" onclick="return confirmLogout();">
+                        <img src="images/logout.png" width="70" height="50" alt="logouticon">
+                    </a>
+                </li>
+                <li class="nav-item">
+                <?php else: ?>
+                    <div style="display: inline-block; margin-right: 20px; white-space: nowrap;">
+                        <a href="login.php">
+                            <img src="images/account.png" width="70" height="50" alt="accounticon">
+                        </a>
+                    </div>
+                <?php endif; ?>
             </li>
         </ul>
     </nav>
 </nav>
+<script>
+    function confirmLogout() {
+        var confirmAction = confirm("Are you sure you want to log out?");
+        if (confirmAction) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
