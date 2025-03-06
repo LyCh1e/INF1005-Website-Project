@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 <nav class="navbar navbar-expand-sm" id="nav-bar">
-    <a class="navbar-brand" href="images/logo.png">
+    <a class="navbar-brand">
         <img class="logo" src="images/logo.png" alt="LOGO">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">

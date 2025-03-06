@@ -69,8 +69,13 @@
   text-align: center; /* Center the text within the div */
   z-index: 1;
   outline: solid;
-  background-color: rgba(3, 3, 3, 0.628); /* Add a semi-transparent background */
-    padding: 20px; /* Add some padding */
+  background-color: rgba(
+    3,
+    3,
+    3,
+    0.628
+  ); /* Add a semi-transparent background */
+  padding: 20px; /* Add some padding */
 }
 
 .website-name {
@@ -104,4 +109,27 @@ header {
 main {
   margin-top: 20px; /* Add space at the top */
   padding: 40px; /* Add padding */
+  flex: 1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+footer {
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 10px;
 }
