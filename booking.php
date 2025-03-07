@@ -12,7 +12,7 @@
                     <button class="nav-link active" id="new-booking-tab" data-bs-toggle="tab" data-bs-target="#new-booking" type="button" role="tab">New Booking</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="view-bookings-tab" data-bs-toggle="tab" data-bs-target="#view-bookings" type="button" role="tab">Previous Bookings</button>
+                    <button class="nav-link" id="view-bookings-tab" data-bs-toggle="tab" data-bs-target="#view-bookings" type="button" role="tab">View Bookings</button>
                 </li>
             </ul>
             <div class="tab-content" id="bookingTabsContent">
@@ -46,7 +46,7 @@
                 <!-- View Previous Bookings -->
                 <div class="tab-pane fade" id="view-bookings" role="tabpanel">
                     <div class="mt-3">
-                        <h3>Previous Bookings</h3>
+                        <h3>Booked Restaurants</h3>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>

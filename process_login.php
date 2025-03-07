@@ -4,8 +4,6 @@ session_start();
 $email = $pwd = $errorMsg = "";
 $success = true;
 
-
-
 if (empty($_POST["pwd"])) {
     $errorMsg .= "Password is required.<br>";
     $success = false;
