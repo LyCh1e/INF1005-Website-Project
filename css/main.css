@@ -42,7 +42,8 @@
   z-index: 1000; /* Ensures it's above other elements */
 }
 
-.navbar-collapse, .dropdown-menu {
+.navbar-collapse,
+.dropdown-menu {
   background-color: teal; /* Set the background color to teal */
   opacity: 1; /* Make the background fully opaque */
 }
@@ -56,50 +57,60 @@
   background-color: teal; /* Light gray background color */
 }
 
-.homeimage {
-  position: relative; /* Make the header the reference point */
+/* Fully dynamic header styling */
+.home-image {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
 }
 
 .display-image {
-  width: 100%; /* Make the image fill the container */
-  height: 800px; /* Set the height */
-  object-fit: cover; /* Cover the container */
+  width: 100%;
+  height: calc(400px + 25vw); /* Adjusted for better scaling */
+  object-fit: cover;
+  transition: height 0.3s ease;
 }
 
 .display-text {
-  position: absolute; /* Position the text absolutely */
+  position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Center the text */
-  text-align: center; /* Center the text within the div */
+  transform: translate(-50%, -50%);
+  text-align: center;
   z-index: 1;
-  outline: solid;
-  background-color: rgba(
-    3,
-    3,
-    3,
-    0.628
-  ); /* Add a semi-transparent background */
-  padding: 20px; /* Add some padding */
+  background-color: rgba(3, 3, 3, 0.6);
+  padding: calc(8px + 0.8vw);
+  width: calc(50% + 15vw);
+  max-width: 85%;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
 }
 
+/* Dynamic and responsive text */
 .website-name {
   text-align: center;
-  font-size: 100px;
+  font-size: clamp(25px, 8vw, 100px); /* Ensures text shrinks but stays readable */
   font-weight: bold;
   color: aquamarine;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  transition: font-size 0.3s ease;
+  margin: 0 0 calc(4px + 0.4vw) 0;
+  line-height: 1.1;
 }
 
 .website-slogan {
   text-align: center;
-  font-size: 40px;
+  font-size: clamp(10px, 3vw, 40px); /* Responsive font that shrinks well */
   font-weight: 500;
   color: gainsboro;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", Geneva, Verdana, sans-serif;
+  transition: font-size 0.3s ease;
+  margin: 0;
+  line-height: 1.3;
 }
+
 
 .form-control {
   border-color: lightgrey;
