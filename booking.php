@@ -24,6 +24,10 @@
                             <input required type="text" class="form-control" id="name" name="name" required>
                         </div>
                         <div class="mb-3">
+                            <label for="time" class="form-label">Phone Number</label>
+                            <input required type="text" class="form-control" id="tel" name="phoneNumber" required>
+                        </div>
+                        <div class="mb-3">
                             <label for="time" class="form-label">Restaurant Name</label>
                             <input required type="text" class="form-control" id="time" name="restaurantName" required>
                         </div>
