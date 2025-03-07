@@ -42,6 +42,11 @@
   z-index: 1000; /* Ensures it's above other elements */
 }
 
+.navbar-collapse, .dropdown-menu {
+  background-color: teal; /* Set the background color to teal */
+  opacity: 1; /* Make the background fully opaque */
+}
+
 .footer-container {
   border-top: 3px solid #555; /* Add a border at the top */
   padding: 10px; /* Add some padding */

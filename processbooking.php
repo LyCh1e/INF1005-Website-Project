@@ -1,4 +1,20 @@
 <?php
+// Database connection
+$config = parse_ini_file('/var/www/private/db-config.ini');
+if (!$config) {
+    die("Failed to read database config file.");
+}
+$conn = new mysqli(
+    $config['servername'],
+    $config['username'],
+    $config['password'],
+    $config['dbname']
+);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
 // Initialize variables with empty values
 $name = $phoneNumber = $restaurantName = $date = $time = "";
 $errors = [];
@@ -15,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $time = $_POST["time"];
         
         // Prepare SQL statement to prevent SQL injection
-        $stmt = $conn->prepare("INSERT INTO bookings (name, phone_number, restuarant_name, date, time) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO bookings (name, phone_number, restaurant_name, date, time) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("sssss", $name, $phoneNumber, $restaurantName, $date, $time);
         
         // Execute the statement
@@ -59,6 +75,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+
+// Close connection when done
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -117,20 +136,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <footer class="card-footer">
                         <div class="d-flex justify-content-between">
                             <!-- Form for confirming booking -->
-                            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" aria-label="Confirm booking form">
+                            <form id="confirm-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" aria-label="Confirm booking form">
                                 <input type="hidden" name="name" value="<?php echo htmlspecialchars($name); ?>">
                                 <input type="hidden" name="phoneNumber" value="<?php echo htmlspecialchars($phoneNumber); ?>">
                                 <input type="hidden" name="restaurantName" value="<?php echo htmlspecialchars($restaurantName); ?>">
                                 <input type="hidden" name="date" value="<?php echo htmlspecialchars($date); ?>">
                                 <input type="hidden" name="time" value="<?php echo htmlspecialchars($time); ?>">
                                 <input type="hidden" name="confirm" value="yes">
-                            </form>
-                            
-                            <!-- Back button to edit information -->
-                            <nav aria-label="Form navigation">
-                                <a id="confirm-booking" href="booking.php" type="submit" class="btn btn-success" role="button">Confirm</a>
+                                
+                                <button id="confirm-booking" type="submit" class="btn btn-success ">Confirm</button>
                                 <a id="cancel-booking" href="booking.php" class="btn btn-secondary" role="button">Cancel</a>
-                            </nav>
+                            </form>
                         </div>
                     </footer>
                 </article>
