@@ -1,4 +1,4 @@
-// Tabbed Menu
+// Tabbed Menu for home page
 function openMenu(evt, menuName) {
     var i, x, tablinks;
     x = document.getElementsByClassName("menu");
@@ -13,3 +13,6 @@ function openMenu(evt, menuName) {
     evt.currentTarget.firstElementChild.className += " w3-dark-grey";
   }
   document.getElementById("myLink").click();
+
+// Tabbed Menu for booking page
+var bookingTabs = new bootstrap.Tab(document.querySelector('#bookingTabs'));
