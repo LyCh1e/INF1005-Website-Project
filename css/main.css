@@ -110,6 +110,54 @@
   border-width: 2px;
 }
 
+.card {
+  width: 60%;
+  position: center;
+}
+
+.card-footer {
+  display: inline;
+  justify-content: space-between; /* Distributes space between items */
+  align-items: center; /* Vertically centers items */
+  padding: 1rem;
+  background-color: #f8f9fa;
+  position: center;
+}
+
+#confirm-booking {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 15px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: black;
+  border-width: 2px;
+  cursor: pointer;
+  margin: 0 5px;
+  font-weight: bold;
+}
+
+#cancel-booking {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 15px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: black;
+  border-width: 2px;
+  cursor: pointer;
+  margin: 0 5px;
+  font-weight: bold;
+}
+
+#confirm-booking:hover {
+  background-color: #218838;
+}
+
+#cancel-booking:hover {
+  background-color: #c82333;
+}
+
 nav {
   display: flex;
   justify-content: space-between;
@@ -148,5 +196,3 @@ footer {
 form {
   width: 50%;
 }
-
-
