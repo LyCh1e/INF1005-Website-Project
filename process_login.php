@@ -64,6 +64,7 @@ function authenticateUser()
                 $fname = $row["fname"];
                 $lname = $row["lname"];
                 $hash = $row["password"];
+                $ph = $row['phone_number'];
                 // Check if the password matches:
                 if (!password_verify($_POST["pwd"], $hash)) {
                     // Don’t tell hackers which one was wrong, keep them guessing...
@@ -74,6 +75,7 @@ function authenticateUser()
                     $_SESSION['fname'] = $fname;
                     $_SESSION['lname'] = $lname;
                     $_SESSION['email'] = $email;
+                    $_SESSION['ph'] = $ph;
                 }
             } else {
                 $errorMsg = "Email not found or password doesn't match...";

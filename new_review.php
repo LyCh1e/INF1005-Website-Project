@@ -24,14 +24,15 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = htmlspecialchars($_POST["name"]);
     $rating = intval($_POST["rating"]);
+    $restaurantName = htmlspecialchars($_POST["restaurantName"]);
     $comment = htmlspecialchars($_POST["comment"]);
 
     if (!empty($name) && !empty($comment) && $rating >= 1 && $rating <= 5) {
-        $stmt = $conn->prepare("INSERT INTO reviews (name, rating, comment) VALUES (?, ?, ?)");
-        $stmt->bind_param("sis", $name, $rating, $comment);
+        $stmt = $conn->prepare("INSERT INTO reviews (name,restaurantName, rating, comment) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssis", $name, $restaurantName, $rating, $comment);
         $stmt->execute();
         $stmt->close();
-        echo "<script>alert('Review submitted successfully!');</script>";
+        echo "<script>alert('Review submitted successfully!');window.location.href='reviews.php';</script>";
     } else {
         echo "<script>alert('Please fill all fields correctly.');</script>";
     }
@@ -49,24 +50,23 @@ $conn->close();
 <?php
 include "inc/head.inc.php";
 ?>
-    <meta charset="UTF-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-     <main>
-    <title>Write a Review</title>
-    </main>
 </head>
 <body>
 <?php
     include "inc/nav.inc.php";
     ?>
+    <main>
     <div class="container mt-5">
         <h2 class="text-center">Write a Review</h2>
-
-        <!-- Review Form -->
         <form method="POST" class="mb-4">
             <div class="mb-3">
                 <label class="form-label"><strong>Name:</strong></label>
-                <input type="text" name="name" class="form-control" required value="<?= htmlspecialchars($_SESSION['fname']) ?>">
+                <input type="text" name="name" class="form-control" value="<?= htmlspecialchars($_SESSION['fname']) ?>" disabled>
+                <input type="hidden" name="name" value="<?= htmlspecialchars($_SESSION['fname']) ?>">
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Restaurant Name:</strong></label>
+                <input type="text" name="restaurantName" class="form-control" required>
             </div>
             <div class="mb-3">
                 <label class="form-label"><strong>Rating:</strong> (1-5)</label>
@@ -83,11 +83,9 @@ include "inc/head.inc.php";
                 <textarea name="comment" class="form-control" rows="4" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit Review</button>
-        </form>
-
-        <!-- Display Reviews -->
-        
+        </form>        
     </div>
+    </main>
     <?php
 include "inc/footer.inc.php";
 ?>
