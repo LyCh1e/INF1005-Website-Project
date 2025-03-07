@@ -4,16 +4,16 @@
         <?php include 'inc/head.inc.php'; ?>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>My PHP Webpage</title>
+        <title>Gastronome's Guide</title>
     </head>
     <body>
-        <!-- Navigation Bar -->
-        <?php include "inc/nav.inc.php"; ?>
-        <!-- Header -->
-        <?php include "inc/header.inc.php"; ?>
+        <header>
+            <?php include "inc/nav.inc.php"; ?>
+            <?php include "inc/header.inc.php"; ?>
+        </header>
         
         <!-- Main Content -->
-        <main class="container mt-4">
+        <main class="container mt-4" id="about">
             <h1>Welcome to The Gastronome's Guide</h1>
             <p class="title">Our website provides information on the top restaurants of the month</p>
             <p class="intro">We provide booking services as well as </p>

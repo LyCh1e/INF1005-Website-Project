@@ -57,7 +57,7 @@
 
 .display-image {
   width: 100%; /* Make the image fill the container */
-  height: 700px; /* Set the height */
+  height: 800px; /* Set the height */
   object-fit: cover; /* Cover the container */
 }
 
@@ -96,14 +96,24 @@
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
+.form-control {
+  border-color: lightgrey;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0px;
+}
+
+.form-control:focus {
+  border-color: black;
+  outline: black;
+  box-shadow: none;
+  border-width: 2px;
+}
+
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-header {
-  margin-top: 70px;
 }
 
 main {
@@ -118,7 +128,8 @@ main {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -133,3 +144,9 @@ footer {
   text-align: center;
   padding: 10px;
 }
+
+form {
+  width: 50%;
+}
+
+
