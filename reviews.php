@@ -86,6 +86,7 @@ include "inc/head.inc.php";
                                 <?php endif; ?>
                                 <p>
                                     <a href="edit_review.php?id=<?= $review['id'] ?>" class="btn btn-primary">Edit Review</a>
+                                    <a href="delete_review.php?id=<?= $review['id'] ?>" class="btn btn-secondary">Delete Review</a>
 
                                 </p>
                             </div>

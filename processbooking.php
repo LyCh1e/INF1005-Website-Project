@@ -25,13 +25,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["confirm"]) && $_POST["confirm"] == "yes") {
         // Retrieve data from POST
         $name = trim($_POST["name"]);
-        $phoneNumber = trim($_POST["phoneNumber"]);
+        $phoneNumber = trim($_POST["ph"]);
         $restaurantName = trim($_POST["restaurantName"]);
         $date = $_POST["date"];
         $time = $_POST["time"];
         
         // Prepare SQL statement to prevent SQL injection
-        $stmt = $conn->prepare("INSERT INTO bookings (name, phone_number, restaurant_name, date, time) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO bookings (name, phoneNumber, restaurantName, date, time) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("sssss", $name, $phoneNumber, $restaurantName, $date, $time);
         
         // Execute the statement
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // First submission from booking form - capture data for review
         $name = trim($_POST["name"]);
-        $phoneNumber = trim($_POST["phoneNumber"]);
+        $phoneNumber = trim($_POST["ph"]);
         $restaurantName = trim($_POST["restaurantName"]);
         $date = $_POST["date"];
         $time = $_POST["time"];

@@ -1,0 +1,114 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// session_start();
+
+// Database connection
+$config = parse_ini_file('/var/www/private/db-config.ini');
+if (!$config) {
+    die("Failed to read database config file.");
+} else {
+    $conn = new mysqli(
+        $config['servername'],
+        $config['username'],
+        $config['password'],
+        $config['dbname']
+    );
+}
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Get review ID from URL
+if (!isset($_GET['id']) || !ctype_digit($_GET['id'])) {
+    die("Invalid booking ID. Please provide a valid booking ID.");
+}
+
+$booking_id = intval($_GET['id']);
+
+// Fetch the review to edit
+$stmt = $conn->prepare("SELECT * FROM bookings WHERE id = ?");
+$stmt->bind_param("i", $booking_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$booking = $result->fetch_assoc();
+
+if (!$booking) {
+    die("Booking not found.");
+}
+$stmt->close();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $ph = trim($_POST["ph"]);
+    $date = trim($_POST['date']);
+    $time = trim($_POST['time']);
+
+    $update_stmt = $conn->prepare("UPDATE bookings SET date = ?, time = ?, phoneNumber = ? WHERE id = ?");
+    $update_stmt->bind_param("sssi", $date, $time, $ph, $booking_id);
+
+    if ($update_stmt->execute()) {
+        echo "<script>alert('Booking updated successfully!'); window.location.href='booking.php';</script>";
+        exit;
+    } else {
+        echo "<script>alert('Failed to update booking. Please try again.');</script>";
+    }
+    $update_stmt->close();
+}
+
+$conn->close();
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<?php
+include "inc/head.inc.php";
+?>
+</head>
+<body>
+<?php
+    include "inc/nav.inc.php";
+    ?>
+    <main>
+    <div class="container mt-5">
+        <h2 class="text-center">Edit Your Booking</h2>
+        <form method="POST" class="mb-4">
+            <div class="mb-3">
+                <label class="form-label"><strong>Name:</strong></label>
+                <input type="text" name="name" class="form-control" value="<?= htmlspecialchars($_SESSION['fname']) ?>" disabled>
+                <input type="hidden" name="name" value="<?= htmlspecialchars($_SESSION['fname']) ?>">
+            </div>
+            <div class="mb-3">
+                        <label for="ph" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" name="ph"
+                            value="<?= htmlspecialchars($_SESSION['ph']) ?>">
+                        <!-- can try to autofill phone number -->
+                    </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Restaurant Name:</strong></label>
+                <input type="text" name="restaurantName" class="form-control" value="<?= htmlspecialchars($booking['restaurantName']) ?>" disabled>
+                <input type="hidden" name="restaurantName" value="<?= htmlspecialchars($booking['restaurantName']) ?>">
+            </div>
+            <div class="mb-3">
+                        <label for="date" class="form-label">Date</label>
+                        <input required type="date" class="form-control" id="date" name="date" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="time" class="form-label">Time</label>
+                        <input required type="time" class="form-control" id="time" name="time" required>
+                    </div>
+            
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a href="reviews.php" class="btn btn-secondary">Cancel</a>
+        </form>        
+    </div>
+    </main>
+    <?php
+include "inc/footer.inc.php";
+?>
+
+</body>
+</html>

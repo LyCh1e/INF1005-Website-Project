@@ -24,7 +24,7 @@ session_start();
         <div class="tab-content" id="bookingTabsContent">
             <!-- New Booking Form -->
             <div class="tab-pane fade show active" id="new-booking" role="tabpanel">
-                <form action="process_booking.php" method="POST" class="mt-3" style="width: 30%;">
+                <form action="processbooking.php" method="POST" class="mt-3" style="width: 30%;">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name" name="name"
@@ -33,7 +33,8 @@ session_start();
                     </div>
                     <div class="mb-3">
                         <label for="ph" class="form-label">Phone Number</label>
-                        <input type="text" class="form-control" name="ph" value="<?= htmlspecialchars($_SESSION['ph']) ?>">
+                        <input type="text" class="form-control" name="ph"
+                            value="<?= htmlspecialchars($_SESSION['ph']) ?>">
                         <!-- can try to autofill phone number -->
                     </div>
                     <div class="mb-3">
@@ -50,8 +51,8 @@ session_start();
                     </div>
                     <?php if (!isset($_SESSION['fname'])): ?>
                         <h5><small><a href="login.php">Please login to make booking.</a></small></h5>
-                        <?php else: ?>
-                        
+                    <?php else: ?>
+
                         <button type="submit" class="btn btn-primary">Book Now</button>
                     <?php endif; ?>
                 </form>
@@ -78,7 +79,7 @@ session_start();
                             }
 
                             // Assuming session has 'email' or 'user_id' as identifiers
-
+                            
                             // Database connection
                             $config = parse_ini_file('/var/www/private/db-config.ini');
                             if (!$config) {
@@ -95,7 +96,7 @@ session_start();
                                 die("Connection failed: " . $conn->connect_error);
                             }
 
-                            $query = "SELECT name, restaurantName, date, time FROM bookings ORDER BY date DESC, time DESC";
+                            $query = "SELECT id, name, restaurantName, date, time FROM bookings ORDER BY date DESC, time DESC";
                             $result = mysqli_query($conn, $query);
 
                             // Check if there are bookings
@@ -109,7 +110,16 @@ session_start();
                                     <td>" . htmlspecialchars($row['restaurantName']) . "</td>
                                     <td>" . htmlspecialchars($row['date']) . "</td>
                                     <td>" . htmlspecialchars($row['time']) . "</td>
-                                  </tr>";
+                                    <td>
+                                        <a href='edit_booking.php?id=" . htmlspecialchars($row['id']) . "'>
+                                            <img src='images/editicon.jpg' width='60' height='50' alt='editicon'>
+                                        </a>
+
+                                        <a href='delete_booking.php?id=" . urlencode($row['id']) . "' onclick='return confirm(\"Are you sure?\")'>
+                                            <img src='images/deleteicon.png' width='60' height='50' alt='deleteicon'>
+                                        </a>
+                                    </td>
+                                    </tr>";
                                         }
                                     }
                                 }
