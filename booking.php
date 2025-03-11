@@ -25,6 +25,7 @@ session_start();
             <!-- New Booking Form -->
             <div class="tab-pane fade show active" id="new-booking" role="tabpanel">
                 <form action="processbooking.php" method="POST" class="mt-3" style="width: 30%;">
+                <?php if (isset($_SESSION['fname'])): ?>
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name" name="name"
@@ -49,11 +50,9 @@ session_start();
                         <label for="time" class="form-label">Time</label>
                         <input required type="time" class="form-control" id="time" name="time" required>
                     </div>
-                    <?php if (!isset($_SESSION['fname'])): ?>
-                        <h5><small><a href="login.php">Please login to make booking.</a></small></h5>
+                    <button type="submit" class="btn btn-primary">Book Now</button>
                     <?php else: ?>
-
-                        <button type="submit" class="btn btn-primary">Book Now</button>
+                        <h5><small><a href="login.php">Please login to make booking.</a></small></h5>
                     <?php endif; ?>
                 </form>
             </div>
@@ -74,7 +73,7 @@ session_start();
                             <?php
                             // Ensure session is started and logged-in user's data is accessible
                             if (!isset($_SESSION['fname'])) {
-                                echo "<tr><td colspan='4'>Please login to view your bookings.</td></tr>";
+                                echo "<tr><td colspan='4'>Please login to view bookings.</td></tr>";
                                 exit;
                             }
 
