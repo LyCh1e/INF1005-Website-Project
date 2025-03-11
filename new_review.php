@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("ssis", $name, $restaurantName, $rating, $comment);
         $stmt->execute();
         $stmt->close();
-        echo "<script>alert('Review submitted successfully!');window.location.href='reviews.php';</script>";
+        echo "<script>alert('Review submitted successfully!');window.location.href='reviews.php?restaurant=" . htmlspecialchars($_GET['restaurant']) . "';</script>";
     } else {
         echo "<script>alert('Please fill all fields correctly.');</script>";
     }
@@ -46,49 +46,88 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<?php
-include "inc/head.inc.php";
-?>
+    <?php
+    include "inc/head.inc.php";
+    ?>
 </head>
+
 <body>
-<?php
+    <?php
     include "inc/nav.inc.php";
     ?>
     <main>
-    <div class="container mt-5">
-        <h2 class="text-center">Write a Review</h2>
-        <form method="POST" class="mb-4">
-            <div class="mb-3">
-                <label class="form-label"><strong>Name:</strong></label>
-                <input type="text" name="name" class="form-control" value="<?= htmlspecialchars($_SESSION['fname']) ?>" disabled>
-                <input type="hidden" name="name" value="<?= htmlspecialchars($_SESSION['fname']) ?>">
-            </div>
-            <div class="mb-3">
-                <label class="form-label"><strong>Restaurant Name:</strong></label>
-                <input type="text" name="restaurantName" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label"><strong>Rating:</strong> (1-5)</label>
-                <select name="rating" class="form-select" required>
-                    <option value="5">★★★★★</option>
-                    <option value="4">★★★★☆</option>
-                    <option value="3">★★★☆☆</option>
-                    <option value="2">★★☆☆☆</option>
-                    <option value="1">★☆☆☆☆</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label class="form-label"><strong>Comment:</strong></label>
-                <textarea name="comment" class="form-control" rows="4" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit Review</button>
-        </form>        
-    </div>
+        <?php if (isset($_GET['restaurant'])): ?>
+        <div class="container mt-5">
+            <h2 class="text-center">Write a Review</h2>
+            <form method="POST" class="mb-4">
+                <div class="mb-3">
+                    <label class="form-label"><strong>Name:</strong></label>
+                    <input type="text" name="name" class="form-control"
+                        value="<?= htmlspecialchars($_SESSION['fname']) ?>" disabled>
+                    <input type="hidden" name="name" value="<?= htmlspecialchars($_SESSION['fname']) ?>">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><strong>Restaurant Name:</strong></label>
+                    <input type="text" name="restaurantName" class="form-control"
+                        value="<?= htmlspecialchars($_GET['restaurant'] )?>" disabled>
+                        <input type="hidden" name="restaurantName" value="<?= htmlspecialchars($_GET['restaurant']) ?>">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><strong>Rating:</strong> (1-5)</label>
+                    <select name="rating" class="form-select" required>
+                        <option value="5">★★★★★</option>
+                        <option value="4">★★★★☆</option>
+                        <option value="3">★★★☆☆</option>
+                        <option value="2">★★☆☆☆</option>
+                        <option value="1">★☆☆☆☆</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><strong>Comment:</strong></label>
+                    <textarea name="comment" class="form-control" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Review</button>
+            </form>
+        </div>
+        <?php else: ?>
+            <div class="container mt-5">
+            <h2 class="text-center">Write a Review</h2>
+            <form method="POST" class="mb-4">
+                <div class="mb-3">
+                    <label class="form-label"><strong>Name:</strong></label>
+                    <input type="text" name="name" class="form-control"
+                        value="<?= htmlspecialchars($_SESSION['fname']) ?>" disabled>
+                    <input type="hidden" name="name" value="<?= htmlspecialchars($_SESSION['fname']) ?>">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><strong>Restaurant Name:</strong></label>
+                    <input type="text" name="restaurantName" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><strong>Rating:</strong> (1-5)</label>
+                    <select name="rating" class="form-select" required>
+                        <option value="5">★★★★★</option>
+                        <option value="4">★★★★☆</option>
+                        <option value="3">★★★☆☆</option>
+                        <option value="2">★★☆☆☆</option>
+                        <option value="1">★☆☆☆☆</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><strong>Comment:</strong></label>
+                    <textarea name="comment" class="form-control" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Review</button>
+            </form>
+        </div>
+        <?php endif; ?>
     </main>
     <?php
-include "inc/footer.inc.php";
-?>
+    include "inc/footer.inc.php";
+    ?>
 
 </body>
+
 </html>

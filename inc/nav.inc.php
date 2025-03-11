@@ -20,7 +20,7 @@
                     Services
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="aboutServicesDropdown">
-                    <li><a class="dropdown-item" href="reviews.php">Restaurant Reviews</a></li>
+                    <li><a class="dropdown-item" href="restaurants.php">Restaurant Reviews</a></li>
                     <li><a class="dropdown-item" href="booking.php">Booking</a></li>
                 </ul>
             </li>

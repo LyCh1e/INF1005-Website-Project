@@ -43,7 +43,7 @@ if (isset($_GET['id']) && isset($_SESSION['fname'])) {
     
     $stmt->execute();
     if ($stmt->affected_rows > 0) {
-        echo "<script>alert('Review deleted successfully!'); window.location.href='reviews.php';</script>";
+        echo "<script>alert('Review deleted successfully!'); window.location.href='reviews.php?restaurant=" . htmlspecialchars($_GET['restaurantName']) . "';</script>";
     } else {
         $error = $stmt->error;  // Capture the error message
         echo "<script>console.log('Error during deletion: $error');</script>"; // Log the error to console
@@ -53,6 +53,6 @@ if (isset($_GET['id']) && isset($_SESSION['fname'])) {
     $stmt->close();
     $conn->close();
 } else {
-    echo "<script>alert('Unauthorized access.'); window.location.href='reviews.php';</script>";
+    echo "<script>alert('Unauthorized access.'); window.location.href='reviews.php?restaurant=" . htmlspecialchars($_GET['restaurantName']) . "';</script>";
 }
 ?>

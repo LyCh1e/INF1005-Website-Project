@@ -100,7 +100,7 @@ include "inc/head.inc.php";
                 <textarea name="comment" class="form-control" rows="4" required><?= htmlspecialchars($review['comment']) ?></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Save Changes</button>
-            <a href="reviews.php" class="btn btn-secondary">Cancel</a>
+            <a href="reviews.php?restaurant=<?= isset($_GET['restaurantName']) ? urlencode($_GET['restaurantName']) : '' ?>" class="btn btn-secondary">Cancel</a>
         </form>        
     </div>
     </main>
