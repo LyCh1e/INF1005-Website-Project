@@ -52,14 +52,14 @@ include "inc/head.inc.php";
             <?php endif; ?>
         </div>
         
-        <div class="row">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
             <?php
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     $restaurantName = htmlspecialchars($row['restaurantName']);
                     $avgRating = number_format($row['avgRating'], 1);
 
-                    echo "<div class='col-md-3 mb-3'>
+                    echo "<div class='col'>
                             <div class='card shadow-lg'>
                                 <div class='card-body text-center'>
                                     <h5 class='card-title'>$restaurantName</h5>

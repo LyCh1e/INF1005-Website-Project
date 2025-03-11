@@ -94,15 +94,15 @@ include "inc/head.inc.php";
             </div>
             <div class="mb-3">
                         <label for="date" class="form-label">Date</label>
-                        <input required type="date" class="form-control" id="date" name="date" required>
+                        <input required type="date" class="form-control" id="date" name="date" min="<?= date('Y-m-d'); ?>" value="<?= htmlspecialchars($booking['date']) ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="time" class="form-label">Time</label>
-                        <input required type="time" class="form-control" id="time" name="time" required>
+                        <input required type="time" class="form-control" id="time" name="time" value="<?= htmlspecialchars($booking['time']) ?>" required>
                     </div>
             
             <button type="submit" class="btn btn-primary">Save Changes</button>
-            <a href="reviews.php" class="btn btn-secondary">Cancel</a>
+            <a href="booking.php" class="btn btn-secondary">Cancel</a>
         </form>        
     </div>
     </main>

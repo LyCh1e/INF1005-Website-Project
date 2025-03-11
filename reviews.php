@@ -62,7 +62,7 @@ $conn->close();
     <main class="container mt-5">
         <h1>
             <?php if ($restaurantFilter): ?>
-                <?= htmlspecialchars($restaurantFilter) ?> Reviews
+                <?= htmlspecialchars($restaurantFilter) ?>
             <?php else: ?>
                 All Reviews
             <?php endif; ?>

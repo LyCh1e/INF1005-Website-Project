@@ -32,7 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("ssis", $name, $restaurantName, $rating, $comment);
         $stmt->execute();
         $stmt->close();
-        echo "<script>alert('Review submitted successfully!');window.location.href='reviews.php?restaurant=" . htmlspecialchars($_GET['restaurant']) . "';</script>";
+        if (isset($_GET['restaurant'])){
+            echo "<script>alert('Review submitted successfully!');window.location.href='reviews.php?restaurant=" . htmlspecialchars($_GET['restaurant']) . "';</script>";
+        }
+        else{
+            echo "<script>alert('Review submitted successfully!');window.location.href='restaurants.php'</script>";
+        }
     } else {
         echo "<script>alert('Please fill all fields correctly.');</script>";
     }

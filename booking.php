@@ -39,12 +39,44 @@ session_start();
                         <!-- can try to autofill phone number -->
                     </div>
                     <div class="mb-3">
-                        <label for="time" class="form-label">Restaurant Name</label>
-                        <input required type="text" class="form-control" id="time" name="restaurantName" required>
+                        <label for="restaurantName" class="form-label">Restaurant Name</label>
+                        <select required class="form-control" id="restaurantName" name="restaurantName">
+                            <option value="" selected disabled>Select a restaurant</option>
+                            <?php
+                            // Database connection
+                            $config = parse_ini_file('/var/www/private/db-config.ini');
+                            if ($config) {
+                                $conn = new mysqli(
+                                    $config['servername'],
+                                    $config['username'],
+                                    $config['password'],
+                                    $config['dbname']
+                                );
+
+                                if ($conn->connect_error) {
+                                    die("Connection failed: " . $conn->connect_error);
+                                }
+
+                                // Fetch restaurant names
+                                $query = "SELECT DISTINCT restaurantName FROM reviews ORDER BY restaurantName ASC";
+                                $result = mysqli_query($conn, $query);
+
+                                if ($result) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        echo "<option value='" . htmlspecialchars($row['restaurantName']) . "'>" . htmlspecialchars($row['restaurantName']) . "</option>";
+                                    }
+                                }
+
+                                mysqli_close($conn);
+                            } else {
+                                echo "<option disabled>Database error</option>";
+                            }
+                            ?>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="date" class="form-label">Date</label>
-                        <input required type="date" class="form-control" id="date" name="date" required>
+                        <input required type="date" class="form-control" id="date" name="date" min="<?= date('Y-m-d'); ?>" required>
                     </div>
                     <div class="mb-3">
                         <label for="time" class="form-label">Time</label>

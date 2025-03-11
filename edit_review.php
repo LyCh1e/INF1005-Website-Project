@@ -3,8 +3,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// session_start();
-
 // Database connection
 $config = parse_ini_file('/var/www/private/db-config.ini');
 if (!$config) {
@@ -49,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $update_stmt->bind_param("isi", $rating, $comment, $review_id);
 
     if ($update_stmt->execute()) {
-        echo "<script>alert('Review updated successfully!'); window.location.href='reviews.php';</script>";
+        echo "<script>alert('Review updated successfully!'); window.location.href='reviews.php?restaurant=" . htmlspecialchars($_GET['restaurantName']) . "';</script>";
         exit;
     } else {
         echo "<script>alert('Failed to update review. Please try again.');</script>";
@@ -100,7 +98,7 @@ include "inc/head.inc.php";
                 <textarea name="comment" class="form-control" rows="4" required><?= htmlspecialchars($review['comment']) ?></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Save Changes</button>
-            <a href="reviews.php?restaurant=<?= isset($_GET['restaurantName']) ? urlencode($_GET['restaurantName']) : '' ?>" class="btn btn-secondary">Cancel</a>
+            <a href="reviews.php?restaurant=<?= urlencode($review['restaurantName']) ?>" class="btn btn-secondary">Cancel</a>
         </form>        
     </div>
     </main>
