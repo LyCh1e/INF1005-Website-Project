@@ -101,7 +101,7 @@ include "inc/head.inc.php";
                         <input required type="time" class="form-control" id="time" name="time" value="<?= htmlspecialchars($booking['time']) ?>" required>
                     </div>
             
-            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="submit" class="btn btn-success">Save Changes</button>
             <a href="booking.php" class="btn btn-secondary">Cancel</a>
         </form>        
     </div>

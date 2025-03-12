@@ -97,7 +97,7 @@ include "inc/head.inc.php";
                 <label class="form-label"><strong>Comment:</strong></label>
                 <textarea name="comment" class="form-control" rows="4" required><?= htmlspecialchars($review['comment']) ?></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="submit" class="btn btn-success">Save Changes</button>
             <a href="reviews.php?restaurant=<?= urlencode($review['restaurantName']) ?>" class="btn btn-secondary">Cancel</a>
         </form>        
     </div>

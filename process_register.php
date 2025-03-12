@@ -133,12 +133,12 @@ include "inc/head.inc.php";
             $hash = password_hash($pwd, PASSWORD_DEFAULT);
             echo "<h1>Your registration is successful!</h1>";
             echo "<h3>Thank you for signing up, " . $fname . ".</h3>";
-            echo '<p><a href="login.php"><button class="loginbutton">Login</button></a></p>';
+            echo '<p><a href="login.php"><button class="loginbutton" style="background-color: rgb(0, 146, 131); color: white">Login</button></a></p>';
         } else {
             echo "<h1>Oops!</h1>";
             echo "<h3>The following input errors were detected:</h3>";
             echo "<p>" . $errorMsg . "</p>";
-            echo '<p><a href="register.php"><button class="regbutton">Return to Sign Up</button></a></p>';
+            echo '<p><a href="register.php"><button class="regbutton" style="background-color: red; color: white">Return to Sign Up</button></a></p>';
         }
         ?>
     </div>

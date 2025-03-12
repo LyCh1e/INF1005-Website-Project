@@ -77,13 +77,13 @@ $conn->close();
         <div style="display: inline-block; margin-right: 20px;">
             <?php if (isset($_SESSION['fname'])): ?>
                 <p>
-                    <a href="new_review.php?restaurant=<?= urlencode($_GET['restaurant']) ?>" class='btn btn-primary'>Write a Review!</a>
+                    <a href="new_review.php?restaurant=<?= urlencode($_GET['restaurant']) ?>" class='btn' style='background-color: rgb(0, 146, 131); color: white'>Write a Review!</a>
                 </p>
             <?php else: ?>
                 <div>
                     <p>
                         Want to write a review?
-                        <a href="login.php">Please Login!</a>
+                        <a href="login.php" style="color:rgb(0, 146, 131);">Please Login!</a>
                     </p>
                 </div>
             <?php endif; ?>
@@ -103,11 +103,16 @@ $conn->close();
                         <?php endif; ?>
 
                         <?php if (isset($_SESSION['fname']) && $_SESSION['fname'] == $review['name']): ?>
+                            <div class="icon-container" style="position: absolute; top: 20px; right: 20px;">
                             <p>
-                            <a href="edit_review.php?id=<?= $review['id'] ?>&restaurantName=<?= urlencode($review['restaurantName']) ?>" class="btn btn-primary">Edit Review</a>
-                            <!-- <a href="delete_review.php?id=<?= $review['id'] ?>" class="btn btn-secondary">Delete Review</a> -->
-                            <a href="delete_review.php?id=<?= $review['id'] ?>&restaurantName=<?= urlencode($review['restaurantName']) ?>" class="btn btn-secondary">Delete Review</a>
+                            <a href="edit_review.php?id=<?= $review['id'] ?>&restaurantName=<?= urlencode($review['restaurantName']) ?>">
+                            <i class="fas fa-edit" style="font-size: 35px; color: green;"></i></a>                            
+                            <a href="delete_review.php?id=<?= $review['id'] ?>&restaurantName=<?= urlencode($review['restaurantName']) ?>">
+                            <i class="fas fa-trash-alt" style="font-size: 35px; color: dark grey;"></i>
+                            </a>
+                            
                             </p>
+                            </div>
                         <?php endif; ?>
                     </div>
                 </div>

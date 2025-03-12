@@ -113,13 +113,13 @@ include "inc/head.inc.php";
             $hash = password_hash($pwd, PASSWORD_DEFAULT);
             echo "<h1>Login successful!</h1>";
             echo "<h3>Welcome back, " . $fname . ".</h3>";
-            echo '<p><a href="index.php"><button class="homebutton">Return to Home</button></a></p>';
+            echo '<p><a href="index.php"><button class="homebutton" style="background-color: rgb(0, 146, 131); color: white">Return to Home</button></a></p>';
         } else {
             echo "<h1>Oops!</h1>";
             echo "<h3>The following errors were detected:</h3>";
             echo "<p>Email not found or password doesn't match...</p>";
             // echo "<p>" . $errorMsg . "</p>";
-            echo '<p><a href="login.php"><button class="eloginbutton">Return to Login</button></a></p>';
+            echo '<p><a href="login.php"><button class="eloginbutton" style="background-color: red; color: white">Return to Login</button></a></p>';
         }
         ?>
     </div>

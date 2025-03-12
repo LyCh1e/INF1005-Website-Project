@@ -93,7 +93,7 @@ $conn->close();
                     <label class="form-label"><strong>Comment:</strong></label>
                     <textarea name="comment" class="form-control" rows="4" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit Review</button>
+                <button type="submit" class="btn btn-success">Submit Review</button>
             </form>
         </div>
         <?php else: ?>
@@ -124,7 +124,7 @@ $conn->close();
                     <label class="form-label"><strong>Comment:</strong></label>
                     <textarea name="comment" class="form-control" rows="4" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit Review</button>
+                <button type="submit" class="btn btn-success">Submit Review</button>
             </form>
         </div>
         <?php endif; ?>

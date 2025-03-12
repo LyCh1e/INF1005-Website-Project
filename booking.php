@@ -82,7 +82,7 @@ session_start();
                         <label for="time" class="form-label">Time</label>
                         <input required type="time" class="form-control" id="time" name="time" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Book Now</button>
+                    <button type="submit" class="btn" style='background-color: rgb(0, 146, 131); color: white'>Book Now</button>
                     <?php else: ?>
                         <h5><small><a href="login.php">Please login to make booking.</a></small></h5>
                     <?php endif; ?>
@@ -143,12 +143,9 @@ session_start();
                                     <td>" . htmlspecialchars($row['time']) . "</td>
                                     <td>
                                         <a href='edit_booking.php?id=" . htmlspecialchars($row['id']) . "'>
-                                            <img src='images/editicon.jpg' width='60' height='50' alt='editicon'>
-                                        </a>
-
+                                            <i class='fas fa-edit' style='font-size: 35px; color: green;'></i></a>
                                         <a href='delete_booking.php?id=" . urlencode($row['id']) . "' onclick='return confirm(\"Are you sure?\")'>
-                                            <img src='images/deleteicon.png' width='60' height='50' alt='deleteicon'>
-                                        </a>
+                                            <i class='fas fa-trash-alt' style='font-size: 35px; color: dark grey;'></i></a>
                                     </td>
                                     </tr>";
                                         }

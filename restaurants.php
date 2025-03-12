@@ -40,9 +40,11 @@ include "inc/head.inc.php";
         <h2 class="text-center mb-4">Restaurant Reviews</h2>
         <div style="display: inline-block; margin-right: 20px;">
             <?php if (isset($_SESSION['fname'])): ?>
+                <h3>
                 <p>
-                    <a href="new_review.php" class='btn btn-primary'>Write a Review!</a>
+                Can't find the restaurant? <a href="new_review.php" style="color: rgb(0, 146, 131);">Click here to add the review!</a>
                 </p>
+                </h3>
             <?php else: ?>
                 <div>
                     <p>
@@ -53,7 +55,7 @@ include "inc/head.inc.php";
             <?php endif; ?>
         </div>
 
-        <div class="row row-cols-1 row-cols-2 row-cols-3 row-cols-4 g-3">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
             <?php
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
@@ -65,7 +67,7 @@ include "inc/head.inc.php";
                                 <div class='card-body text-center'>
                                     <h5 class='card-title'>$restaurantName</h5>
                                     <p class='card-text'>⭐️ Average Rating: <strong>$avgRating</strong></p>
-                                    <a href='reviews.php?restaurant=" . urlencode($restaurantName) . "' class='btn btn-primary'>View Reviews</a>
+                                    <a href='reviews.php?restaurant=" . urlencode($restaurantName) . "' class='btn  d-flex justify-content-center' style='background-color: rgb(0, 146, 131); color: white'>View Reviews</a>
                                 </div>
                             </div>
                         </div>";
