@@ -32,6 +32,7 @@ $result = $conn->query($query);
 <?php
 include "inc/head.inc.php";
 ?>
+
 <body>
     <?php include "inc/nav.inc.php"; ?> <!-- Include navigation bar -->
 
@@ -51,8 +52,8 @@ include "inc/head.inc.php";
                 </div>
             <?php endif; ?>
         </div>
-        
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+
+        <div class="row row-cols-1 row-cols-2 row-cols-3 row-cols-4 g-3">
             <?php
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
@@ -60,14 +61,14 @@ include "inc/head.inc.php";
                     $avgRating = number_format($row['avgRating'], 1);
 
                     echo "<div class='col'>
-                            <div class='card shadow-lg'>
+                            <div class='card shadow-lg w-auto'>
                                 <div class='card-body text-center'>
                                     <h5 class='card-title'>$restaurantName</h5>
-                                    <p class='card-text'>⭐ Average Rating: <strong>$avgRating</strong></p>
+                                    <p class='card-text'>⭐️ Average Rating: <strong>$avgRating</strong></p>
                                     <a href='reviews.php?restaurant=" . urlencode($restaurantName) . "' class='btn btn-primary'>View Reviews</a>
                                 </div>
                             </div>
-                          </div>";
+                        </div>";
                 }
             } else {
                 echo "<p class='text-center'>No restaurants found.</p>";
@@ -78,6 +79,7 @@ include "inc/head.inc.php";
 
     <?php include "inc/footer.inc.php"; ?> <!-- Include footer -->
 </body>
+
 </html>
 
 <?php
