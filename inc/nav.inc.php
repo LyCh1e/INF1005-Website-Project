@@ -14,6 +14,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="index.php#about">About</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.php#discover">Discover</a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="aboutServicesDropdown" role="button"
                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -23,9 +26,6 @@
                     <li><a class="dropdown-item" href="restaurants.php">Restaurant Reviews</a></li>
                     <li><a class="dropdown-item" href="booking.php">Booking</a></li>
                 </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="index.php#rankings">Rankings</a>
             </li>
         </ul>
         <ul class="navbar-nav">
