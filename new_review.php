@@ -26,10 +26,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $rating = intval($_POST["rating"]);
     $restaurantName = htmlspecialchars($_POST["restaurantName"]);
     $comment = htmlspecialchars($_POST["comment"]);
+    $price = htmlspecialchars($_POST["restaurantPricing"]);
 
     if (!empty($name) && !empty($comment) && $rating >= 1 && $rating <= 5) {
-        $stmt = $conn->prepare("INSERT INTO reviews (name,restaurantName, rating, comment) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssis", $name, $restaurantName, $rating, $comment);
+        $stmt = $conn->prepare("INSERT INTO reviews (name,restaurantName, rating, comment, restaurantPricing) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssisi", $name, $restaurantName, $rating, $comment, $price);
         $stmt->execute();
         $stmt->close();
         if (isset($_GET['restaurant'])){
@@ -87,6 +88,14 @@ $conn->close();
                         <option value="3">★★★☆☆</option>
                         <option value="2">★★☆☆☆</option>
                         <option value="1">★☆☆☆☆</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><strong>Pricing:</strong></label>
+                    <select name="restaurantPricing" class="form-select" required>
+                        <option value="3">$$$</option>
+                        <option value="2">$$</option>
+                        <option value="1">$</option>
                     </select>
                 </div>
                 <div class="mb-3">

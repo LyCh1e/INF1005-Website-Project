@@ -40,15 +40,18 @@ $reviews = $result->fetch_all(MYSQLI_ASSOC);
 
 // Get average rating for selected restaurant
 if ($restaurantFilter) {
-    $avg_stmt = $conn->prepare("SELECT AVG(rating) AS average_rating FROM reviews WHERE restaurantName = ?");
+    $avg_stmt = $conn->prepare("SELECT AVG(rating) as avgRating, AVG(restaurantPricing) as avgRP FROM reviews WHERE restaurantName = ?");
     $avg_stmt->bind_param("s", $restaurantFilter);
 } else {
-    $avg_stmt = $conn->prepare("SELECT AVG(rating) AS average_rating FROM reviews");
+    $avg_stmt = $conn->prepare("SELECT AVG(rating) AS avgRating, AVG(restaurantPricing) as avgRP FROM reviews");
 }
 
 $avg_stmt->execute();
 $avg_result = $avg_stmt->get_result();
-$average_rating = $avg_result->fetch_assoc()['average_rating'] ?? 0;
+$avgRow = $avg_result->fetch_assoc();
+$average_rating = $avgRow['avgRating'] ?? 0;
+$avgRP = floor($avgRow['avgRP'] ?? 0);
+$pricingSymbols = str_repeat("$", $avgRP);
 
 $conn->close();
 ?>
@@ -69,6 +72,8 @@ $conn->close();
             
             <?php if ($average_rating > 0): ?>
                 (<span><small><?= number_format($average_rating, 1) ?> ⭐</small></span>)
+                <p><h3><span><small>Average Pricing: <?= $pricingSymbols; ?></small></span></h3></p>
+                
             <?php else: ?>
                 <small>(No reviews yet)</small>
             <?php endif; ?>
@@ -88,7 +93,7 @@ $conn->close();
                 </div>
             <?php endif; ?>
         </div>
-
+        <!-- Displaying reviews -->
         <?php if (!empty($reviews)): ?>
             <?php foreach ($reviews as $review): ?>
                 <div class="card mb-3">
@@ -96,6 +101,7 @@ $conn->close();
                         <h5 class="card-title"><?= htmlspecialchars($review['name']) ?></h5>
                         <p class="card-text"><?= htmlspecialchars($review['restaurantName']) ?></p>
                         <p class="card-text"><?= str_repeat("⭐", $review['rating']) ?></p>
+                        <p class="card-text"><?= str_repeat("$", $review['restaurantPricing']) ?></p>
                         <p class="card-text"><?= htmlspecialchars($review['comment']) ?></p>
                         <p class="text-muted">Posted on <?= $review['created_at'] ?></p>
                         <?php if (!is_null($review['edited_at'])): ?>

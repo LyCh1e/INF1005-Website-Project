@@ -36,7 +36,7 @@
                 <div class="w3-col s4 tablink">$$</div>
               </a>
               <a href="javascript:void(0)" onclick="openMenu(event, 'Premium');">
-                <div class="w3-col s4 tablink">$$$+</div>
+                <div class="w3-col s4 tablink">$$$</div>
               </a>
             </nav>
 

@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
     $searchTerm = trim($_POST['search']);
 
     // Secure search query using prepared statement
-    $stmt = $conn->prepare("SELECT restaurantName, AVG(rating) as avgRating FROM reviews WHERE restaurantName LIKE ? GROUP BY restaurantName");
+    $stmt = $conn->prepare("SELECT restaurantName, AVG(rating) as avgRating, AVG(restaurantPricing) as avgRP FROM reviews WHERE restaurantName LIKE ? GROUP BY restaurantName");
     $searchWildcard = "%" . $searchTerm . "%";
     $stmt->bind_param("s", $searchWildcard);
     $stmt->execute();
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
     $stmt->close();
 } else {
     // Default query to fetch all restaurants
-    $query = "SELECT restaurantName, AVG(rating) as avgRating FROM reviews GROUP BY restaurantName";
+    $query = "SELECT restaurantName, AVG(rating) as avgRating, AVG(restaurantPricing) as avgRP FROM reviews GROUP BY restaurantName";
     $result = $conn->query($query);
 
     while ($row = $result->fetch_assoc()) {
@@ -98,12 +98,15 @@ include "inc/head.inc.php";
                     <?php
                     $restaurantName = htmlspecialchars($row['restaurantName']);
                     $avgRating = number_format($row['avgRating'], 1);
+                    $avgRP = floor($row['avgRP']);
+                    $pricingSymbols = str_repeat("$", $avgRP);
                     ?>
                     <div class='col'>
                         <div class='card shadow-lg w-auto'>
                             <div class='card-body text-center'>
                                 <h5 class='card-title'><?php echo $restaurantName; ?></h5>
-                                <p class='card-text'>⭐️ Average Rating: <strong><?php echo $avgRating; ?></strong></p>
+                                <p class='card-text'>Average Rating: <strong><?php echo $avgRating; ?> ⭐️</strong></p>
+                                <p class='card-text'>Average Pricing: <strong><?php echo $pricingSymbols; ?></strong></p>
                                 <a href='reviews.php?restaurant=<?php echo urlencode($restaurantName); ?>'
                                     class='btn d-flex justify-content-center'
                                     style='background-color: rgb(0, 146, 131); color: white'>View Reviews</a>
