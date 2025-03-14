@@ -3,9 +3,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// session_start();
-
-// Database connection
 $config = parse_ini_file('/var/www/private/db-config.ini');
 if (!$config) {
     die("Failed to read database config file.");
@@ -22,7 +19,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get review ID from URL
+// Get booking ID
 if (!isset($_GET['id']) || !ctype_digit($_GET['id'])) {
     die("Invalid booking ID. Please provide a valid booking ID.");
 }
@@ -75,6 +72,7 @@ include "inc/head.inc.php";
     <main>
     <div class="container mt-5">
         <h2 class="text-center">Edit Your Booking</h2>
+        <!-- Edit booking form -->
         <form method="POST" class="mb-4">
             <div class="mb-3">
                 <label class="form-label"><strong>Name:</strong></label>
@@ -85,7 +83,6 @@ include "inc/head.inc.php";
                         <label for="ph" class="form-label">Phone Number</label>
                         <input type="text" class="form-control" name="ph"
                             value="<?= htmlspecialchars($_SESSION['ph']) ?>">
-                        <!-- can try to autofill phone number -->
                     </div>
             <div class="mb-3">
                 <label class="form-label"><strong>Restaurant Name:</strong></label>

@@ -3,7 +3,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Database connection
 $config = parse_ini_file('/var/www/private/db-config.ini');
 if (!$config) {
     die("Failed to read database config file.");
@@ -20,13 +19,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if a specific restaurant was selected
 $restaurantFilter = "";
 if (isset($_GET['restaurant']) && !empty($_GET['restaurant'])) {
     $restaurantFilter = trim($_GET['restaurant']);
 }
 
-// Prepare SQL query
 if ($restaurantFilter) {
     $stmt = $conn->prepare("SELECT * FROM reviews WHERE restaurantName = ? ORDER BY created_at DESC");
     $stmt->bind_param("s", $restaurantFilter);

@@ -1,10 +1,8 @@
 <?php
-// Enable error reporting for debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Database connection
 $config = parse_ini_file('/var/www/private/db-config.ini');
 if (!$config) {
     die("Failed to read database config file.");
@@ -17,21 +15,15 @@ $conn = new mysqli(
     $config['dbname']
 );
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
-// Initialize search variables
 $searchTerm = "";
 $restaurants = [];
 
-// Fetch restaurants (with optional search filter)
 if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
     $searchTerm = trim($_POST['search']);
-
-    // Secure search query using prepared statement
     $stmt = $conn->prepare("SELECT restaurantName, AVG(rating) as avgRating, AVG(restaurantPricing) as avgRP FROM reviews WHERE restaurantName LIKE ? GROUP BY restaurantName");
     $searchWildcard = "%" . $searchTerm . "%";
     $stmt->bind_param("s", $searchWildcard);
@@ -44,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
 
     $stmt->close();
 } else {
-    // Default query to fetch all restaurants
     $query = "SELECT restaurantName, AVG(rating) as avgRating, AVG(restaurantPricing) as avgRP FROM reviews GROUP BY restaurantName";
     $result = $conn->query($query);
 
@@ -120,7 +111,7 @@ include "inc/head.inc.php";
         </div>
     </main>
 
-    <?php include "inc/footer.inc.php"; ?> <!-- Include footer -->
+    <?php include "inc/footer.inc.php"; ?> 
 </body>
 
 </html>

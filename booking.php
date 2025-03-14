@@ -1,8 +1,6 @@
 <?php
 session_start();
 ?>
-<!-- can try to not allow past booking -->
-<!-- try time interval by 5 min? -->
 <!DOCTYPE html>
 <html lang="en">
 <?php include "inc/head.inc.php"; ?>
@@ -36,14 +34,12 @@ session_start();
                         <label for="ph" class="form-label">Phone Number</label>
                         <input type="text" class="form-control" name="ph"
                             value="<?= htmlspecialchars($_SESSION['ph']) ?>">
-                        <!-- can try to autofill phone number -->
                     </div>
                     <div class="mb-3">
                         <label for="restaurantName" class="form-label">Restaurant Name</label>
                         <select required class="form-control" id="restaurantName" name="restaurantName">
                             <option value="" selected disabled>Select a restaurant</option>
                             <?php
-                            // Database connection
                             $config = parse_ini_file('/var/www/private/db-config.ini');
                             if ($config) {
                                 $conn = new mysqli(
@@ -103,15 +99,10 @@ session_start();
                         </thead>
                         <tbody>
                             <?php
-                            // Ensure session is started and logged-in user's data is accessible
                             if (!isset($_SESSION['fname'])) {
                                 echo "<tr><td colspan='4'>Please login to view bookings.</td></tr>";
                                 exit;
-                            }
-
-                            // Assuming session has 'email' or 'user_id' as identifiers
-                            
-                            // Database connection
+                            }                            
                             $config = parse_ini_file('/var/www/private/db-config.ini');
                             if (!$config) {
                                 die("Failed to read database config file.");
@@ -130,10 +121,9 @@ session_start();
                             $query = "SELECT id, name, restaurantName, date, time FROM bookings ORDER BY date DESC, time DESC";
                             $result = mysqli_query($conn, $query);
 
-                            // Check if there are bookings
                             if ($result) {
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                    // Check if the logged-in user is the one who made the booking
+                                    // If logged-in user is the one who made the booking
                                     if (isset($_SESSION['fname'])) {
                                         if ($_SESSION['fname'] == $row['name']) {
                                             echo "<tr>

@@ -3,7 +3,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Database connection
 $config = parse_ini_file('/var/www/private/db-config.ini');
 if (!$config) {
     die("Failed to read database config file.");
@@ -20,7 +19,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get review ID from URL
+// Get review ID
 if (!isset($_GET['id']) || !ctype_digit($_GET['id'])) {
     die("Invalid review ID. Please provide a valid review ID.");
 }
@@ -74,6 +73,7 @@ $conn->close();
     <main>
         <div class="container mt-5">
             <h2 class="text-center">Edit Your Review</h2>
+            <!-- Edit review form -->
             <form method="POST" class="mb-4">
                 <div class="mb-3">
                     <label class="form-label"><strong>Name:</strong></label>

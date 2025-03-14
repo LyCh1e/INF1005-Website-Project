@@ -1,5 +1,4 @@
 <?php
-// Database connection
 $config = parse_ini_file('/var/www/private/db-config.ini');
 if (!$config) {
     die("Failed to read database config file.");
@@ -15,45 +14,35 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Initialize variables with empty values
 $name = $phoneNumber = $restaurantName = $date = $time = "";
 $errors = [];
 
-// Process only POST requests
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Check if coming from confirmation page
     if (isset($_POST["confirm"]) && $_POST["confirm"] == "yes") {
-        // Retrieve data from POST
         $name = trim($_POST["name"]);
         $phoneNumber = trim($_POST["ph"]);
         $restaurantName = trim($_POST["restaurantName"]);
         $date = $_POST["date"];
         $time = $_POST["time"];
         
-        // Prepare SQL statement to prevent SQL injection
         $stmt = $conn->prepare("INSERT INTO bookings (name, phoneNumber, restaurantName, date, time) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("sssss", $name, $phoneNumber, $restaurantName, $date, $time);
         
-        // Execute the statement
         if ($stmt->execute()) {
-            // Redirect to a success page or booking page with success message
             header("Location: booking.php?success=1");
             exit();
         } else {
-            // Handle database error
             $errors[] = "Database error: " . $conn->error;
         }
         
         $stmt->close();
     } else {
-        // First submission from booking form - capture data for review
         $name = trim($_POST["name"]);
         $phoneNumber = trim($_POST["ph"]);
         $restaurantName = trim($_POST["restaurantName"]);
         $date = $_POST["date"];
         $time = $_POST["time"];
         
-        // Basic validation
         if (empty($name)) {
             $errors[] = "Name is required";
         }
@@ -75,8 +64,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-
-// Close connection when done
 $conn->close();
 ?>
 
