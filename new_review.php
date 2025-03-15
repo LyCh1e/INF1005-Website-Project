@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $price = htmlspecialchars($_POST["restaurantPricing"]);
 
     if (!empty($name) && !empty($comment) && $rating >= 1 && $rating <= 5) {
-        $stmt = $conn->prepare("INSERT INTO reviews (name,restaurantName, rating, comment, restaurantPricing) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO reviews (`name`, `restaurantName`, `rating`, `comment`, `restaurantPricing`) VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("ssisi", $name, $restaurantName, $rating, $comment, $price);
         $stmt->execute();
         $stmt->close();

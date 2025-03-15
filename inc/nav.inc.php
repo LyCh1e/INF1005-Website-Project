@@ -12,7 +12,7 @@
                 <a class="nav-link" href="index.php#home">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php#about">About</a>
+                <a class="nav-link" href="aboutus.php">About</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="index.php#discover">Discover</a>
@@ -26,6 +26,9 @@
                     <li><a class="dropdown-item" href="restaurants.php">Restaurant Reviews</a></li>
                     <li><a class="dropdown-item" href="booking.php">Booking</a></li>
                 </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="restaurant-rankings.php">Rankings</a>
             </li>
         </ul>
         <ul class="navbar-nav">
