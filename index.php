@@ -152,11 +152,6 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
           <?php endforeach; ?>
         </div>
       </section>
-
-      <figure>
-        <img src="/w3images/coffeehouse2.jpg" style="width:100%;max-width:1000px;margin-top:32px;" alt="Coffee House">
-        <figcaption>Enjoy our cozy coffee house atmosphere!</figcaption>
-      </figure>
     </div>
   </article>
 
