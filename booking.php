@@ -3,8 +3,10 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<?php include "inc/head.inc.php"; ?>
-
+<head>
+    <?php include "inc/head.inc.php"; ?>
+    <title>Restaurant Booking</title>
+</head>
 <body>
     <?php include "inc/nav.inc.php"; ?>
     <main class="container mt-5">

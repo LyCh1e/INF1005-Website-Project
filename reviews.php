@@ -55,7 +55,11 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="en">
-<?php include "inc/head.inc.php"; ?>
+
+<head>
+    <?php include "inc/head.inc.php"; ?>
+    <title>Restaurant Reviews</title>
+</head>
 
 <body>
     <?php include "inc/nav.inc.php"; ?>
