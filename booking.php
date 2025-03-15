@@ -103,7 +103,6 @@ session_start();
                             <?php
                             if (!isset($_SESSION['fname'])) {
                                 echo "<tr><td colspan='4'>Please login to view bookings.</td></tr>";
-                                exit;
                             }                            
                             $config = parse_ini_file('/var/www/private/db-config.ini');
                             if (!$config) {
@@ -155,7 +154,8 @@ session_start();
             </div>
         </div>
     </main>
+    <?php include "inc/footer.inc.php"; ?>
 </body>
-<?php include "inc/footer.inc.php"; ?>
+
 
 </html>
