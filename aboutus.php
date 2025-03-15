@@ -9,7 +9,6 @@
 <body>
   <header>
     <?php include "inc/nav.inc.php"; ?>
-    <?php include "inc/header.inc.php"; ?>
   </header>
 
   <!-- Main Content -->

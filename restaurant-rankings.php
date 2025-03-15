@@ -61,7 +61,6 @@ $conn->close();
 <body>
     <header>
         <?php include "inc/nav.inc.php"; ?>
-        <?php include "inc/header.inc.php"; ?>
     </header>
 
     <main class="container mt-4">
