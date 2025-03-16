@@ -12,7 +12,7 @@
   </header>
 
   <!-- Main Content -->
-  <main class="container-main mt-4" id="about">
+  <main class="container-main mt-4" id="about" style="padding-top: 60px;">
     <h1 class="welcome" style="font-weight: bold;">About The Gastronome's Guide</h1>
 
     <section class="mb-5">
