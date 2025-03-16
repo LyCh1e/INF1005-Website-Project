@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
 <head>
     <?php include "inc/head.inc.php"?>
     <title>Restaurant Reviews</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD74Wi1gaUSYAwobsBDQj4K_6DUvZi1-W0" async defer></script>
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD74Wi1gaUSYAwobsBDQj4K_6DUvZi1-W0&callback=initMap" async defer></script>
     <script>
         let map;
 
@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
         }
     </script>
 </head>
-<body onload="initMap()">
+<body>
     <?php include "inc/nav.inc.php"; ?>
 
     <main class="container mt-5">
