@@ -73,7 +73,7 @@ $conn->close();
     <main>
         <div class="container mt-5">
             <h2 class="text-center">Edit Your Review</h2>
-            <!-- Edit review form -->
+            <?php if (isset($_SESSION['fname'])): ?>
             <form method="POST" class="mb-4">
                 <div class="mb-3">
                     <label class="form-label"><strong>Name:</strong></label>
@@ -115,6 +115,9 @@ $conn->close();
                 <a href="reviews.php?restaurant=<?= urlencode($review['restaurantName']) ?>"
                     class="btn btn-secondary">Cancel</a>
             </form>
+            <?php else: ?>
+                <h5><small><a href="login.php">Please login to edit review.</a></small></h5> 
+            <?php endif; ?>     
         </div>
     </main>
     <?php

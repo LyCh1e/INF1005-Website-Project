@@ -22,6 +22,7 @@ if (empty($_POST["email"])) {
         $success = false;
     }
 }
+
 function sanitize_input($data)
 {
     $data = trim($data);
@@ -65,10 +66,10 @@ function authenticateUser()
                 $ph = $row['phone_number'];
                 // Check if the password matches:
                 if (!password_verify($_POST["pwd"], $hash)) {
-                    // Don’t tell hackers which one was wrong, keep them guessing...
+                    // Don't tell hackers which one was wrong, keep them guessing...
                     $errorMsg = "Email not found or password doesn't match...";
                     $success = false;
-                }else {
+                } else {
                     // Password matches, login successful, set session variables
                     $_SESSION['fname'] = $fname;
                     $_SESSION['lname'] = $lname;
@@ -84,11 +85,12 @@ function authenticateUser()
         $conn->close();
     }
 }
-if ($success){
+
+if ($success) {
     authenticateUser();
-    $_SESSION['fname'] = $fname;
 }
-if(!$success){
+
+if (!$success) {
     session_unset();
     session_destroy();
 }
@@ -97,36 +99,72 @@ if(!$success){
 <!DOCTYPE html>
 <html lang="en">
 
-<?php
-include "inc/head.inc.php";
-?>
-<link rel="stylesheet" href="css/main.css">
-<body>
-    <?php
-    include "inc/nav.inc.php";
-    ?>
-    <main>
-    <div class="container">
-
-        <?php
-        if ($success) {
-            $hash = password_hash($pwd, PASSWORD_DEFAULT);
-            echo "<h1>Login successful!</h1>";
-            echo "<h3>Welcome back, " . $fname . ".</h3>";
-            echo '<p><a href="index.php"><button class="homebutton" style="background-color: rgb(0, 146, 131); color: white">Return to Home</button></a></p>';
-        } else {
-            echo "<h1>Oops!</h1>";
-            echo "<h3>The following errors were detected:</h3>";
-            echo "<p>Email not found or password doesn't match...</p>";
-            // echo "<p>" . $errorMsg . "</p>";
-            echo '<p><a href="login.php"><button class="eloginbutton" style="background-color: red; color: white">Return to Login</button></a></p>';
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php include "inc/head.inc.php"; ?>
+    <link rel="stylesheet" href="css/main.css">
+    <title>Authentication Result</title>
+    <style>
+        /* Basic styles to simulate your site */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
         }
-        ?>
-    </div>
+        h1 {
+            color: rgb(0, 146, 131);
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .homebutton {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgb(0, 146, 131);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .eloginbutton {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: red;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <?php include "inc/nav.inc.php"; ?>
+    <main>
+        <div style="text-align: center;">
+        <?php if ($success && isset($_SESSION['fname'])) { ?>
+            <!-- Successful Authentication View -->
+            <h1>Login successful!</h1>
+            <h3>Welcome back, <?php echo $_SESSION['fname']; ?>.</h3>
+            <p><a href="index.php"><button class="homebutton">Return to Home</button></a></p>
+        <?php } else { ?>
+            <!-- Failed Authentication View -->
+            <h1>Oops!</h1>
+            <h3>The following errors were detected:</h3>
+            <p><?php echo $errorMsg; ?></p>
+            <p><a href="login.php"><button class="eloginbutton">Return to Login</button></a></p>
+        <?php } ?>
+        </div>
     </main>
+
+    <?php include "inc/footer.inc.php"; ?>
 </body>
-<?php
-include "inc/footer.inc.php";
-?>
 
 </html>
