@@ -59,10 +59,7 @@
       <p>For business inquiries or partnership opportunities, please contact us at business@gastronomesguide.sg</p>
     </aside>
   </main>
-
-  <footer>
     <?php include 'inc/footer.inc.php'; ?>
-  </footer>
 </body>
 
 </html>
