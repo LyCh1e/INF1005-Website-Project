@@ -82,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
         }
     </script>
 </head>
-<body>
+<body onload="initMap()">
     <?php include "inc/nav.inc.php"; ?>
 
     <main class="container mt-5">
@@ -127,6 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
                         <div class='card shadow-lg w-auto'>
                             <div class='card-body text-center'>
                                 <h5 class='card-title'><?php echo $restaurantName; ?></h5>
+                                <div id="map" style="width: 100%; height: 500px; margin: 20px 0;"></div>
                                 <p class='card-text'>Average Rating: <strong><?php echo $avgRating; ?> ⭐️</strong></p>
                                 <p class='card-text'>Average Pricing: <strong><?php echo $pricingSymbols; ?></strong></p>
                                 <a href='reviews.php?restaurant=<?php echo urlencode($restaurantName); ?>'
