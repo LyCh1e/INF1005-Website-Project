@@ -67,32 +67,44 @@ $conn->close();
         <h1 class="text-center mb-4">Restaurant Rankings</h1>
         
         <!-- Filter options -->
-        <div class="card mb-4 shadow-sm">
+        <section class="card mb-4 shadow-sm" aria-labelledby="filter-heading">
             <div class="card-body">
-                <h5 class="card-title">Filter Options</h5>
-                <form action="restaurant-rankings.php" method="get" class="row g-3 align-items-center">
-                    <div class="col-md-4">
-                        <label for="price" class="form-label">Price Range:</label>
-                        <select name="price" id="price" class="form-select">
-                            <option value="0" <?= $priceFilter == 0 ? 'selected' : '' ?>>All Prices</option>
-                            <option value="1" <?= $priceFilter == 1 ? 'selected' : '' ?>>$ (Budget)</option>
-                            <option value="2" <?= $priceFilter == 2 ? 'selected' : '' ?>>$$ (Standard)</option>
-                            <option value="3" <?= $priceFilter == 3 ? 'selected' : '' ?>>$$$ (Premium)</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="sort" class="form-label">Sort Order:</label>
-                        <select name="sort" id="sort" class="form-select">
-                            <option value="desc" <?= $sortOrder == 'DESC' ? 'selected' : '' ?>>Highest to Lowest</option>
-                            <option value="asc" <?= $sortOrder == 'ASC' ? 'selected' : '' ?>>Lowest to Highest</option>
-                        </select>
-                    </div>
-                    <div class="col-md-4 d-flex align-items-end">
-                        <button type="submit" class="btn w-100" style="background-color: rgb(0, 146, 131); color: white">Apply Filters</button>
+                <h2 id="filter-heading" class="card-title" style="font-weight: bold;">Filter Options</h2>
+                <form action="restaurant-rankings.php" method="get" style="width: 100%; margin: 0 auto;">
+                    <fieldset class="row mb-3">
+                        <legend class="col-form-label col-12">
+                            <label for="price" class="form-label">Price Range:</label>
+                        </legend>
+                        <div class="col-12">
+                            <select name="price" id="price" class="form-select" style="width: 100%" aria-describedby="price-hint">
+                                <option value="0" <?= $priceFilter == 0 ? 'selected' : '' ?>>All Prices</option>
+                                <option value="1" <?= $priceFilter == 1 ? 'selected' : '' ?>>$ (Budget)</option>
+                                <option value="2" <?= $priceFilter == 2 ? 'selected' : '' ?>>$$ (Standard)</option>
+                                <option value="3" <?= $priceFilter == 3 ? 'selected' : '' ?>>$$$ (Premium)</option>
+                            </select>
+                            <div id="price-hint" class="visually-hidden">Select a price range to filter restaurants</div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="row mb-3">
+                        <legend class="col-form-label col-12">
+                            <label for="sort" class="form-label">Sort Order:</label>
+                        </legend>
+                        <div class="col-12">
+                            <select name="sort" id="sort" class="form-select" style="width: 100%" aria-describedby="sort-hint">
+                                <option value="desc" <?= $sortOrder == 'DESC' ? 'selected' : '' ?>>Highest to Lowest</option>
+                                <option value="asc" <?= $sortOrder == 'ASC' ? 'selected' : '' ?>>Lowest to Highest</option>
+                            </select>
+                            <div id="sort-hint" class="visually-hidden">Select how you want to sort the restaurant rankings</div>
+                        </div>
+                    </fieldset>
+                    <div class="row">
+                        <div class="col-12 text-end">
+                            <button type="submit" class="btn" style="background-color: rgb(0, 146, 131); color: white" aria-label="Apply selected filters">Apply Filters</button>
+                        </div>
                     </div>
                 </form>
             </div>
-        </div>
+        </section>
 
         <!-- Rankings table -->
         <div class="table-responsive">
