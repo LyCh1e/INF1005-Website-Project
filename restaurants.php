@@ -97,11 +97,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
                         <div class='card shadow-lg w-auto'>
                             <div class='card-body text-center'>
                                 <h5 class='card-title'><?php echo $restaurantName; ?></h5>
-                                <iframe id="map" style="width: 100%; height: 150px; margin: 20px 0;" 
-                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade" 
-                                    src="http://www.google.com/maps/embed/v1/place?key=AIzaSyD74Wi1gaUSYAwobsBDQj4K_6DUvZi1-W0&q=<?php echo $restaurantName;?>">
-                                
-                                </iframe>
                                 <p class='card-text'>Average Rating: <strong><?php echo $avgRating; ?> ⭐️</strong></p>
                                 <p class='card-text'>Average Pricing: <strong><?php echo $pricingSymbols; ?></strong></p>
                                 <a href='reviews.php?restaurant=<?php echo urlencode($restaurantName); ?>'

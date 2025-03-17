@@ -190,6 +190,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
                     <div class='col'>
                         <div class='card shadow-lg w-auto'>
                             <h2 class="card-title"><?= htmlspecialchars($restaurant['name']) ?></h2>
+                            <iframe id="map" style="width: 100%; height: 150px; margin: 20px 0;" 
+                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade" 
+                                    src="http://www.google.com/maps/embed/v1/place?key=AIzaSyD74Wi1gaUSYAwobsBDQj4K_6DUvZi1-W0&q=<?= urlencode($restaurant['name']) ?>">
+                            </iframe>
                             <p class="card-text"><i class="fas fa-map-marker-alt"></i> <a
                                     href="https://www.google.com/maps/search/?q=<?= urlencode($restaurant['address']) ?>"
                                     target="_blank"><?= htmlspecialchars($restaurant['address']) ?></a></p>
