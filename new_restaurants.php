@@ -84,21 +84,7 @@ if ($result->num_rows > 0) {
 if (isset($stmt)) {
     $stmt->close();
 }
-$restaurantFilter = "";
-if (isset($_GET['restaurant']) && !empty($_GET['restaurant'])) {
-    $restaurantFilter = trim($_GET['restaurant']);
-}
 
-if ($restaurantFilter) {
-    $stmtr = $conn->prepare("SELECT * FROM reviews WHERE restaurantName = ? ORDER BY created_at DESC");
-    $stmtr->bind_param("s", $restaurantFilter);
-} else {
-    $stmtr = $conn->prepare("SELECT * FROM reviews ORDER BY created_at DESC");
-}
-
-$stmtr->execute();
-$resultr = $stmtr->get_result();
-$reviews = $resultr->fetch_all(MYSQLI_ASSOC);
 $searchTerm = "";
 $restaurants = [];
 

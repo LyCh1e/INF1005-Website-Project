@@ -1,4 +1,5 @@
 <?php
+session_start();
 $email = $fname = $lname = $ph = $pwd = $pwd_confirm = $errorMsg = "";
 $success = true;
 
@@ -118,34 +119,72 @@ if ($success) {
 <!DOCTYPE html>
 <html lang="en">
 
-<?php
-include "inc/head.inc.php";
-?>
-<link rel="stylesheet" href="css/main.css">
-<body>
-    <?php
-    include "inc/nav.inc.php";
-    ?>
-    <main>
-    <div class="container">
-        <?php
-        if ($success) {
-            $hash = password_hash($pwd, PASSWORD_DEFAULT);
-            echo "<h1>Your registration is successful!</h1>";
-            echo "<h3>Thank you for signing up, " . $fname . ".</h3>";
-            echo '<p><a href="login.php"><button class="loginbutton" style="background-color: rgb(0, 146, 131); color: white">Login</button></a></p>';
-        } else {
-            echo "<h1>Oops!</h1>";
-            echo "<h3>The following input errors were detected:</h3>";
-            echo "<p>" . $errorMsg . "</p>";
-            echo '<p><a href="register.php"><button class="regbutton" style="background-color: red; color: white">Return to Sign Up</button></a></p>';
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php include "inc/head.inc.php"; ?>
+    <link rel="stylesheet" href="css/main.css">
+    <title>Authentication Result</title>
+    <style>
+        /* Basic styles to simulate your site */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
         }
-        ?>
-    </div>
+        h1 {
+            color: rgb(0, 146, 131);
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .loginbutton {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgb(0, 146, 131);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .regbutton {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: red;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <?php include "inc/nav.inc.php"; ?>
+    <main>
+        <div style="text-align: center;">
+        <?php if ($success) { ?>
+            <!-- Successful Authentication View -->
+            <h1>Your registration is successful!!</h1>
+            <h3>Thank you for signing up, <?php echo $fname; ?>.</h3>
+            <p><a href="login.php"><button class="loginbutton">Login</button></a></p>
+        <?php } else { ?>
+            <!-- Failed Authentication View -->
+            <h1>Oops!</h1>
+            <h3>The following errors were detected:</h3>
+            <p><?php echo $errorMsg; ?></p>
+            <p><a href="register.php"><button class="regbutton">Return Sign Up</button></a></p>
+        <?php } ?>
+        </div>
     </main>
+
+    <?php include "inc/footer.inc.php"; ?>
 </body>
-<?php
-include "inc/footer.inc.php";
-?>
 
 </html>
