@@ -50,37 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
 <head>
     <?php include "inc/head.inc.php"?>
     <title>Restaurant Reviews</title>
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD74Wi1gaUSYAwobsBDQj4K_6DUvZi1-W0&callback=initMap" async defer></script>
-    <script>
-        let map;
-
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 1.3521, lng: 103.8198 },
-                zoom: 12
-            });
-
-            const geocoder = new google.maps.Geocoder();
-
-            <?php foreach ($restaurants as $row): ?>
-                geocodeAddress(geocoder, map, "<?php echo htmlspecialchars($row['address']); ?>", "<?php echo htmlspecialchars($row['restaurantName']); ?>");
-            <?php endforeach; ?>
-        }
-
-        function geocodeAddress(geocoder, map, address, title) {
-            geocoder.geocode({ address: address }, (results, status) => {
-                if (status === "OK" && results[0]) {
-                    new google.maps.Marker({
-                        map: map,
-                        position: results[0].geometry.location,
-                        title: title
-                    });
-                } else {
-                    console.error("Geocode failed for address: ", address, " with status: ", status);
-                }
-            });
-        }
-    </script>
+    
 </head>
 <body>
     <?php include "inc/nav.inc.php"; ?>
@@ -127,7 +97,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
                         <div class='card shadow-lg w-auto'>
                             <div class='card-body text-center'>
                                 <h5 class='card-title'><?php echo $restaurantName; ?></h5>
-                                <div id="map" style="width: 100%; height: 500px; margin: 20px 0;"></div>
+                                <iframe id="map" style="width: 100%; height: 150px; margin: 20px 0;" 
+                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade" 
+                                    src="http://www.google.com/maps/embed/v1/place?key=AIzaSyD74Wi1gaUSYAwobsBDQj4K_6DUvZi1-W0&q=" + $restaurantName>
+                                
+                                </iframe>
                                 <p class='card-text'>Average Rating: <strong><?php echo $avgRating; ?> ⭐️</strong></p>
                                 <p class='card-text'>Average Pricing: <strong><?php echo $pricingSymbols; ?></strong></p>
                                 <a href='reviews.php?restaurant=<?php echo urlencode($restaurantName); ?>'
