@@ -8,6 +8,7 @@
     <?php include "inc/nav.inc.php"; ?>
     <main class="container mt-5">
         <h1>Member Registration</h1>
+        <?php if (!isset($_SESSION['fname'])): ?>
         <p>For existing members, please go to the <a href="login.php" style='color: rgb(0, 146, 131)'>Sign In page</a>.</p>
         <form action="process_register.php" method="post">
             <div class="mb-3">
@@ -42,6 +43,9 @@
                 <button type="submit" class="btn" style='background-color: rgb(0, 146, 131); color: white'>Submit</button>
             </div>
         </form>
+        <?php else: ?>
+            <p><a href="index.php" style='color: rgb(0, 146, 131)'>You are already logged in!</a>.</p>
+        <?php endif; ?>
     </main>
     <?php include "inc/footer.inc.php"; ?>
 </body>
