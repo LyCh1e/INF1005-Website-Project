@@ -99,23 +99,32 @@ if ($restaurantFilter) {
 $stmtr->execute();
 $resultr = $stmtr->get_result();
 $reviews = $resultr->fetch_all(MYSQLI_ASSOC);
+$searchTerm = "";
+$restaurants = [];
 
-// Get average rating for selected restaurant
-if ($restaurantFilter) {
-    $avg_stmt = $conn->prepare("SELECT AVG(rating) as avgRating, AVG(restaurantPricing) as avgRP FROM reviews WHERE restaurantName = ?");
-    $avg_stmt->bind_param("s", $restaurantFilter);
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
+    $searchTerm = trim($_POST['search']);
+    $searchWildcard = "%" . $searchTerm . "%";
+    $stmt = $conn->prepare("SELECT name, address, phone, cuisine, website FROM restaurant_reviews WHERE name LIKE ? OR address LIKE ? OR cuisine LIKE ?");
+    $stmt->bind_param("sss", $searchWildcard, $searchWildcard, $searchWildcard);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    while ($row = $result->fetch_assoc()) {
+        $restaurants[] = $row;
+    }
+
+    $stmt->close();
 } else {
-    $avg_stmt = $conn->prepare("SELECT AVG(rating) AS avgRating, AVG(restaurantPricing) as avgRP FROM reviews");
+    $query = "SELECT name, address, phone, cuisine, website FROM restaurant_reviews";
+    $result = $conn->query($query);
+
+    while ($row = $result->fetch_assoc()) {
+        $restaurants[] = $row;
+    }
 }
 
-$avg_stmt->execute();
-$avg_result = $avg_stmt->get_result();
-$avgRow = $avg_result->fetch_assoc();
-$average_rating = $avgRow['avgRating'] ?? 0;
-$avgRP = floor($avgRow['avgRP'] ?? 0);
-$pricingSymbols = str_repeat("$", $avgRP);
 
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -154,12 +163,46 @@ $conn->close();
     include "inc/nav.inc.php";
     ?>
     <div class="container mt-5">
-        <h1 class="text-center mb-4" style="padding-top: 10px">Restaurant Reviews in Singapore</h1>
+        <h1 class="text-center mb-4" style="padding-top: 15px">Restaurant Reviews in Singapore</h1>
+        <div class="d-flex justify-content-center">
+            <form method="POST" action="" class="d-flex">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control me-2" placeholder="Search for a restaurant"
+                        value="<?php echo htmlspecialchars($searchTerm ?? ''); ?>">
+                    <button type="submit" class="btn" style="background: none; border: none;">
+                        <i class="fas fa-search" type="submit" style="font-size: 30px; color: rgb(0, 146, 131);"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div style="display: inline-block; margin-right: 20px;">
+            <?php if (isset($_SESSION['fname'])): ?>
+                <h5>
+                    <p>Can't find the restaurant? <a href="new_review.php" style="color: rgb(0, 146, 131);">Click here to
+                            add the review!</a></p>
+                </h5>
+            <?php else: ?>
+                <div style="padding: 10px">
+                    <h5>
+                        <p>Want to write a review? <a href="login.php">Please Login!</a></p>
+                    </h5>
+                </div>
+            <?php endif; ?>
+        </div>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
             <?php if (!empty($restaurants)): ?>
                 <?php foreach ($restaurants as $restaurant): ?>
+                    <?php
+                    $avg_stmt = $conn->prepare("SELECT AVG(rating) as avgRating, AVG(restaurantPricing) as avgRP FROM reviews WHERE restaurantName = ?");
+                    $avg_stmt->bind_param("s", $restaurant['name']);
+                    $avg_stmt->execute();
+                    $avg_result = $avg_stmt->get_result();
+                    $avgRow = $avg_result->fetch_assoc();
+                    $average_rating = $avgRow['avgRating'] ?? 0;
+                    $avgRP = floor($avgRow['avgRP'] ?? 0);
+                    $pricingSymbols = str_repeat("$", $avgRP); ?>
                     <div class='col'>
-                    <div class='card shadow-lg w-auto'>
+                        <div class='card shadow-lg w-auto'>
                             <h2 class="card-title"><?= htmlspecialchars($restaurant['name']) ?></h2>
                             <p class="card-text"><i class="fas fa-map-marker-alt"></i> <a
                                     href="https://www.google.com/maps/search/?q=<?= urlencode($restaurant['address']) ?>"
@@ -171,32 +214,21 @@ $conn->close();
                                 <?php if ($average_rating > 0): ?>
                                     <i class="fas fa-star"></i> Average Rating: <?= number_format($average_rating, 1) ?> ⭐
                                 <p>
-                                <i class="fas fa-money-bill"></i> Average Pricing: <?= $pricingSymbols; ?>
+                                    <i class="fas fa-money-bill"></i> Average Pricing: <?= $pricingSymbols; ?>
                                 </p>
 
                             <?php else: ?>
                                 <small>(No reviews yet)</small>
                             <?php endif; ?></p>
-                            <p class="card-text"><i class="fas fa-clock"></i> <strong>Opening Hours:</strong></p>
-                            <ul>
-                                <?php
-                                $openHours = json_decode($restaurant['openingHours'], true);
-                                if ($openHours) {
-                                    foreach ($openHours as $day => $hours) {
-                                        echo "<li><strong>$day:</strong> $hours</li>";
-                                    }
-                                } else {
-                                    echo "<li>Not available</li>";
-                                }
-                                ?>
-                            </ul>
                             <p class="card-text"><i class="fas fa-globe"></i> <a
                                     href="<?= htmlspecialchars($restaurant['website']) ?>" target="_blank">Website</a></p>
+                            <p style="padding-right: 10px;">
                             <a href="reviews.php?restaurant=<?php echo urlencode($restaurant['name']); ?>"
                                 class="btn d-flex justify-content-center"
-                                style="background-color: rgb(0, 146, 131); color: white">View Reviews</a>
+                                style="background-color: rgb(0, 146, 131); color: white">View Reviews</a></p>
                         </div>
                     </div>
+
                 <?php endforeach; ?>
             <?php else: ?>
                 <p>No restaurants found in the database.</p>
@@ -207,3 +239,6 @@ $conn->close();
 </body>
 
 </html>
+
+<?php
+$conn->close(); ?>
