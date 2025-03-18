@@ -9,7 +9,7 @@
     <main class="container mt-5">
         <h1>Member Registration</h1>
         <?php if (!isset($_SESSION['fname'])): ?>
-        <p>For existing members, please go to the <a href="login.php" style='color: rgb(0, 146, 131)'>Sign In page</a>.</p>
+        <p>For existing members, please go to the <a href="login.php" style='color: rgb(0, 78, 74)'>Sign In page</a>.</p>
         <form action="process_register.php" method="post">
             <div class="mb-3">
                 <label for="fname" class="form-label">First Name:</label>
