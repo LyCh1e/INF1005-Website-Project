@@ -34,7 +34,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 5px;
-  background-color: teal;
+  background-color: darkturquoise;
   position: fixed; /* Fixes the navbar in place */
   top: 0; /* Positions it at the top of the viewport */
   width: 100%; /* Ensures it spans the full width */
@@ -44,7 +44,7 @@
 
 .navbar-collapse,
 .dropdown-menu {
-  background-color: teal; /* Set the background color to teal */
+  background-color: darkturquoise; /* Set the background color to teal */
   opacity: 1; /* Make the background fully opaque */
 }
 
@@ -68,7 +68,7 @@
   text-align: center; /* Center the text */
   font-size: small; /* Smaller font size */
   font-style: italic; /* Italic font style */
-  background-color: teal; /* Light gray background color */
+  background-color: darkturquoise; /* Light gray background color */
 }
 
 /* Fully dynamic header styling */
@@ -232,6 +232,8 @@ footer {
   background-color: #f1f1f1;
   text-align: center;
   padding: 10px;
+  color: black;
+  font-weight: bold;
 }
 
 form {
