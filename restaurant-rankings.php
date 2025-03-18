@@ -99,7 +99,7 @@ $conn->close();
                     </fieldset>
                     <div class="row">
                         <div class="col-12 text-end">
-                            <button type="submit" class="btn" style="background-color: rgb(0, 146, 131); color: white" aria-label="Apply selected filters">Apply Filters</button>
+                            <button type="submit" class="btn" style="background-color: rgb(0, 78, 74); color: white" aria-label="Apply selected filters">Apply Filters</button>
                         </div>
                     </div>
                 </form>
@@ -161,7 +161,7 @@ $conn->close();
                                 <td class="text-center"><?= $restaurant['reviewCount'] ?></td>
                                 <td class="text-center">
                                     <a href="reviews.php?restaurant=<?= urlencode($restaurant['restaurantName']) ?>" 
-                                       class="btn btn-sm" style="background-color: rgb(0, 146, 131); color: white">
+                                       class="btn btn-sm" style="background-color: rgb(0, 78, 74); color: white">
                                         See Reviews
                                     </a>
                                 </td>
