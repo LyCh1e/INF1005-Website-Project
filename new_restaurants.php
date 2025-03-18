@@ -143,7 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
                                placeholder="Search for a restaurant"
                                value="<?php echo htmlspecialchars($searchTerm ?? ''); ?>">
                         <button type="submit" class="btn" aria-label="Search" style="background: none; border: none;">
-                            <i class="fas fa-search" style="font-size: 30px; color: rgb(0, 146, 131);"></i>
+                            <i class="fas fa-search" style="font-size: 30px; color: rgb(0, 78, 74);"></i>
                         </button>
                     </div>
                 </form>
@@ -153,7 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
         <section class="add-review-section">
             <?php if (isset($_SESSION['fname'])): ?>
                 <h5>
-                    <p>Can't find the restaurant? <a href="new_review.php" style="color: rgb(0, 146, 131);">Click here to
+                    <p>Can't find the restaurant? <a href="new_review.php" style="color: rgb(0, 78, 74);">Click here to
                             add the review!</a></p>
                 </h5>
             <?php else: ?>
@@ -219,7 +219,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
                                     <div class="action-buttons">
                                         <a href="reviews.php?restaurant=<?php echo urlencode($restaurant['name']); ?>"
                                             class="btn d-flex justify-content-center"
-                                            style="background-color: rgb(0, 146, 131); color: white">View Reviews</a>
+                                            style="background-color: rgb(0, 78, 74); color: white">View Reviews</a>
                                     </div>
                                 </div>
                             </div>
