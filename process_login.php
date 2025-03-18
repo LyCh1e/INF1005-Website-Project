@@ -127,7 +127,7 @@ if (!$success) {
             padding: 10px 20px;
             border: none;
             border-radius: 5px;
-            background-color: rgb(0, 146, 131);
+            background-color: rgb(0, 78, 74);
             color: white;
             font-size: 16px;
             cursor: pointer;

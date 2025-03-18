@@ -40,11 +40,11 @@
                 <label class="form-check-label" for="agree">Agree to terms and conditions.</label>
             </div>
             <div class="mb-3">
-                <button type="submit" class="btn" style='background-color: rgb(0, 146, 131); color: white'>Submit</button>
+                <button type="submit" class="btn" style='background-color: rgb(0, 78, 74); color: white'>Submit</button>
             </div>
         </form>
         <?php else: ?>
-            <p><a href="index.php" style='color: rgb(0, 146, 131)'>You are already logged in!</a>.</p>
+            <p><a href="index.php" style='color: rgb(0, 78, 74)'>You are already logged in!</a>.</p>
         <?php endif; ?>
     </main>
     <?php include "inc/footer.inc.php"; ?>

@@ -12,7 +12,7 @@
         <h1>Member Login</h1>
         <?php if (!isset($_SESSION['fname'])): ?>
             <p>Existing members log in here. For new members, please go to the
-                <a href="register.php" style='color: rgb(0, 146, 131)'>Member Registration page</a>.
+                <a href="register.php" style='color: rgb(0, 78, 74)'>Member Registration page</a>.
             </p>
             <form action="process_login.php" method="post">
                 <div class="mb-3">
@@ -27,14 +27,14 @@
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn"
-                        style='background-color: rgb(0, 146, 131); color: white'>Submit</button>
+                        style='background-color: rgb(0, 78, 74); color: white'>Submit</button>
                 <!-- Add this right after the Submit button in login.php -->
                 <div class="mb-3">
-                    <p>Forgot your password? <a href="forgot_password.php" style='color: rgb(0, 146, 131)'>Reset it here</a>.</p>
+                    <p>Forgot your password? <a href="forgot_password.php" style='color: rgb(0, 78, 74)'>Reset it here</a>.</p>
                 </div>
             </form>
         <?php else: ?>
-            <p><a href="index.php" style='color: rgb(0, 146, 131)'>You are already logged in!</a>.</p>
+            <p><a href="index.php" style='color: rgb(0, 78, 74)'>You are already logged in!</a>.</p>
         <?php endif; ?>
     </main>
     <?php include "inc/footer.inc.php"; ?>

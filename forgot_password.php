@@ -19,12 +19,11 @@
                     placeholder="Enter your email" required>
             </div>
             <div class="mb-3">
-                <button type="submit" class="btn"
-                    style='background-color: rgb(0, 146, 131); color: white'>Reset Password</button>
+                <button type="submit" class="btn" style='background-color: rgb(0, 78, 74); color: white'>Reset Password</button>
             </div>
         </form>
         <div class="mb-3">
-            <p>Remember your password? <a href="login.php" style='color: rgb(0, 146, 131)'>Back to login</a>.</p>
+            <p>Remember your password? <a href="login.php" style='color: rgb(0, 78, 74)'>Back to login</a>.</p>
         </div>
     </main>
     <?php include "inc/footer.inc.php"; ?>
