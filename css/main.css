@@ -16,11 +16,12 @@
 .nav-link {
   color: white; /* Default text color */
   text-decoration: none; /* Remove default link underline */
-  padding: 5px 10px; /* Add some padding for visual appeal */
-  text-decoration: none; /* Remove underline */
-  margin: 0 5px; /* Add space between links */
-  font-size: large; /* Larger font size */
-  font-weight: bold; /* Larger font weight */
+  padding: 5px 10px; 
+  text-decoration: none; 
+  margin: 0 5px; 
+  font-size: large; 
+  font-weight: bold; 
+  background-color: rgb(0, 78, 74); /* For bookings page nav-tab as well */ 
 }
 
 .nav-link:hover {

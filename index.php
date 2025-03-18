@@ -1,29 +1,29 @@
-<?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-$config = parse_ini_file('/var/www/private/db-config.ini');
-if (!$config) {
- die("Failed to read database config file.");
-}
-
-$conn = new mysqli(
- $config['servername'],
- $config['username'],
- $config['password'],
- $config['dbname']
-);
-
-if ($conn->connect_error) {
- die("Connection failed: " . $conn->connect_error);
-}
-
-$stmt = $conn->prepare("SELECT restaurantName, AVG(rating) as avgRating, AVG(restaurantPricing) as avgRP FROM reviews GROUP BY restaurantName");
-$stmt->execute();
-$result = $stmt->get_result();
-$restaurants = $result->fetch_all(MYSQLI_ASSOC);
-?>
+//<?php
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+//
+//$config = parse_ini_file('/var/www/private/db-config.ini');
+//if (!$config) {
+// die("Failed to read database config file.");
+//}
+//
+//$conn = new mysqli(
+// $config['servername'],
+// $config['username'],
+// $config['password'],
+// $config['dbname']
+//);
+//
+//if ($conn->connect_error) {
+// die("Connection failed: " . $conn->connect_error);
+//}
+//
+//$stmt = $conn->prepare("SELECT restaurantName, AVG(rating) as avgRating, AVG(restaurantPricing) as avgRP FROM reviews GROUP BY restaurantName");
+//$stmt->execute();
+//$result = $stmt->get_result();
+//$restaurants = $result->fetch_all(MYSQLI_ASSOC);
+//?>
 
 <!DOCTYPE html>
 <html lang="en">
