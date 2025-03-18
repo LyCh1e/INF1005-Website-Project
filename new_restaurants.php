@@ -122,6 +122,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
     <?php
     include "inc/head.inc.php";
     ?>
+    <style>
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding-left: 10px;
+            padding-bottom: 10px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .review-text {
+            font-style: italic;
+            color: #555;
+        }
+        .action-buttons{
+            padding-right: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -211,11 +230,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
                                         <?php else: ?>
                                             <p class="card-text"><small>(No reviews yet)</small></p>
                                         <?php endif; ?>
+                                        <p class="card-text"><i class="fas fa-globe" aria-hidden="true"></i> <a
+                                        href="<?= htmlspecialchars($restaurant['website']) ?>" target="_blank">Website</a></p>
+                                        <br>
                                     </div>
-                                    
-                                    <p class="card-text"><i class="fas fa-globe" aria-hidden="true"></i> <a
-                                            href="<?= htmlspecialchars($restaurant['website']) ?>" target="_blank">Website</a></p>
-                                    
+
                                     <div class="action-buttons">
                                         <a href="reviews.php?restaurant=<?php echo urlencode($restaurant['name']); ?>"
                                             class="btn d-flex justify-content-center"
