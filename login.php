@@ -28,6 +28,9 @@
                 <div class="mb-3">
                     <button type="submit" class="btn"
                         style='background-color: rgb(0, 146, 131); color: white'>Submit</button>
+                <!-- Add this right after the Submit button in login.php -->
+                <div class="mb-3">
+                    <p>Forgot your password? <a href="forgot_password.php" style='color: rgb(0, 146, 131)'>Reset it here</a>.</p>
                 </div>
             </form>
         <?php else: ?>
