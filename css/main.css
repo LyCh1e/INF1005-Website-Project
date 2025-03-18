@@ -48,6 +48,16 @@
   opacity: 1; /* Make the background fully opaque */
 }
 
+.dropdown-item{
+  color: white; 
+  text-decoration: none; 
+  padding: 5px 10px; 
+  text-decoration: none; 
+  margin: 0 5px; 
+  font-size: small;
+  font-weight: bold;
+}
+
 .container-main {
   width: 70%;
   margin: auto;
