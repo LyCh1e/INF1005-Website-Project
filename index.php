@@ -73,7 +73,7 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
         <section id="Budget" class="w3-container menu w3-padding">
           <h2>Budget Options</h2>
           <!-- Budget menu items go here -->
-          <div class="row">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
             <?php foreach ($restaurants as $row): ?>
               <?php
               $restaurantName = htmlspecialchars($row['restaurantName']);
@@ -86,8 +86,9 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
                   <div class='card shadow-lg w-auto'>
                     <div class='card-body text-center'>
                     <a href='reviews.php?restaurant=<?php echo urlencode($restaurantName); ?>' style="text-decoration: none;">
-                      <h5 class='card-title'><?php echo $restaurantName; ?></h5>
-                      <p class='card-text'>Average Rating: <strong><?php echo $avgRating; ?> ⭐️</strong></p>
+                      <h5 class='card-title'><strong><?php echo $restaurantName; ?></strong></h5>
+                      <p class='card-text'>Average Rating: <strong>
+                        <?php echo $avgRating; ?> <i class="fas fa-star" style="color: gold" aria-hidden="true"></i> </strong></p>
                       <p class='card-text'>Average Pricing: <strong><?php echo $pricingSymbols; ?></strong></p></a>
                     </div>
                   </div>
@@ -100,7 +101,7 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
         <section id="Standard" class="w3-container menu w3-padding" style="display:none">
           <h3>Standard Options</h3>
           <!-- Standard menu items go here -->
-          <div class="row">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
             <?php foreach ($restaurants as $row): ?>
               <?php
               $restaurantName = htmlspecialchars($row['restaurantName']);
@@ -113,8 +114,9 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
                   <div class='card shadow-lg w-auto'>
                     <div class='card-body text-center'>
                     <a href='reviews.php?restaurant=<?php echo urlencode($restaurantName); ?>' style="text-decoration: none;">
-                      <h5 class='card-title'><?php echo $restaurantName; ?></h5>
-                      <p class='card-text'>Average Rating: <strong><?php echo $avgRating; ?> ⭐️</strong></p>
+                      <h5 class='card-title'><strong><?php echo $restaurantName; ?></strong></h5>
+                      <p class='card-text'>Average Rating: <strong>
+                        <?php echo $avgRating; ?> <i class="fas fa-star" style="color: gold" aria-hidden="true"></i></strong></p>
                       <p class='card-text'>Average Pricing: <strong><?php echo $pricingSymbols; ?></strong></p></a>
                     </div>
                   </div>
@@ -127,7 +129,7 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
         <section id="Premium" class="w3-container menu w3-padding" style="display:none">
           <h3>Premium Options</h3>
           <!-- Premium menu items go here -->
-          <div class="row">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
             <?php foreach ($restaurants as $row): ?>
               <?php
               $restaurantName = htmlspecialchars($row['restaurantName']);
@@ -140,8 +142,9 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
                   <div class='card shadow-lg w-auto'>
                     <div class='card-body text-center'>
                     <a href='reviews.php?restaurant=<?php echo urlencode($restaurantName); ?>' style="text-decoration: none;">
-                      <h5 class='card-title'><?php echo $restaurantName; ?></h5>
-                      <p class='card-text'>Average Rating: <strong><?php echo $avgRating; ?> ⭐️</strong></p>
+                      <h5 class='card-title'><strong><?php echo $restaurantName; ?></strong></h5>
+                      <p class='card-text'>Average Rating: <strong>
+                        <?php echo $avgRating; ?> <i class="fas fa-star" style="color: gold" aria-hidden="true"></i></strong></p>
                       <p class='card-text'>Average Pricing: <strong><?php echo $pricingSymbols; ?></strong></p></a>
                     </div>
                   </div>
