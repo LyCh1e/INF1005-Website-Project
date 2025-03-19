@@ -92,10 +92,10 @@ $conn->close();
                     <label class="form-label"><strong>Rating:</strong> (1-5)</label>
                     <select name="rating" class="form-select" required>
                         <option value="5" <?= ($review['rating'] == 5) ? 'selected' : '' ?>>★★★★★</option>
-                        <option value="4" <?= ($review['rating'] == 4) ? 'selected' : '' ?>>★★★★☆</option>
-                        <option value="3" <?= ($review['rating'] == 3) ? 'selected' : '' ?>>★★★☆☆</option>
-                        <option value="2" <?= ($review['rating'] == 2) ? 'selected' : '' ?>>★★☆☆☆</option>
-                        <option value="1" <?= ($review['rating'] == 1) ? 'selected' : '' ?>>★☆☆☆☆</option>
+                        <option value="4" <?= ($review['rating'] == 4) ? 'selected' : '' ?>>★★★★</option>
+                        <option value="3" <?= ($review['rating'] == 3) ? 'selected' : '' ?>>★★★</option>
+                        <option value="2" <?= ($review['rating'] == 2) ? 'selected' : '' ?>>★★</option>
+                        <option value="1" <?= ($review['rating'] == 1) ? 'selected' : '' ?>>★</option>
                     </select>
                 </div>
                 <div class="mb-3">

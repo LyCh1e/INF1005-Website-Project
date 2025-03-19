@@ -139,10 +139,10 @@ $conn->close();
                         <label class="form-label"><strong>Rating:</strong> (1-5)</label>
                         <select name="rating" class="form-select" required>
                             <option value="5">★★★★★</option>
-                            <option value="4">★★★★☆</option>
-                            <option value="3">★★★☆☆</option>
-                            <option value="2">★★☆☆☆</option>
-                            <option value="1">★☆☆☆☆</option>
+                            <option value="4">★★★★</option>
+                            <option value="3">★★★</option>
+                            <option value="2">★★</option>
+                            <option value="1">★</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -179,10 +179,10 @@ $conn->close();
                         <label class="form-label"><strong>Rating:</strong> (1-5)</label>
                         <select name="rating" class="form-select" required>
                             <option value="5">★★★★★</option>
-                            <option value="4">★★★★☆</option>
-                            <option value="3">★★★☆☆</option>
-                            <option value="2">★★☆☆☆</option>
-                            <option value="1">★☆☆☆☆</option>
+                            <option value="4">★★★★</option>
+                            <option value="3">★★★</option>
+                            <option value="2">★★</option>
+                            <option value="1">★</option>
                         </select>
                     </div>
                     <div class="mb-3">

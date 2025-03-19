@@ -72,7 +72,7 @@ $conn->close();
             <?php endif; ?>
             
             <?php if ($average_rating > 0): ?>
-                (<span><small><?= number_format($average_rating, 1) ?> ⭐</small></span>)
+                (<span><small><?= number_format($average_rating, 1) ?> <i class="fas fa-star" style="color: gold" aria-hidden="true"></i></small></span>)
                 <p><h3><span><small>Average Pricing: <?= $pricingSymbols; ?></small></span></h3></p>
                 
             <?php else: ?>
@@ -101,7 +101,7 @@ $conn->close();
                     <div class="card-body">
                         <h5 class="card-title"><?= htmlspecialchars($review['name']) ?></h5>
                         <p class="card-text"><?= htmlspecialchars($review['restaurantName']) ?></p>
-                        <p class="card-text"><?= str_repeat("⭐", $review['rating']) ?></p>
+                        <p class="card-text"><?= str_repeat('<i class="fas fa-star" style="color: gold" aria-hidden="true"></i>', $review['rating']) ?></p>
                         <p class="card-text"><?= str_repeat("$", $review['restaurantPricing']) ?></p>
                         <p class="card-text"><?= htmlspecialchars($review['comment']) ?></p>
                         <p class="text-muted">Posted on <?= $review['created_at'] ?></p>
