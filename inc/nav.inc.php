@@ -33,25 +33,24 @@
             </li>
         </ul>
         <ul class="navbar-nav">
+            <?php if (isset($_SESSION['fname'])): ?>
+            <h1 class="welcome-text">Welcome, <?php echo $_SESSION['fname']; ?>!</h1>
             <li class="nav-item">
-                <?php if (isset($_SESSION['fname'])): ?>
-                <h3 class="welcome-text">Welcome, <?php echo $_SESSION['fname']; ?>!</h3>
-            </li>
-            <li class="nav-item">
-                <a href="logout.php" onclick="return confirmLogout();">
-                    <img class="logout-image"src="images/logout.png" width="60" height="50" alt="logouticon">
-                </a>
-            </li>
-            <li class="nav-item">
-            <?php else: ?>
                 <div style="display: inline-block; padding: 5px; white-space: nowrap;">
-                    <p class="welcome-text">Welcome, Chiyung!</p>
+                    <a href="logout.php" onclick="return confirmLogout();">
+                        <img class="logout-image"src="images/logout.png" width="60" height="50" alt="logouticon">
+                    </a>
+                </div>
+            </li>
+            <?php else: ?>
+                <li class="nav-item">
+                <div style="display: inline-block; padding: 5px; white-space: nowrap;">
                     <a href="login.php">
                         <img class="account-image" src="images/account.png" alt="accounticon">
                     </a>
                 </div>
-            <?php endif; ?>
             </li>
+            <?php endif; ?>
         </ul>
     </nav>
 </nav>
