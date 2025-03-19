@@ -48,7 +48,9 @@
   background-color: rgb(0, 78, 74); /* Set the background color to teal */
   opacity: 1; /* Make the background fully opaque */
 }
-
+.nav-item{
+  color: white;
+}
 .dropdown-item{
   color: white; 
   text-decoration: none; 

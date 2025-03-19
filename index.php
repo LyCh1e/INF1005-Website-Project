@@ -50,7 +50,8 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
       dining. <br>
       Read what others are saying about their favorite spots, discover hidden gems, and find the perfect place for your
       next night out.</p>
-    <p class="intro">We provide a booking services for all the restaurants here, so you can easily reserve a table without leaving the comfort of your home.</p>
+    <p class="intro">We provide booking services as well as seamless online ordering, so you can easily reserve a table
+      or grab your favorite dish without leaving the comfort of your home.</p>
     <!-- Menu Container -->
     <article class="w3-container" id="discover">
       <div class="w3-content" style="max-width:1000px">
@@ -87,7 +88,7 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
                     <a href='reviews.php?restaurant=<?php echo urlencode($restaurantName); ?>' style="text-decoration: none;">
                       <h5 class='card-title'><strong><?php echo $restaurantName; ?></strong></h5>
                       <p class='card-text'>Average Rating: <strong>
-                        <?php echo $avgRating; ?> <i class="fas fa-star" style="color: gold" aria-hidden="true"></i> </strong></p>
+                        <br><?php echo $avgRating; ?> <i class="fas fa-star" style="color: gold" aria-hidden="true"></i> </strong></p>
                       <p class='card-text'>Average Pricing: <strong><?php echo $pricingSymbols; ?></strong></p></a>
                     </div>
                   </div>
@@ -115,7 +116,7 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
                     <a href='reviews.php?restaurant=<?php echo urlencode($restaurantName); ?>' style="text-decoration: none;">
                       <h5 class='card-title'><strong><?php echo $restaurantName; ?></strong></h5>
                       <p class='card-text'>Average Rating: <strong>
-                        <?php echo $avgRating; ?> <i class="fas fa-star" style="color: gold" aria-hidden="true"></i></strong></p>
+                        <br><?php echo $avgRating; ?> <i class="fas fa-star" style="color: gold" aria-hidden="true"></i></strong></p>
                       <p class='card-text'>Average Pricing: <strong><?php echo $pricingSymbols; ?></strong></p></a>
                     </div>
                   </div>
@@ -142,8 +143,8 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
                     <div class='card-body text-center'>
                     <a href='reviews.php?restaurant=<?php echo urlencode($restaurantName); ?>' style="text-decoration: none;">
                       <h5 class='card-title'><strong><?php echo $restaurantName; ?></strong></h5>
-                      <p class='card-text'>Average Rating: <strong>
-                        <?php echo $avgRating; ?> <i class="fas fa-star" style="color: gold" aria-hidden="true"></i></strong></p>
+                      <ps='card-text'>Average Rating: <strong></strong>
+                        <br><?php echo $avgRating; ?> <i class="fas fa-star" style="color: gold" aria-hidden="true"></i></strong></br></p>
                       <p class='card-text'>Average Pricing: <strong><?php echo $pricingSymbols; ?></strong></p></a>
                     </div>
                   </div>
