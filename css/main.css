@@ -16,12 +16,12 @@
 .nav-link {
   color: white; /* Default text color */
   text-decoration: none; /* Remove default link underline */
-  padding: 5px 10px; 
-  text-decoration: none; 
-  margin: 0 5px; 
-  font-size: large; 
-  font-weight: bold; 
-  background-color: rgb(0, 78, 74); /* For bookings page nav-tab as well */ 
+  padding: 5px 10px;
+  text-decoration: none;
+  margin: 0 5px;
+  font-size: large;
+  font-weight: bold;
+  background-color: rgb(0, 78, 74); /* For bookings page nav-tab as well */
 }
 
 .nav-link:hover {
@@ -48,17 +48,38 @@
   background-color: rgb(0, 78, 74); /* Set the background color to teal */
   opacity: 1; /* Make the background fully opaque */
 }
-.nav-item{
+.nav-item {
   color: white;
 }
-.dropdown-item{
-  color: white; 
-  text-decoration: none; 
-  padding: 5px 10px; 
-  text-decoration: none; 
-  margin: 0 5px; 
+.dropdown-item {
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  text-decoration: none;
+  margin: 0 5px;
   font-size: small;
   font-weight: bold;
+  text-align: left;
+}
+
+/* Styling for the welcome text */
+.welcome-text {
+  color: white;
+  font-weight: bold;
+  display: inline;
+  font-size: 20px;
+  padding: 0px 10px;
+  opacity: 1;
+}
+
+/* Hamburger menu styling */
+.navbar-toggler {
+  border: 1px solid white;
+  margin-right: 15px;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 .container-main {
@@ -266,6 +287,6 @@ form {
 }
 
 .is-invalid {
-border-color: #dc3545 !important;
-box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+  border-color: #dc3545 !important;
+  box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
 }

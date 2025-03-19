@@ -1,5 +1,5 @@
 <?php session_start(); ?>
-<nav class="navbar navbar-expand-sm" id="nav-bar">
+<nav class="navbar navbar-expand-lg" id="nav-bar">
     <a class="navbar-brand">
         <img class="logo" src="images/logo.png" alt="LOGO">
     </a>
@@ -19,7 +19,7 @@
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="aboutServicesDropdown" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                    data-toggle="dropdown" aria-expanded="false">
                     Services
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="aboutServicesDropdown">
@@ -35,21 +35,22 @@
         <ul class="navbar-nav">
             <li class="nav-item">
                 <?php if (isset($_SESSION['fname'])): ?>
-                    <h3><b>Welcome, <?php echo $_SESSION['fname']; ?>!</b></h3>
-                </li>
-                <li class="nav-item">
-                    <a href="logout.php" onclick="return confirmLogout();">
-                        <img src="images/logout.png" width="70" height="50" alt="logouticon">
+                <h3 class="welcome-text">Welcome, <?php echo $_SESSION['fname']; ?>!</h3>
+            </li>
+            <li class="nav-item">
+                <a href="logout.php" onclick="return confirmLogout();">
+                    <img class="logout-image"src="images/logout.png" width="60" height="50" alt="logouticon">
+                </a>
+            </li>
+            <li class="nav-item">
+            <?php else: ?>
+                <div style="display: inline-block; padding: 5px; white-space: nowrap;">
+                    <p class="welcome-text">Welcome, Chiyung!</p>
+                    <a href="login.php">
+                        <img class="account-image" src="images/account.png" alt="accounticon">
                     </a>
-                </li>
-                <li class="nav-item">
-                <?php else: ?>
-                    <div style="display: inline-block; margin-right: 20px; white-space: nowrap;">
-                        <a href="login.php">
-                            <img src="images/account.png" width="70" height="50" alt="accounticon">
-                        </a>
-                    </div>
-                <?php endif; ?>
+                </div>
+            <?php endif; ?>
             </li>
         </ul>
     </nav>
