@@ -30,7 +30,6 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
 
 <head>
   <?php include 'inc/head.inc.php'; ?>
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gastronome's Guide</title>
 </head>
@@ -58,7 +57,7 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
   
         <h1 class="discover mt-4">Discover New Restaurants</h1>
   
-        <nav class="w3-row w3-center w3-card w3-padding">
+        <nav class="w3-row w3-center w3-card w3-padding" aria-label="Restaurant Pricing Navigation">
           <a href="javascript:void(0)" onclick="openMenu(event, 'Budget');" id="myLink">
             <div class="w3-col s4 tablink">$</div>
           </a>
@@ -86,7 +85,7 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
                   <div class='card shadow-lg w-auto'>
                     <div class='card-body text-center'>
                     <a href='reviews.php?restaurant=<?php echo urlencode($restaurantName); ?>' style="text-decoration: none;">
-                      <h5 class='card-title'><strong><?php echo $restaurantName; ?></strong></h5>
+                      <h3 style="font-size: 18px;" class='card-title'><strong><?php echo $restaurantName; ?></strong></h5>
                       <p class='card-text'>Average Rating: <strong>
                         <br><?php echo $avgRating; ?> <i class="fas fa-star" style="color: gold" aria-hidden="true"></i> </strong></p>
                       <p class='card-text'>Average Pricing: <strong><?php echo $pricingSymbols; ?></strong></p></a>
@@ -143,8 +142,8 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
                     <div class='card-body text-center'>
                     <a href='reviews.php?restaurant=<?php echo urlencode($restaurantName); ?>' style="text-decoration: none;">
                       <h5 class='card-title'><strong><?php echo $restaurantName; ?></strong></h5>
-                      <ps='card-text'>Average Rating: <strong></strong>
-                        <br><?php echo $avgRating; ?> <i class="fas fa-star" style="color: gold" aria-hidden="true"></i></strong></br></p>
+                      <p class='card-text'>Average Rating: <strong>
+                        <br><?php echo $avgRating; ?> <i class="fas fa-star" style="color: gold" aria-hidden="true"></i></strong></p>
                       <p class='card-text'>Average Pricing: <strong><?php echo $pricingSymbols; ?></strong></p></a>
                     </div>
                   </div>
