@@ -24,11 +24,12 @@
                     <label for="pwd" class="form-label">Password:</label>
                     <input required maxlength="45" type="password" id="pwd" name="pwd" class="form-control"
                         placeholder="Enter password" required>
+                    <div id="loginError" class="error-message">Account does not exist or password is incorrect.</div>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn"
                         style='background-color: rgb(0, 78, 74); color: white'>Submit</button>
-                <!-- Add this right after the Submit button in login.php -->
+                </div>
                 <div class="mb-3">
                     <p>Forgot your password? <a href="forgot_password.php" style='color: rgb(0, 78, 74)'>Reset it here</a>.</p>
                 </div>
@@ -38,6 +39,7 @@
         <?php endif; ?>
     </main>
     <?php include "inc/footer.inc.php"; ?>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
