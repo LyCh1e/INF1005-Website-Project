@@ -221,7 +221,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
                                         <?php if ($average_rating > 0): ?>
                                             <p class="card-text">
                                                 <i class="fas fa-star" aria-hidden="true"></i> 
-                                                <span class="rating">Average Rating: <?= number_format($average_rating, 1) ?> ⭐</span>
+                                                <span class="rating">Average Rating: <?= number_format($average_rating, 1) ?> <i class="fas fa-star" style="color: gold" aria-hidden="true"></i></span>
                                             </p>
                                             <p class="card-text">
                                                 <i class="fas fa-money-bill" aria-hidden="true"></i> 

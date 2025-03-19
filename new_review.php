@@ -196,7 +196,7 @@ $conn->close();
                     
                     <div class="mb-3">
                         <label class="form-label"><strong>Website:</strong></label>
-                        <input type="text" name="website" class="form-control">
+                        <input type="text" name="website" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><strong>Address:</strong></label>
@@ -208,7 +208,7 @@ $conn->close();
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><strong>Cuisine:</strong></label>
-                        <input type="text" name="cuisine" class="form-control">
+                        <input type="text" name="cuisine" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><strong>Comment:</strong></label>
