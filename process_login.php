@@ -148,7 +148,7 @@ if (!$success) {
 <body>
     <?php include "inc/nav.inc.php"; ?>
     <main>
-        <div style="text-align: center;">
+        <div style="text-align: center; padding-top: 10px">
         <?php if ($success && isset($_SESSION['fname'])) { ?>
             <!-- Successful Authentication View -->
             <h1>Login successful!</h1>

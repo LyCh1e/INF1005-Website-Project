@@ -168,7 +168,7 @@ if ($success) {
 <body>
     <?php include "inc/nav.inc.php"; ?>
     <main>
-        <div style="text-align: center;">
+        <div style="text-align: center;  padding-top: 10px">
         <?php if ($success) { ?>
             <!-- Successful Authentication View -->
             <h1>Your registration is successful!!</h1>

@@ -43,8 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $stmt->close();
 
-        // Check if $_GET['restaurant'] is set, then insert into restaurant_reviews as well
-        // if (isset($_GET['restaurant'])) {
             $stmtCheck = $conn->prepare("SELECT id, rating, noOfReviews FROM restaurant_reviews WHERE name = ?");
             $stmtCheck->bind_param("s", $restaurantName);
             $stmtCheck->execute();
@@ -86,13 +84,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt2->execute();
                 $stmt2->close();
             }
-        // }
 
         // Redirect after success
         if (isset($_GET['restaurant'])) {
             echo "<script>alert('Review submitted successfully!');window.location.href='reviews.php?restaurant=" . htmlspecialchars($_GET['restaurant']) . "';</script>";
         } else {
-            echo "<script>alert('Review submitted successfully!');window.location.href='restaurants.php'</script>";
+            echo "<script>alert('Review submitted successfully!');window.location.href='new_restaurants.php'</script>";
         }
     } else {
         echo "<script>alert('Please fill all fields correctly.');</script>";

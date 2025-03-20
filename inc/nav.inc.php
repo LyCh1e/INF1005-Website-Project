@@ -33,12 +33,14 @@
             </li>
         </ul>
         <ul class="navbar-nav">
-            <?php if (isset($_SESSION['fname'])): ?>
-                <h1 class="welcome-text">Welcome, <?php echo $_SESSION['fname']; ?>!</h1>
+            <div class="nav-item">
+                <?php if (isset($_SESSION['fname'])): ?>
+                    <h1 class="welcome-text">Welcome, <?php echo $_SESSION['fname']; ?>!</h1>
+                </div>
                 <li class="nav-item">
                     <div style="display: inline-block; padding: 5px; white-space: nowrap;">
                         <a href="logout.php" onclick="return confirmLogout();">
-                            <img class="logout-image"src="images/logout.png" width="60" height="50" alt="logouticon">
+                            <img class="logout-image" src="images/logout.png" width="60" height="50" alt="logouticon">
                         </a>
                     </div>
                 </li>

@@ -32,6 +32,18 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
   <?php include 'inc/head.inc.php'; ?>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gastronome's Guide</title>
+  <style>
+        .card {
+          height: 300px;
+        }
+        .card-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center the content */
+    align-items: center; /* Horizontally center the content */
+    overflow: hidden;
+        }
+    </style>
 </head>
 
 <body>
