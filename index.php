@@ -70,7 +70,7 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
         </nav>
   
         <section id="Budget" class="w3-container menu w3-padding">
-          <h2>Budget Options</h2>
+          <h3>Budget Options</h3>
           <!-- Budget menu items go here -->
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
             <?php foreach ($restaurants as $row): ?>
