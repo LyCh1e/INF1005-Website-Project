@@ -73,7 +73,7 @@ $conn->close();
             
             <?php if ($average_rating > 0): ?>
                 (<span><small><?= number_format($average_rating, 1) ?> <i class="fas fa-star" style="color: gold" aria-hidden="true"></i></small></span>)
-                <p><h3><span><small>Average Pricing: <?= $pricingSymbols; ?></small></span></h3></p>
+                <h2><span><small>Average Pricing: <?= $pricingSymbols; ?></small></span></h2>
                 
             <?php else: ?>
                 <small>(No reviews yet)</small>
@@ -89,7 +89,7 @@ $conn->close();
                 <div>
                     <p>
                         Want to write a review?
-                        <a href="login.php" style="color:rgb(0, 146, 131);">Please Login!</a>
+                        <a href="login.php" style="color:#00766B;">Please Login!</a>
                     </p>
                 </div>
             <?php endif; ?>
@@ -99,7 +99,7 @@ $conn->close();
             <?php foreach ($reviews as $review): ?>
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h5 class="card-title"><?= htmlspecialchars($review['name']) ?></h5>
+                        <h3 class="card-title"><?= htmlspecialchars($review['name']) ?></h3>
                         <p class="card-text"><?= htmlspecialchars($review['restaurantName']) ?></p>
                         <p class="card-text"><?= str_repeat('<i class="fas fa-star" style="color: gold" aria-hidden="true"></i>', $review['rating']) ?></p>
                         <p class="card-text"><?= str_repeat("$", $review['restaurantPricing']) ?></p>
@@ -128,8 +128,8 @@ $conn->close();
             <p>No reviews found for this restaurant.</p>
         <?php endif; ?>
     </main>
+    <?php include "inc/footer.inc.php"; ?>
 </body>
 
-<?php include "inc/footer.inc.php"; ?>
 
 </html>

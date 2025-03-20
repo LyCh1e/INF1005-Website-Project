@@ -56,29 +56,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
     <?php include "inc/nav.inc.php"; ?>
 
     <main class="container mt-5">
-        <h2 class="text-center mb-4">Restaurant Reviews</h2>
+        <h1 class="text-center mb-4">Restaurant Reviews</h2>
         <div class="d-flex justify-content-center">
-            <form method="POST" action="" class="d-flex">
+            <form method="POST" action="#" class="d-flex">
+                <script>document.querySelector("form").setAttribute("action", "")</script>
                 <div class="input-group">
                     <input type="text" name="search" class="form-control me-2" placeholder="Search for a restaurant"
                         value="<?php echo htmlspecialchars($searchTerm ?? ''); ?>">
-                    <button type="submit" class="btn" style="background: none; border: none;">
-                        <i class="fas fa-search" type="submit" style="font-size: 30px; color: rgb(0, 146, 131);"></i>
+                    <button type="submit" class="btn" style="background: none; border: none;" aria-label="Submit search button">
+                        <i class="fas fa-search" style="font-size: 30px; color: rgb(0, 146, 131);"></i>
                     </button>
                 </div>
             </form>
         </div>
         <div style="display: inline-block; margin-right: 20px;">
             <?php if (isset($_SESSION['fname'])): ?>
-                <h5>
-                    <p>Can't find the restaurant? <a href="new_review.php" style="color: rgb(0, 146, 131);">Click here to
-                            add the review!</a></p>
-                </h5>
+                <h2 style="font-size: 24px">
+                    Can't find the restaurant? 
+                    <a href="new_review.php" style="color: rgb(0, 146, 131);">Click here to add the review!</a>
+                </h2>
             <?php else: ?>
                 <div style="padding: 10px">
-                    <h5>
-                    <p>Want to write a review? <a href="login.php">Please Login!</a></p>
-                    </h5>               
+                    <h2 style="font-size: 24px">
+                        Want to write a review? <a href="login.php">Please Login!</a>
+                    </h2>               
                 </div>
             <?php endif; ?>
         </div>
@@ -101,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
                                 <p class='card-text'>Average Pricing: <strong><?php echo $pricingSymbols; ?></strong></p>
                                 <a href='reviews.php?restaurant=<?php echo urlencode($restaurantName); ?>'
                                     class='btn d-flex justify-content-center'
-                                    style='background-color: rgb(0, 146, 131); color: white'>View Reviews</a>
+                                    style='background-color: #00766B; color: white'>View Reviews</a>
                             </div>
                         </div>
                     </div>

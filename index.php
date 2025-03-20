@@ -55,7 +55,7 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
     <article class="w3-container" id="discover">
       <div class="w3-content" style="max-width:1000px">
   
-        <h1 class="discover mt-4">Discover New Restaurants</h1>
+        <h2 class="discover mt-4">Discover New Restaurants</h2>
   
         <nav class="w3-row w3-center w3-card w3-padding" aria-label="Restaurant Pricing Navigation">
           <a href="javascript:void(0)" onclick="openMenu(event, 'Budget');" id="myLink">
@@ -85,7 +85,7 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
                   <div class='card shadow-lg w-auto'>
                     <div class='card-body text-center'>
                     <a href='reviews.php?restaurant=<?php echo urlencode($restaurantName); ?>' style="text-decoration: none;">
-                      <h3 style="font-size: 18px;" class='card-title'><strong><?php echo $restaurantName; ?></strong></h5>
+                      <h3 style="font-size: 18px;" class='card-title'><strong><?php echo $restaurantName; ?></strong></h3>
                       <p class='card-text'>Average Rating: <strong>
                         <br><?php echo $avgRating; ?> <i class="fas fa-star" style="color: gold" aria-hidden="true"></i> </strong></p>
                       <p class='card-text'>Average Pricing: <strong><?php echo $pricingSymbols; ?></strong></p></a>

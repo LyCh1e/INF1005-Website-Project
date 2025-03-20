@@ -82,7 +82,7 @@ session_start();
                     </div>
                     <button type="submit" class="btn" style='background-color: rgb(0, 146, 131); color: white'>Book Now</button>
                     <?php else: ?>
-                        <h5><small><a href="login.php">Please login to make booking.</a></small></h5>
+                        <h2><small><a href="login.php">Please login to make booking.</a></small></h2>
                     <?php endif; ?>
                 </form>
             </div>

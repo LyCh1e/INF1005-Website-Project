@@ -155,7 +155,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
         
         <section class="search-section">
             <div class="d-flex justify-content-center">
-                <form method="POST" action="" class="d-flex">
+                <form method="POST" action="#" class="d-flex">
+                    <script>document.querySelector("form").setAttribute("action", "")</script>
                     <div class="input-group">
                         <label for="search-input" class="visually-hidden">Search for a restaurant</label>
                         <input type="text" id="search-input" name="search" class="form-control me-2" 
@@ -171,15 +172,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
         
         <section class="add-review-section">
             <?php if (isset($_SESSION['fname'])): ?>
-                <h5>
-                    <p>Can't find the restaurant? <a href="new_review.php" style="color: rgb(0, 78, 74);">Click here to
-                            add the review!</a></p>
-                </h5>
+                <h2 style="font-size: 24px">
+                    Can't find the restaurant? 
+                    <a href="new_review.php" style="color: rgb(0, 78, 74);">Click here to add the review!</a>
+                </h2>
             <?php else: ?>
                 <div class="login-prompt">
-                    <h5>
-                        <p>Want to write a review? <a href="login.php">Please Login!</a></p>
-                    </h5>
+                    <h2 style="font-size: 24px">
+                        Want to write a review? <a href="login.php">Please Login!</a>
+                    </h2>
                 </div>
             <?php endif; ?>
         </section>
