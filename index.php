@@ -61,8 +61,8 @@ $restaurants = $result->fetch_all(MYSQLI_ASSOC);
       dining. <br>
       Read what others are saying about their favorite spots, discover hidden gems, and find the perfect place for your
       next night out.</p>
-    <p class="intro">We provide booking services as well as seamless online ordering, so you can easily reserve a table
-      or grab your favorite dish without leaving the comfort of your home.</p>
+    <p class="intro">We provide booking services as well as so you can easily reserve a table at your convenience!!</p>
+    
     <!-- Menu Container -->
     <article class="w3-container" id="discover">
       <div class="w3-content" style="max-width:1000px">
