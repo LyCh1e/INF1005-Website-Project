@@ -45,7 +45,8 @@
             <?php else: ?>
                 <li class="nav-item">
                     <div style="display: inline-block; padding: 5px; white-space: nowrap;">
-                        <a href="login.php">
+                        <a href="login.php" style="text-decoration: none;">
+                            <h1 class="welcome-text">Login</h1>
                             <img class="account-image" src="images/account.png" alt="accounticon">
                         </a>
                     </div>
