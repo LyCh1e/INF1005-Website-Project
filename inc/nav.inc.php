@@ -23,8 +23,7 @@
                     Services
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="aboutServicesDropdown">
-                    <li><a class="dropdown-item" href="restaurants.php">Restaurant Reviews</a></li>
-                    <li><a class="dropdown-item" href="new_restaurants.php">Restaurant Reviews (API)</a></li>
+                    <li><a class="dropdown-item" href="new_restaurants.php">Restaurant Reviews</a></li>
                     <li><a class="dropdown-item" href="booking.php">Booking</a></li>
                 </ul>
             </li>
@@ -33,10 +32,8 @@
             </li>
         </ul>
         <ul class="navbar-nav">
-            <div class="nav-item">
-                <?php if (isset($_SESSION['fname'])): ?>
-                    <h1 class="welcome-text">Welcome, <?php echo $_SESSION['fname']; ?>!</h1>
-                </div>
+            <?php if (isset($_SESSION['fname'])): ?>
+                <h1 class="nav-item">Welcome, <?php echo $_SESSION['fname']; ?>!</h1>
                 <li class="nav-item">
                     <div style="display: inline-block; padding: 5px; white-space: nowrap;">
                         <a href="logout.php" onclick="return confirmLogout();">
