@@ -170,3 +170,33 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 });
+
+function togglePwd(){
+  var pwd = document.getElementById("pwd");
+  var eyeIcon = document.getElementById("eyeIcon");
+  if (pwd.type === "password"){
+    pwd.type = "text";
+    eyeIcon.classList.remove("fa-eye");
+    eyeIcon.classList.add("fa-eye-slash");
+  } else{
+    pwd.type = "password";
+    eyeIcon.classList.remove("fa-eye-slash");
+    eyeIcon.classList.add("fa-eye");
+    
+  }
+}
+
+function toggleConfirmPwd(){
+  var pwd = document.getElementById("pwd_confirm");
+  var eyeIcon = document.getElementById("CeyeIcon");
+  if (pwd.type === "password"){
+    pwd.type = "text";
+    eyeIcon.classList.remove("fa-eye");
+    eyeIcon.classList.add("fa-eye-slash");
+  } else{
+    pwd.type = "password";
+    eyeIcon.classList.remove("fa-eye-slash");
+    eyeIcon.classList.add("fa-eye");
+    
+  }
+}

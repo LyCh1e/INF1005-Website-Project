@@ -22,9 +22,12 @@
                 </div>
                 <div class="mb-3">
                     <label for="pwd" class="form-label">Password:</label>
+                    <div class="mb-3" style="display: flex;">
                     <input required maxlength="45" type="password" id="pwd" name="pwd" class="form-control"
-                        placeholder="Enter password" required>
+                        placeholder="Enter password" required> 
+                        <button type="button" onclick="togglePwd()" style="background: none; border: none; padding-left: 10px"><i class="fas fa-eye" id="eyeIcon"></i></button>
                     <div id="loginError" class="error-message">Account does not exist or password is incorrect.</div>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn"
@@ -39,7 +42,7 @@
         <?php endif; ?>
     </main>
     <?php include "inc/footer.inc.php"; ?>
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
 </body>
 
 </html>
