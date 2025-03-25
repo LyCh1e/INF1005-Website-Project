@@ -1,6 +1,7 @@
 <?php
 session_start();
-$email = $errorMsg = "";
+$email = $fname = $ph = "";
+$errorMsg = "";
 $success = true;
 
 // Check if email is submitted
@@ -11,7 +12,28 @@ if (empty($_POST["email"])) {
     $email = sanitize_input($_POST["email"]);
     // Additional check to make sure e-mail address is well-formed
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errorMsg .= "Invalid email format.";
+        $errorMsg .= "Invalid email format.<br>";
+        $success = false;
+    }
+}
+
+// Check if first name is submitted
+if (empty($_POST["fname"])) {
+    $errorMsg .= "First name is required.<br>";
+    $success = false;
+} else {
+    $fname = sanitize_input($_POST["fname"]);
+}
+
+// Check if phone number is submitted
+if (empty($_POST["ph"])) {
+    $errorMsg .= "Phone number is required.<br>";
+    $success = false;
+} else {
+    $ph = sanitize_input($_POST["ph"]);
+    // Phone number validation matching the registration requirement
+    if (!preg_match("/^\d{8}$/", $ph)) {
+        $errorMsg .= "Invalid phone number. Please enter an 8-digit number.<br>";
         $success = false;
     }
 }
@@ -30,7 +52,7 @@ function generateResetToken() {
 
 function processPasswordReset()
 {
-    global $email, $errorMsg, $success;
+    global $email, $fname, $ph, $errorMsg, $success;
     
     // Create database connection
     $config = parse_ini_file('/var/www/private/db-config.ini');
@@ -54,14 +76,14 @@ function processPasswordReset()
         return;
     }
     
-    // Check if email exists in database
-    $stmt = $conn->prepare("SELECT email FROM world_of_pets_members WHERE email = ?");
-    $stmt->bind_param("s", $email);
+    // Check if email exists and matches with fname and phone_number in database
+    $stmt = $conn->prepare("SELECT email FROM world_of_pets_members WHERE email = ? AND fname = ? AND phone_number = ?");
+    $stmt->bind_param("sss", $email, $fname, $ph);
     $stmt->execute();
     $result = $stmt->get_result();
     
     if ($result->num_rows == 0) {
-        $errorMsg = "Email not found.";
+        $errorMsg = "The provided information doesn't match our records.";
         $success = false;
         $stmt->close();
         $conn->close();
@@ -150,8 +172,8 @@ if ($success) {
     <main class="container mt-5">
         <div style="text-align: center;">
             <?php if ($success): ?>
-                <h1>Password Reset Link Sent</h1>
-                <h3>Please check your email for password reset instructions.</h3>
+                <h1>Password Reset Link Ready</h1>
+                <h3>Identity verified successfully. You can now reset your password.</h3>
                 <p>
                     <!-- For demonstration purposes, create a direct link -->
                     <a href="reset_password.php?email=<?= urlencode($email) ?>&token=<?= urlencode($_SESSION['reset_token']) ?>">
@@ -162,7 +184,7 @@ if ($success) {
                     (In a real application, this link would be sent to your email)
                 </p>
             <?php else: ?>
-                <h1>Password Reset Failed</h1>
+                <h1>Identity Verification Failed</h1>
                 <h3>The following errors were detected:</h3>
                 <p><?= $errorMsg ?></p>
                 <p>

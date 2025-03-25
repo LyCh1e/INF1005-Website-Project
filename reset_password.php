@@ -68,7 +68,7 @@ if (isset($_GET['email']) && isset($_GET['token'])) {
         <h1>Reset Your Password</h1>
 
         <?php if ($validToken): ?>
-            <p>Please enter your new password below.</p>
+            <p>Your identity has been verified. Please enter your new password below.</p>
             <form action="process_reset_password.php" method="post">
                 <input type="hidden" name="email" value="<?= htmlspecialchars($email) ?>">
                 <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
