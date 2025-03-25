@@ -172,7 +172,7 @@ if ($success) {
     <main class="container mt-5">
         <div style="text-align: center;">
             <?php if ($success): ?>
-                <h1>Password Reset Link Ready</h1>
+                <h1>Password Reset</h1>
                 <h3>Identity verified successfully. You can now reset your password.</h3>
                 <p>
                     <!-- For demonstration purposes, create a direct link -->
@@ -180,9 +180,9 @@ if ($success) {
                         <button class="action-button success-button">Click here to reset your password</button>
                     </a>
                 </p>
-                <p class="small text-muted">
+                <!-- <p class="small text-muted">
                     (In a real application, this link would be sent to your email)
-                </p>
+                </p> -->
             <?php else: ?>
                 <h1>Identity Verification Failed</h1>
                 <h3>The following errors were detected:</h3>

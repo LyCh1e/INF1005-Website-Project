@@ -127,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding-left: 10px;
             padding-bottom: 10px;
-            height: 550px;
+            height: 570px;
         }
 
         .card-title {
