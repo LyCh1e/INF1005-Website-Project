@@ -3,10 +3,12 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <?php include "inc/head.inc.php"; ?>
     <title>Restaurant Booking</title>
 </head>
+
 <body>
     <?php include "inc/nav.inc.php"; ?>
     <main class="container mt-5">
@@ -25,63 +27,65 @@ session_start();
             <!-- New Booking Form -->
             <div class="tab-pane fade show active" id="new-booking" role="tabpanel">
                 <form action="processbooking.php" method="POST" class="mt-3" style="width: 30%;">
-                <?php if (isset($_SESSION['fname'])): ?>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name"
-                            value="<?= htmlspecialchars($_SESSION['fname']) ?>" disabled>
-                        <input type="hidden" name="name" value="<?= htmlspecialchars($_SESSION['fname']) ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="ph" class="form-label">Phone Number
+                    <?php if (isset($_SESSION['fname'])): ?>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name"
+                                value="<?= htmlspecialchars($_SESSION['fname']) ?>" disabled>
+                            <input type="hidden" name="name" value="<?= htmlspecialchars($_SESSION['fname']) ?>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ph" class="form-label">Phone Number</label>
                             <input type="text" class="form-control" name="ph"
                                 value="<?= htmlspecialchars($_SESSION['ph']) ?>">
-                        </label>
-                    </div>
-                    <div class="mb-3">
-                        <label for="restaurantName" class="form-label">Restaurant Name</label>
-                        <select required class="form-control" id="restaurantName" name="restaurantName">
-                            <option value="" selected disabled>Select a restaurant</option>
-                            <?php
-                            $config = parse_ini_file('/var/www/private/db-config.ini');
-                            if ($config) {
-                                $conn = new mysqli(
-                                    $config['servername'],
-                                    $config['username'],
-                                    $config['password'],
-                                    $config['dbname']
-                                );
+                            <input type="hidden" name="ph" value="<?= htmlspecialchars($_SESSION['ph']) ?>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="restaurantName" class="form-label">Restaurant Name</label>
+                            <select required class="form-control" id="restaurantName" name="restaurantName">
+                                <option value="" selected disabled>Select a restaurant</option>
+                                <?php
+                                $config = parse_ini_file('/var/www/private/db-config.ini');
+                                if ($config) {
+                                    $conn = new mysqli(
+                                        $config['servername'],
+                                        $config['username'],
+                                        $config['password'],
+                                        $config['dbname']
+                                    );
 
-                                if ($conn->connect_error) {
-                                    die("Connection failed: " . $conn->connect_error);
-                                }
-
-                                // Fetch restaurant names
-                                $query = "SELECT DISTINCT restaurantName FROM reviews ORDER BY restaurantName ASC";
-                                $result = mysqli_query($conn, $query);
-
-                                if ($result) {
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<option value='" . htmlspecialchars($row['restaurantName']) . "'>" . htmlspecialchars($row['restaurantName']) . "</option>";
+                                    if ($conn->connect_error) {
+                                        die("Connection failed: " . $conn->connect_error);
                                     }
-                                }
 
-                                mysqli_close($conn);
-                            } else {
-                                echo "<option disabled>Database error</option>";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="date" class="form-label">Date</label>
-                        <input required type="date" class="form-control" id="date" name="date" min="<?= date('Y-m-d'); ?>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="time" class="form-label">Time</label>
-                        <input required type="time" class="form-control" id="time" name="time" required>
-                    </div>
-                    <button type="submit" class="btn" style='background-color: #00796b; color: white'>Book Now</button>
+                                    // Fetch restaurant names
+                                    $query = "SELECT DISTINCT restaurantName FROM reviews ORDER BY restaurantName ASC";
+                                    $result = mysqli_query($conn, $query);
+
+                                    if ($result) {
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            echo "<option value='" . htmlspecialchars($row['restaurantName']) . "'>" . htmlspecialchars($row['restaurantName']) . "</option>";
+                                        }
+                                    }
+
+                                    mysqli_close($conn);
+                                } else {
+                                    echo "<option disabled>Database error</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Date</label>
+                            <input required type="date" class="form-control" id="date" name="date"
+                                min="<?= date('Y-m-d'); ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="time" class="form-label">Time</label>
+                            <input required type="time" class="form-control" id="time" name="time" required>
+                        </div>
+                        <button type="submit" class="btn" style='background-color: rgb(0, 146, 131); color: white'>Book
+                            Now</button>
                     <?php else: ?>
                         <h2><small><a href="login.php">Please login to make booking.</a></small></h2>
                     <?php endif; ?>
@@ -104,7 +108,7 @@ session_start();
                             <?php
                             if (!isset($_SESSION['fname'])) {
                                 echo "<tr><td colspan='4'>Please login to view bookings.</td></tr>";
-                            }                            
+                            }
                             $config = parse_ini_file('/var/www/private/db-config.ini');
                             if (!$config) {
                                 die("Failed to read database config file.");
@@ -124,22 +128,31 @@ session_start();
                             $result = mysqli_query($conn, $query);
 
                             if ($result) {
+                                $currentTime = new DateTime();
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     // If logged-in user is the one who made the booking
                                     if (isset($_SESSION['fname'])) {
                                         if ($_SESSION['fname'] == $row['name']) {
+                                            $booked_date = new DateTime($row['date'] . ' ' . $row['time']);
                                             echo "<tr>
                                     <td>" . htmlspecialchars($row['name']) . "</td>
                                     <td>" . htmlspecialchars($row['restaurantName']) . "</td>
                                     <td>" . htmlspecialchars($row['date']) . "</td>
-                                    <td>" . htmlspecialchars($row['time']) . "</td>
-                                    <td>
-                                        <a href='edit_booking.php?id=" . htmlspecialchars($row['id']) . "'>
+                                    <td>" . htmlspecialchars($row['time']) . "</td>";
+                                            if ($booked_date > $currentTime) {
+                                                echo " <td>
+                                    <a href='pdf.php?id=" . htmlspecialchars($row['id']) . "'>
+                                            <i class='fa-solid fa-file' style='font-size: 35px; color: indianred;'></i></a>    
+                                    <a href='edit_booking.php?id=" . htmlspecialchars($row['id']) . "'>
                                             <i class='fas fa-edit' style='font-size: 35px; color: green;'></i></a>
                                         <a href='delete_booking.php?id=" . urlencode($row['id']) . "' onclick='return confirm(\"Are you sure?\")'>
-                                            <i class='fas fa-trash-alt' style='font-size: 35px; color: dark grey;'></i></a>
-                                    </td>
-                                    </tr>";
+                                            <i class='fas fa-trash-alt' style='font-size: 35px; color: dark grey;'></i></a> </td>";
+                                            } else{
+                                                echo " <td>
+                                                <a href='pdf.php?id=" . htmlspecialchars($row['id']) . "'>
+                                            <i class='fa-solid fa-file' style='font-size: 35px; color: indianred;'></i></a></td>";
+                                            }
+                                            echo "</tr>";
                                         }
                                     }
                                 }
