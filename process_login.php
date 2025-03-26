@@ -152,14 +152,18 @@ if (!$success) {
         <?php if ($success && isset($_SESSION['fname'])) { ?>
             <!-- Successful Authentication View -->
             <h1>Login successful!</h1>
-            <h3>Welcome back, <?php echo $_SESSION['fname']; ?>.</h3>
-            <p><a href="index.php"><button class="homebutton">Return to Home</button></a></p>
+            <h2>Welcome back, <?php echo $_SESSION['fname']; ?>.</h2>
+            <p><form action="index.php" method="get" style="display: inline;">
+                <button class="homebutton">Return to Home</button>
+            </form></p>
         <?php } else { ?>
             <!-- Failed Authentication View -->
             <h1>Oops!</h1>
-            <h3>The following errors were detected:</h3>
+            <h2>The following errors were detected:</h2>
             <p><?php echo $errorMsg; ?></p>
-            <p><a href="login.php"><button class="eloginbutton">Return to Login</button></a></p>
+            <p><form action="login.php" method="get" style="display: inline;">
+                <button class="eloginbutton">Return to Login</button>
+            </form></p>
         <?php } ?>
         </div>
     </main>

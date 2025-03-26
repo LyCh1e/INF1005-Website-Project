@@ -33,7 +33,7 @@
         </ul>
         <ul class="navbar-nav">
             <?php if (isset($_SESSION['fname'])): ?>
-                <h1 class="nav-item">Welcome, <?php echo $_SESSION['fname']; ?>!</h1>
+                <li class="nav-item" style="font-size: 24px; align-content: center;">Welcome, <?php echo $_SESSION['fname']; ?>!</li>
                 <li class="nav-item">
                     <div style="display: inline-block; padding: 5px; white-space: nowrap;">
                         <a href="logout.php" onclick="return confirmLogout();">

@@ -33,9 +33,10 @@ session_start();
                         <input type="hidden" name="name" value="<?= htmlspecialchars($_SESSION['fname']) ?>">
                     </div>
                     <div class="mb-3">
-                        <label for="ph" class="form-label">Phone Number</label>
-                        <input type="text" class="form-control" name="ph"
-                            value="<?= htmlspecialchars($_SESSION['ph']) ?>">
+                        <label for="ph" class="form-label">Phone Number
+                            <input type="text" class="form-control" name="ph"
+                                value="<?= htmlspecialchars($_SESSION['ph']) ?>">
+                        </label>
                     </div>
                     <div class="mb-3">
                         <label for="restaurantName" class="form-label">Restaurant Name</label>
@@ -80,7 +81,7 @@ session_start();
                         <label for="time" class="form-label">Time</label>
                         <input required type="time" class="form-control" id="time" name="time" required>
                     </div>
-                    <button type="submit" class="btn" style='background-color: rgb(0, 146, 131); color: white'>Book Now</button>
+                    <button type="submit" class="btn" style='background-color: #00796b; color: white'>Book Now</button>
                     <?php else: ?>
                         <h2><small><a href="login.php">Please login to make booking.</a></small></h2>
                     <?php endif; ?>
