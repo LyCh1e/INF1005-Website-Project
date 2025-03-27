@@ -33,9 +33,11 @@
         </ul>
         <ul class="navbar-nav">
             <?php if (isset($_SESSION['fname'])): ?>
-                <div style="font-size: 24px; align-content: center;">
-                    <a style="color: white; text-decoration:none;" href="profile.php">Welcome, <?php echo $_SESSION['fname']; ?>!</a>
+                <li class="nav-item">
+                <div style="font-size: 24px; align-content: center; padding-top: 10px;">
+                    <a class="nav-link" style="color: white; text-decoration:none;" href="profile.php">Welcome, <?php echo $_SESSION['fname']; ?>!</a>
                 </div>
+                </li>
                 <li class="nav-item">
                     <div style="display: inline-block; padding: 5px; white-space: nowrap;">
                         <a href="logout.php" onclick="return confirmLogout();">
