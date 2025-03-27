@@ -38,7 +38,6 @@ session_start();
                             <label for="ph" class="form-label">Phone Number</label>
                             <input type="text" class="form-control" name="ph"
                                 value="<?= htmlspecialchars($_SESSION['ph']) ?>">
-                            <input type="hidden" name="ph" value="<?= htmlspecialchars($_SESSION['ph']) ?>">
                         </div>
                         <div class="mb-3">
                             <label for="restaurantName" class="form-label">Restaurant Name</label>

@@ -82,7 +82,7 @@ include "inc/head.inc.php";
             <div class="mb-3">
                         <label for="ph" class="form-label">Phone Number</label>
                         <input type="text" class="form-control" name="ph"
-                            value="<?= htmlspecialchars($_SESSION['ph']) ?>">
+                            value="<?= htmlspecialchars($booking['phoneNumber']) ?>">
                     </div>
             <div class="mb-3">
                 <label class="form-label"><strong>Restaurant Name:</strong></label>

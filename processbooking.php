@@ -125,7 +125,7 @@ $conn->close();
                             <!-- Form for confirming booking -->
                             <form id="confirm-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" aria-label="Confirm booking form">
                                 <input type="hidden" name="name" value="<?php echo htmlspecialchars($name); ?>">
-                                <input type="hidden" name="phoneNumber" value="<?php echo htmlspecialchars($phoneNumber); ?>">
+                                <input type="hidden" name="ph" value="<?php echo htmlspecialchars($phoneNumber); ?>">
                                 <input type="hidden" name="restaurantName" value="<?php echo htmlspecialchars($restaurantName); ?>">
                                 <input type="hidden" name="date" value="<?php echo htmlspecialchars($date); ?>">
                                 <input type="hidden" name="time" value="<?php echo htmlspecialchars($time); ?>">
