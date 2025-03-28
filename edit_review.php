@@ -64,6 +64,7 @@ $conn->close();
     <?php
     include "inc/head.inc.php";
     ?>
+    <title>Edit Review</title>
 </head>
 
 <body>
@@ -72,25 +73,25 @@ $conn->close();
     ?>
     <main>
         <div class="container mt-5">
-            <h2 class="text-center">Edit Your Review</h2>
+            <h1 class="text-center">Edit Your Review</h1>
             <?php if (isset($_SESSION['fname'])): ?>
             <form method="POST" class="mb-4">
                 <div class="mb-3">
                     <label class="form-label"><strong>Name:</strong></label>
-                    <input type="text" name="name" class="form-control"
+                    <input type="text" name="name" class="form-control" aria-label="name"
                         value="<?= htmlspecialchars($_SESSION['fname']) ?>" disabled>
                     <input type="hidden" name="name" value="<?= htmlspecialchars($_SESSION['fname']) ?>">
                 </div>
                 <div class="mb-3">
                     <label class="form-label"><strong>Restaurant Name:</strong></label>
-                    <input type="text" name="restaurantName" class="form-control"
+                    <input type="text" name="restaurantName" class="form-control" aria-label="Rname"
                         value="<?= htmlspecialchars($review['restaurantName']) ?>" disabled>
                     <input type="hidden" name="restaurantName"
                         value="<?= htmlspecialchars($review['restaurantName']) ?>">
                 </div>
                 <div class="mb-3">
                     <label class="form-label"><strong>Rating:</strong> (1-5)</label>
-                    <select name="rating" class="form-select" required>
+                    <select name="rating" class="form-select" aria-label="rating" required>
                         <option value="5" <?= ($review['rating'] == 5) ? 'selected' : '' ?>>★★★★★</option>
                         <option value="4" <?= ($review['rating'] == 4) ? 'selected' : '' ?>>★★★★</option>
                         <option value="3" <?= ($review['rating'] == 3) ? 'selected' : '' ?>>★★★</option>
@@ -100,7 +101,7 @@ $conn->close();
                 </div>
                 <div class="mb-3">
                     <label class="form-label"><strong>Pricing:</strong></label>
-                    <select name="restaurantPricing" class="form-select" required>
+                    <select name="restaurantPricing" class="form-select" aria-label="pricing" required>
                         <option value="3" <?= ($review['restaurantPricing'] == 3) ? 'selected' : '' ?>>$$$</option>
                         <option value="2" <?= ($review['restaurantPricing'] == 2) ? 'selected' : '' ?>>$$</option>
                         <option value="1" <?= ($review['restaurantPricing'] == 1) ? 'selected' : '' ?>>$</option>
@@ -108,7 +109,7 @@ $conn->close();
                 </div>
                 <div class="mb-3">
                     <label class="form-label"><strong>Comment:</strong></label>
-                    <textarea name="comment" class="form-control" rows="4"
+                    <textarea name="comment" class="form-control" rows="4" aria-label="comment"
                         required><?= htmlspecialchars($review['comment']) ?></textarea>
                 </div>
                 <button type="submit" class="btn btn-success">Save Changes</button>

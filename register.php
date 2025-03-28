@@ -62,7 +62,7 @@
                     <div class="mb-3" style="display: flex;">
                         <input required maxlength="45" type="password" id="pwd" name="pwd" class="form-control"
                             placeholder="Enter password" required>
-                        <button type="button" onclick="togglePwd()"
+                        <button type="button" onclick="togglePwd()" aria-label="eyeicon"
                             style="background: none; border: none; padding-left: 10px"><i class="fas fa-eye"
                                 id="eyeIcon"></i></button>
                     </div>
@@ -84,7 +84,7 @@
                     <div class="mb-3" style="display: flex;">
                         <input required maxlength="45" type="password" id="pwd_confirm" name="pwd_confirm"
                             class="form-control" placeholder="Confirm password" required>
-                        <button type="button" onclick="toggleConfirmPwd()"
+                        <button type="button" onclick="toggleConfirmPwd()" aria-label="eyeicon"
                             style="background: none; border: none; padding-left: 10px"><i class="fas fa-eye"
                                 id="CeyeIcon"></i></button>
                     </div>

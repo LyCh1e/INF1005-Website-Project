@@ -109,6 +109,7 @@ $conn->close();
     <?php
     include "inc/head.inc.php";
     ?>
+    <title>New Review Form</title>
 </head>
 
 <body>
@@ -118,23 +119,23 @@ $conn->close();
     <main>
         <?php if (isset($_GET['restaurant'])): ?>
             <div class="container mt-5">
-                <h2 class="text-center">Write a Review</h2>
+                <h1 class="text-center">Write a Review</h1>
                 <form method="POST" class="mb-4">
                     <div class="mb-3">
                         <label class="form-label"><strong>Name:</strong></label>
-                        <input type="text" name="name" class="form-control"
+                        <input type="text" name="name" class="form-control" aria-label="name"
                             value="<?= htmlspecialchars($_SESSION['fname']) ?>" disabled>
                         <input type="hidden" name="name" value="<?= htmlspecialchars($_SESSION['fname']) ?>">
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><strong>Restaurant Name:</strong></label>
-                        <input type="text" name="restaurantName" class="form-control"
+                        <input type="text" name="restaurantName" class="form-control" aria-label="Rname"
                             value="<?= htmlspecialchars($_GET['restaurant']) ?>" disabled>
                         <input type="hidden" name="restaurantName" value="<?= htmlspecialchars($_GET['restaurant']) ?>">
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><strong>Rating:</strong> (1-5)</label>
-                        <select name="rating" class="form-select" required>
+                        <select name="rating" class="form-select" aria-label="rating" required>
                             <option value="5">★★★★★</option>
                             <option value="4">★★★★</option>
                             <option value="3">★★★</option>
@@ -144,7 +145,7 @@ $conn->close();
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><strong>Pricing:</strong></label>
-                        <select name="restaurantPricing" class="form-select" required>
+                        <select name="restaurantPricing" class="form-select" aria-label="pricing" required>
                             <option value="3">$$$</option>
                             <option value="2">$$</option>
                             <option value="1">$</option>
@@ -153,28 +154,28 @@ $conn->close();
 
                     <div class="mb-3">
                         <label class="form-label"><strong>Comment:</strong></label>
-                        <textarea name="comment" class="form-control" rows="4" required></textarea>
+                        <textarea name="comment" class="form-control" rows="4" aria-label="comment" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-success">Submit Review</button>
                 </form>
             </div>
         <?php else: ?>
             <div class="container mt-5">
-                <h2 class="text-center">Write a Review</h2>
+                <h1 class="text-center">Write a Review</h1>
                 <form method="POST" class="mb-4">
                     <div class="mb-3">
                         <label class="form-label"><strong>Name:</strong></label>
-                        <input type="text" name="name" class="form-control"
+                        <input type="text" name="name" class="form-control" aria-label="name"
                             value="<?= htmlspecialchars($_SESSION['fname']) ?>" disabled>
                         <input type="hidden" name="name" value="<?= htmlspecialchars($_SESSION['fname']) ?>">
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><strong>Restaurant Name:</strong></label>
-                        <input type="text" name="restaurantName" class="form-control" required>
+                        <input type="text" name="restaurantName" class="form-control" aria-label="Rname" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><strong>Rating:</strong> (1-5)</label>
-                        <select name="rating" class="form-select" required>
+                        <select name="rating" class="form-select" aria-label="rating" required>
                             <option value="5">★★★★★</option>
                             <option value="4">★★★★</option>
                             <option value="3">★★★</option>
@@ -184,7 +185,7 @@ $conn->close();
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><strong>Pricing:</strong></label>
-                        <select name="restaurantPricing" class="form-select" required>
+                        <select name="restaurantPricing" class="form-select" aria-label="pricing" required>
                             <option value="3">$$$</option>
                             <option value="2">$$</option>
                             <option value="1">$</option>
@@ -193,23 +194,23 @@ $conn->close();
                     
                     <div class="mb-3">
                         <label class="form-label"><strong>Website:</strong></label>
-                        <input type="text" name="website" class="form-control" required>
+                        <input type="text" name="website" class="form-control" aria-label="web" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><strong>Address:</strong></label>
-                        <input type="text" name="address" class="form-control" required>
+                        <input type="text" name="address" class="form-control" aria-label="add" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><strong>Phone Number:</strong></label>
-                        <input type="text" name="phone" class="form-control" required>
+                        <input type="text" name="phone" class="form-control" aria-label="phone" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><strong>Cuisine:</strong></label>
-                        <input type="text" name="cuisine" class="form-control" required>
+                        <input type="text" name="cuisine" class="form-control" aria-label="cusine" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><strong>Comment:</strong></label>
-                        <textarea name="comment" class="form-control" rows="4" required></textarea>
+                        <textarea name="comment" class="form-control" rows="4" aria-label="comment" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-success">Submit Review</button>
                 </form>

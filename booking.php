@@ -30,18 +30,18 @@ session_start();
                     <?php if (isset($_SESSION['fname'])): ?>
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" name="name"
+                            <input type="text" class="form-control" id="name" name="name" aria-label="name"
                                 value="<?= htmlspecialchars($_SESSION['fname']) ?>" disabled>
                             <input type="hidden" name="name" value="<?= htmlspecialchars($_SESSION['fname']) ?>">
                         </div>
                         <div class="mb-3">
                             <label for="ph" class="form-label">Phone Number</label>
-                            <input type="text" class="form-control" name="ph"
+                            <input type="text" class="form-control" name="ph" aria-label="name"
                                 value="<?= htmlspecialchars($_SESSION['ph']) ?>">
                         </div>
                         <div class="mb-3">
                             <label for="restaurantName" class="form-label">Restaurant Name</label>
-                            <select required class="form-control" id="restaurantName" name="restaurantName">
+                            <select required class="form-control" aria-label="restaurantName" name="restaurantName">
                                 <option value="" selected disabled>Select a restaurant</option>
                                 <?php
                                 $config = parse_ini_file('/var/www/private/db-config.ini');
@@ -76,12 +76,12 @@ session_start();
                         </div>
                         <div class="mb-3">
                             <label for="date" class="form-label">Date</label>
-                            <input required type="date" class="form-control" id="date" name="date"
+                            <input required type="date" class="form-control" aria-label="date" name="date"
                                 min="<?= date('Y-m-d'); ?>" required>
                         </div>
                         <div class="mb-3">
                             <label for="time" class="form-label">Time</label>
-                            <input required type="time" class="form-control" id="time" name="time" required>
+                            <input required type="time" class="form-control" aria-label="time" name="time" required>
                         </div>
                         <button type="submit" class="btn" style='background-color: rgb(0, 146, 131); color: white'>Book
                             Now</button>
@@ -140,15 +140,15 @@ session_start();
                                     <td>" . htmlspecialchars($row['time']) . "</td>";
                                             if ($booked_date > $currentTime) {
                                                 echo " <td>
-                                    <a href='pdf.php?id=" . htmlspecialchars($row['id']) . "'>
+                                    <a aria-label='pdficon' href='pdf.php?id=" . htmlspecialchars($row['id']) . "'>
                                             <i class='fa-solid fa-file' style='font-size: 35px; color: indianred;'></i></a>    
-                                    <a href='edit_booking.php?id=" . htmlspecialchars($row['id']) . "'>
+                                    <a aria-label='editicon' href='edit_booking.php?id=" . htmlspecialchars($row['id']) . "'>
                                             <i class='fas fa-edit' style='font-size: 35px; color: green;'></i></a>
-                                        <a href='delete_booking.php?id=" . urlencode($row['id']) . "' onclick='return confirm(\"Are you sure?\")'>
+                                        <a aria-label='deleteicon' href='delete_booking.php?id=" . urlencode($row['id']) . "' onclick='return confirm(\"Are you sure?\")'>
                                             <i class='fas fa-trash-alt' style='font-size: 35px; color: dark grey;'></i></a> </td>";
                                             } else{
                                                 echo " <td>
-                                                <a href='pdf.php?id=" . htmlspecialchars($row['id']) . "'>
+                                                <a aria-label='pdficon' href='pdf.php?id=" . htmlspecialchars($row['id']) . "'>
                                             <i class='fa-solid fa-file' style='font-size: 35px; color: indianred;'></i></a></td>";
                                             }
                                             echo "</tr>";

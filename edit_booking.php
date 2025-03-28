@@ -60,52 +60,61 @@ $conn->close();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<?php
-include "inc/head.inc.php";
-?>
+    <?php
+    include "inc/head.inc.php";
+    ?>
+    <title>Edit Booking</title>
 </head>
+
 <body>
-<?php
+    <?php
     include "inc/nav.inc.php";
     ?>
     <main>
-    <div class="container mt-5">
-        <h2 class="text-center">Edit Your Booking</h2>
-        <!-- Edit booking form -->
-        <form method="POST" class="mb-4">
-            <div class="mb-3">
-                <label class="form-label"><strong>Name:</strong></label>
-                <input type="text" name="name" class="form-control" value="<?= htmlspecialchars($_SESSION['fname']) ?>" disabled>
-                <input type="hidden" name="name" value="<?= htmlspecialchars($_SESSION['fname']) ?>">
-            </div>
-            <div class="mb-3">
-                        <label for="ph" class="form-label">Phone Number</label>
-                        <input type="text" class="form-control" name="ph"
-                            value="<?= htmlspecialchars($booking['phoneNumber']) ?>">
-                    </div>
-            <div class="mb-3">
-                <label class="form-label"><strong>Restaurant Name:</strong></label>
-                <input type="text" name="restaurantName" class="form-control" value="<?= htmlspecialchars($booking['restaurantName']) ?>" disabled>
-                <input type="hidden" name="restaurantName" value="<?= htmlspecialchars($booking['restaurantName']) ?>">
-            </div>
-            <div class="mb-3">
-                        <label for="date" class="form-label">Date</label>
-                        <input required type="date" class="form-control" id="date" name="date" min="<?= date('Y-m-d'); ?>" value="<?= htmlspecialchars($booking['date']) ?>" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="time" class="form-label">Time</label>
-                        <input required type="time" class="form-control" id="time" name="time" value="<?= htmlspecialchars($booking['time']) ?>" required>
-                    </div>
-            
-            <button type="submit" class="btn btn-success">Save Changes</button>
-            <a href="booking.php" class="btn btn-secondary">Cancel</a>
-        </form>        
-    </div>
+        <div class="container mt-5">
+            <h1 class="text-center">Edit Your Booking</h1>
+            <!-- Edit booking form -->
+            <form method="POST" class="mb-4">
+                <div class="mb-3">
+                    <label class="form-label"><strong>Name:</strong></label>
+                    <input type="text" name="name" class="form-control" aria-label="name"
+                        value="<?= htmlspecialchars($_SESSION['fname']) ?>" disabled>
+                    <input type="hidden" name="name" value="<?= htmlspecialchars($_SESSION['fname']) ?>">
+                </div>
+                <div class="mb-3">
+                    <label for="ph" class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" name="ph" aria-label="ph"
+                        value="<?= htmlspecialchars($booking['phoneNumber']) ?>">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><strong>Restaurant Name:</strong></label>
+                    <input type="text" name="restaurantName" class="form-control" aria-label="Rname"
+                        value="<?= htmlspecialchars($booking['restaurantName']) ?>" disabled>
+                    <input type="hidden" name="restaurantName"
+                        value="<?= htmlspecialchars($booking['restaurantName']) ?>">
+                </div>
+                <div class="mb-3">
+                    <label for="date" class="form-label">Date</label>
+                    <input required type="date" class="form-control" aria-label="date" name="date" min="<?= date('Y-m-d'); ?>"
+                        value="<?= htmlspecialchars($booking['date']) ?>" required>
+                </div>
+                <div class="mb-3">
+                    <label for="time" class="form-label">Time</label>
+                    <input required type="time" class="form-control" aria-label="time" name="time"
+                        value="<?= htmlspecialchars($booking['time']) ?>" required>
+                </div>
+
+                <button type="submit" class="btn btn-success">Save Changes</button>
+                <a href="booking.php" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
     </main>
     <?php
-include "inc/footer.inc.php";
-?>
+    include "inc/footer.inc.php";
+    ?>
 
 </body>
+
 </html>
