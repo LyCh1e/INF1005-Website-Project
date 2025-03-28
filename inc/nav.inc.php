@@ -3,7 +3,7 @@
     <a class="navbar-brand">
         <img class="logo" src="images/logo.png" alt="LOGO">
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-label="ToggleNav">
         <span class="navbar-toggler-icon"></span>
     </button>
     <nav class="collapse navbar-collapse" id="collapsibleNavbar" aria-label="Primary Navigation Bar">

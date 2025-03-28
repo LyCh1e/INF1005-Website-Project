@@ -112,9 +112,9 @@ $conn->close();
                         <?php if (isset($_SESSION['fname']) && $_SESSION['fname'] == $review['name']): ?>
                             <div class="icon-container" style="position: absolute; top: 20px; right: 20px;">
                             <p>
-                            <a href="edit_review.php?id=<?= $review['id'] ?>&restaurantName=<?= urlencode($review['restaurantName']) ?>">
+                            <a href="edit_review.php?id=<?= $review['id'] ?>&restaurantName=<?= urlencode($review['restaurantName']) ?>" aria-label="EditReview">
                             <i class="fas fa-edit" style="font-size: 35px; color: green;"></i></a>                            
-                            <a href="delete_review.php?id=<?= $review['id'] ?>&restaurantName=<?= urlencode($review['restaurantName']) ?>">
+                            <a href="delete_review.php?id=<?= $review['id'] ?>&restaurantName=<?= urlencode($review['restaurantName']) ?>" aria-label="DeleteReview">
                             <i class="fas fa-trash-alt" style="font-size: 35px; color: dark grey;"></i>
                             </a>
                             
