@@ -22,6 +22,7 @@ if ($conn->connect_error) {
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = htmlspecialchars($_POST["name"]);
+    $email = htmlspecialchars($_POST["email"]);
     $rating = intval($_POST["rating"]);
     $restaurantName = htmlspecialchars($_POST["restaurantName"]);
     $comment = htmlspecialchars($_POST["comment"]);
@@ -38,8 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!empty($name) && !empty($comment) && $rating >= 1 && $rating <= 5) {
         // Insert into reviews table
-        $stmt = $conn->prepare("INSERT INTO reviews (`name`, `restaurantName`, `rating`, `comment`, `restaurantPricing`) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssisi", $name, $restaurantName, $rating, $comment, $price);
+        date_default_timezone_set('Asia/Singapore');
+        $currentTime = new DateTime();
+        $currentTime = $currentTime->format('Y-m-d H:i:s');
+        $stmt = $conn->prepare("INSERT INTO reviews (name, email, restaurantName, rating, comment, restaurantPricing, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssisis", $name, $email, $restaurantName, $rating, $comment, $price, $currentTime);
         $stmt->execute();
         $stmt->close();
 
@@ -128,6 +132,12 @@ $conn->close();
                         <input type="hidden" name="name" value="<?= htmlspecialchars($_SESSION['fname']) ?>">
                     </div>
                     <div class="mb-3">
+                        <label class="form-label"><strong>Email:</strong></label>
+                        <input type="text" name="email" class="form-control" aria-label="email"
+                            value="<?= htmlspecialchars($_SESSION['email']) ?>" disabled>
+                        <input type="hidden" name="email" value="<?= htmlspecialchars($_SESSION['email']) ?>">
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label"><strong>Restaurant Name:</strong></label>
                         <input type="text" name="restaurantName" class="form-control" aria-label="Rname"
                             value="<?= htmlspecialchars($_GET['restaurant']) ?>" disabled>
@@ -168,6 +178,12 @@ $conn->close();
                         <input type="text" name="name" class="form-control" aria-label="name"
                             value="<?= htmlspecialchars($_SESSION['fname']) ?>" disabled>
                         <input type="hidden" name="name" value="<?= htmlspecialchars($_SESSION['fname']) ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label"><strong>Email:</strong></label>
+                        <input type="text" name="email" class="form-control" aria-label="email"
+                            value="<?= htmlspecialchars($_SESSION['email']) ?>" disabled>
+                        <input type="hidden" name="email" value="<?= htmlspecialchars($_SESSION['email']) ?>">
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><strong>Restaurant Name:</strong></label>

@@ -10,7 +10,7 @@
     <?php include "inc/nav.inc.php"; ?>
     <main class="container mt-5">
         <h1>Member Login</h1>
-        <?php if (!isset($_SESSION['fname'])): ?>
+        <?php if (!isset($_SESSION['email'])): ?>
             <p>Existing members log in here. For new members, please go to the
                 <a href="register.php" style='color: rgb(0, 78, 74)'>Member Registration page</a>.
             </p>
@@ -25,7 +25,7 @@
                     <div class="mb-3" style="display: flex;">
                     <input required maxlength="45" type="password" id="pwd" name="pwd" class="form-control"
                         placeholder="Enter password" required> 
-                        <button type="button" onclick="togglePwd()" aria-label="eyeicon" style="background: none; border: none; padding-left: 10px"><i class="fas fa-eye" id="eyeIcon"></i></button>
+                        <button type="button" onclick="togglePwd()" style="background: none; border: none; padding-left: 10px"><i class="fas fa-eye" id="eyeIcon"></i></button>
                     <div id="loginError" class="error-message">Account does not exist or password is incorrect.</div>
                     </div>
                 </div>

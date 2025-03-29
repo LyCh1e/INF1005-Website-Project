@@ -39,11 +39,14 @@ if (!$review) {
 $stmt->close();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    date_default_timezone_set('Asia/Singapore');
+    $currentTime = new DateTime();
+    $currentTime = $currentTime->format('Y-m-d H:i:s');
     $rating = intval($_POST['rating']);
     $comment = trim($_POST['comment']);
     $price = intval($_POST['restaurantPricing']);
-    $update_stmt = $conn->prepare("UPDATE reviews SET rating = ?, comment = ?, restaurantPricing = ?, edited_at = NOW() WHERE id = ?");
-    $update_stmt->bind_param("isii", $rating, $comment, $price, $review_id);
+    $update_stmt = $conn->prepare("UPDATE reviews SET rating = ?, comment = ?, restaurantPricing = ?, edited_at =? WHERE id = ?");
+    $update_stmt->bind_param("isisi", $rating, $comment, $price,$currentTime, $review_id);
 
     if ($update_stmt->execute()) {
         echo "<script>alert('Review updated successfully!'); window.location.href='reviews.php?restaurant=" . htmlspecialchars($_GET['restaurantName']) . "';</script>";
@@ -74,7 +77,7 @@ $conn->close();
     <main>
         <div class="container mt-5">
             <h1 class="text-center">Edit Your Review</h1>
-            <?php if (isset($_SESSION['fname'])): ?>
+            <?php if (isset($_SESSION['email'])): ?>
             <form method="POST" class="mb-4">
                 <div class="mb-3">
                     <label class="form-label"><strong>Name:</strong></label>

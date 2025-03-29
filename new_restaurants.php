@@ -174,7 +174,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
         </section>
 
         <section class="add-review-section">
-            <?php if (isset($_SESSION['fname'])): ?>
+            <?php if (isset($_SESSION['email'])): ?>
                 <h2 style="font-size: 24px">
                     Can't find the restaurant?
                     <a href="new_review.php" style="color: rgb(0, 78, 74);">Click here to add the review!</a>

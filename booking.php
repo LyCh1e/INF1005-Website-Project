@@ -27,12 +27,18 @@ session_start();
             <!-- New Booking Form -->
             <div class="tab-pane fade show active" id="new-booking" role="tabpanel">
                 <form action="processbooking.php" method="POST" class="mt-3" style="width: 30%;">
-                    <?php if (isset($_SESSION['fname'])): ?>
+                    <?php if (isset($_SESSION['email'])): ?>
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="name" name="name" aria-label="name"
                                 value="<?= htmlspecialchars($_SESSION['fname']) ?>" disabled>
                             <input type="hidden" name="name" value="<?= htmlspecialchars($_SESSION['fname']) ?>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="email" name="email" aria-label="email"
+                                value="<?= htmlspecialchars($_SESSION['email']) ?>" disabled>
+                            <input type="hidden" name="email" value="<?= htmlspecialchars($_SESSION['email']) ?>">
                         </div>
                         <div class="mb-3">
                             <label for="ph" class="form-label">Phone Number</label>
@@ -123,15 +129,16 @@ session_start();
                                 die("Connection failed: " . $conn->connect_error);
                             }
 
-                            $query = "SELECT id, name, restaurantName, date, time FROM bookings ORDER BY date DESC, time DESC";
+                            $query = "SELECT id, name, email, restaurantName, date, time FROM bookings ORDER BY date DESC, time DESC";
                             $result = mysqli_query($conn, $query);
 
                             if ($result) {
+                                date_default_timezone_set('Asia/Singapore');
                                 $currentTime = new DateTime();
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     // If logged-in user is the one who made the booking
-                                    if (isset($_SESSION['fname'])) {
-                                        if ($_SESSION['fname'] == $row['name']) {
+                                    if (isset($_SESSION['email'])) {
+                                        if ($_SESSION['email'] == $row['email']) {
                                             $booked_date = new DateTime($row['date'] . ' ' . $row['time']);
                                             echo "<tr>
                                     <td>" . htmlspecialchars($row['name']) . "</td>
@@ -146,7 +153,7 @@ session_start();
                                             <i class='fas fa-edit' style='font-size: 35px; color: green;'></i></a>
                                         <a aria-label='deleteicon' href='delete_booking.php?id=" . urlencode($row['id']) . "' onclick='return confirm(\"Are you sure?\")'>
                                             <i class='fas fa-trash-alt' style='font-size: 35px; color: dark grey;'></i></a> </td>";
-                                            } else{
+                                            } else {
                                                 echo " <td>
                                                 <a aria-label='pdficon' href='pdf.php?id=" . htmlspecialchars($row['id']) . "'>
                                             <i class='fa-solid fa-file' style='font-size: 35px; color: indianred;'></i></a></td>";

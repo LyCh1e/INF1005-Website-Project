@@ -29,9 +29,7 @@ if (isset($_GET['id']) && isset($_SESSION['fname'])) {
     if ($result->num_rows === 0) {
         die("<script>alert('Error: Review ID does not exist.'); window.location.href='reviews.php';</script>");
     }
-    $row = $result->fetch_assoc();
-    echo "<script>console.log('Found review: " . print_r($row, true) . "');</script>";
-    
+    $row = $result->fetch_assoc();    
     $check_stmt->close();
 
     // DELETE statement

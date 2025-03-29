@@ -18,8 +18,9 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if (isset($_SESSION['fname']) && isset($_GET['id'])) {
+if (isset($_SESSION['email']) && isset($_GET['id'])) {
     $fname = $_SESSION['fname'];
+    $email = $_SESSION['email'];
     $booking_id = $_GET['id'];
     $sql = "SELECT * FROM bookings WHERE id = '$booking_id'";
     $result = $conn->query($sql);
@@ -28,6 +29,7 @@ if (isset($_SESSION['fname']) && isset($_GET['id'])) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $booking_details .= "<p><strong>Restaurant Name: </strong>" . $row['restaurantName'] . "</p>";
+        $booking_details .= "<p><strong>Email: </strong>" .$row['email'] ."</p>";
         $booking_details .= "<p><strong>Booking under: </strong>" .$row['phoneNumber'] ."</p>";
         $booking_details .= "<p><strong>Date: </strong>" . $row['date'] . "</p>";
         $booking_details .= "<p><strong>Time: </strong>" . $row['time'] . "</p>";
@@ -54,7 +56,6 @@ $html = '
 // Add HTML content to PDF
 $pdf->writeHTML($html, true, false, true, false, '');
 
-// Output PDF (Download)
-$pdf->Output("order_confirmation.pdf", "I");
+$pdf->Output("booking_confirmation.pdf", "I");
 
 ?>

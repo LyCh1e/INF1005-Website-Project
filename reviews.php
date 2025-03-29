@@ -81,7 +81,7 @@ $conn->close();
         </h1>
 
         <div style="display: inline-block; margin-right: 20px;">
-            <?php if (isset($_SESSION['fname'])): ?>
+            <?php if (isset($_SESSION['email'])): ?>
                 <p>
                     <a href="new_review.php?restaurant=<?= urlencode($_GET['restaurant']) ?>" class='btn' style='background-color: rgb(0, 146, 131); color: white'>Write a Review!</a>
                 </p>
@@ -109,7 +109,7 @@ $conn->close();
                             <p class="text-muted"><small>Edited on <?= $review['edited_at'] ?></small></p>
                         <?php endif; ?>
 
-                        <?php if (isset($_SESSION['fname']) && $_SESSION['fname'] == $review['name']): ?>
+                        <?php if (isset($_SESSION['fname']) && $_SESSION['email'] == $review['email']): ?>
                             <div class="icon-container" style="position: absolute; top: 20px; right: 20px;">
                             <p>
                             <a href="edit_review.php?id=<?= $review['id'] ?>&restaurantName=<?= urlencode($review['restaurantName']) ?>" aria-label="EditReview">

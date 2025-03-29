@@ -20,13 +20,14 @@ $errors = [];
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["confirm"]) && $_POST["confirm"] == "yes") {
         $name = trim($_POST["name"]);
+        $email = trim($_POST["email"]);
         $phoneNumber = trim($_POST["ph"]);
         $restaurantName = trim($_POST["restaurantName"]);
         $date = $_POST["date"];
         $time = $_POST["time"];
         
-        $stmt = $conn->prepare("INSERT INTO bookings (name, phoneNumber, restaurantName, date, time) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("sssss", $name, $phoneNumber, $restaurantName, $date, $time);
+        $stmt = $conn->prepare("INSERT INTO bookings (name, email, phoneNumber, restaurantName, date, time) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $name, $email, $phoneNumber, $restaurantName, $date, $time);
         
         if ($stmt->execute()) {
             header("Location: booking.php?success=1");
@@ -38,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
     } else {
         $name = trim($_POST["name"]);
+        $email = trim($_POST["email"]);
         $phoneNumber = trim($_POST["ph"]);
         $restaurantName = trim($_POST["restaurantName"]);
         $date = $_POST["date"];
@@ -45,6 +47,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         if (empty($name)) {
             $errors[] = "Name is required";
+        }
+        if (empty($email)) {
+            $errors[] = "Email is required";
         }
         
         if (empty($phoneNumber)) {
@@ -103,6 +108,10 @@ $conn->close();
                                 <dd class="col-md-9"><?php echo htmlspecialchars($name); ?></dd>
                             </div>
                             <div class="row mb-3">
+                                <dt class="col-md-3">Email:</dt>
+                                <dd class="col-md-9"><?php echo htmlspecialchars($email); ?></dd>
+                            </div>
+                            <div class="row mb-3">
                                 <dt class="col-md-3">Phone Number:</dt>
                                 <dd class="col-md-9"><?php echo htmlspecialchars($phoneNumber); ?></dd>
                             </div>
@@ -125,6 +134,7 @@ $conn->close();
                             <!-- Form for confirming booking -->
                             <form id="confirm-form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" aria-label="Confirm booking form">
                                 <input type="hidden" name="name" value="<?php echo htmlspecialchars($name); ?>">
+                                <input type="hidden" name="email" value="<?php echo htmlspecialchars($email); ?>">
                                 <input type="hidden" name="ph" value="<?php echo htmlspecialchars($phoneNumber); ?>">
                                 <input type="hidden" name="restaurantName" value="<?php echo htmlspecialchars($restaurantName); ?>">
                                 <input type="hidden" name="date" value="<?php echo htmlspecialchars($date); ?>">

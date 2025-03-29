@@ -7,7 +7,6 @@ if (!$config) {
 
 if (isset($_GET['id']) && isset($_SESSION['fname'])) {
     $id = (int) $_GET['id'];
-    echo "<script>console.log('Received ID: " . $id . "');</script>";
     
     $conn = new mysqli(
         $config['servername'], 
@@ -39,7 +38,6 @@ if (isset($_GET['id']) && isset($_SESSION['fname'])) {
         echo "<script>alert('Booking deleted successfully!'); window.location.href='booking.php';</script>";
     } else {
         $error = $stmt->error;
-        echo "<script>console.log('Error during deletion: $error');</script>"; 
         die("<script>alert('No matching record found or deletion failed. Please check for foreign key constraints.'); window.location.href='booking.php';</script>");
     }
 

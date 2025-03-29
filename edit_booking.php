@@ -84,6 +84,12 @@ $conn->close();
                     <input type="hidden" name="name" value="<?= htmlspecialchars($_SESSION['fname']) ?>">
                 </div>
                 <div class="mb-3">
+                    <label class="form-label"><strong>Email:</strong></label>
+                    <input type="text" name="email" class="form-control" aria-label="email"
+                        value="<?= htmlspecialchars($_SESSION['email']) ?>" disabled>
+                    <input type="hidden" name="email" value="<?= htmlspecialchars($_SESSION['email']) ?>">
+                </div>
+                <div class="mb-3">
                     <label for="ph" class="form-label">Phone Number</label>
                     <input type="text" class="form-control" name="ph" aria-label="ph"
                         value="<?= htmlspecialchars($booking['phoneNumber']) ?>">
