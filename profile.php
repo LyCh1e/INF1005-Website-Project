@@ -17,23 +17,21 @@ $conn = new mysqli(
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
-$email = $_SESSION['email'];
-$sql = "SELECT * FROM reviews WHERE email = ?";
-$stmt = $conn->prepare($sql);
-if ($stmt) {
+if ($_SESSION['admin'] == "No") {
+    $email = $_SESSION['email'];
+    $sql = "SELECT * FROM reviews WHERE email = ?";
+    $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $reviews = $result->fetch_all(MYSQLI_ASSOC);
-    }
-    $stmt->close();
 } else {
-    echo "Error in preparing statement: " . $conn->error;
+    $stmt = $conn->prepare("SELECT * FROM reviews ORDER BY created_at DESC");
 }
+$stmt->execute();
+$result = $stmt->get_result();
 
+if ($result->num_rows > 0) {
+    $reviews = $result->fetch_all(MYSQLI_ASSOC);
+}
+$stmt->close();
 $conn->close();
 ?>
 
@@ -69,11 +67,14 @@ $conn->close();
             </div>
             <hr style="border: 2px solid black;">
             <section id="userReview" class="w3-container menu w3-padding">
+                <?php if($_SESSION['admin'] == "No"): ?>
                 <h2 style="text-align: center;">Reviews created</h2>
                 <p style="text-align: center;">Want to view your bookings? <a href="booking.php"
                         style='color: rgb(0, 78, 74)'>Click here!</a></p>
+                <?php else: ?>
+                    <h2 style="text-align: center;">Reviews</h2>
+                <?php endif; ?>
                 <?php if (!empty($reviews)): ?>
-
                     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
                         <?php foreach ($reviews as $row): ?>
                             <div class="col">
@@ -82,6 +83,9 @@ $conn->close();
                                         <a href='reviews.php?restaurant=<?php echo urlencode($row['restaurantName']); ?>'
                                             style="text-decoration: none;">
                                             <p class="card-text"><strong>Name: </strong><?= htmlspecialchars($row['name']) ?></p>
+                                            <?php if ($_SESSION['admin'] == "Yes"): ?>
+                                                <p class="card-text"><strong>Email: </strong><?= htmlspecialchars($row['email']) ?></p>
+                                            <?php endif; ?>
                                             <p class="card-text"><strong>Restaurant Name:
                                                 </strong><?= htmlspecialchars($row['restaurantName']) ?>
                                             </p>

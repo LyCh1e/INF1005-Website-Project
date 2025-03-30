@@ -29,6 +29,10 @@
                     <div id="loginError" class="error-message">Account does not exist or password is incorrect.</div>
                     </div>
                 </div>
+                <!-- <div class="mb-3 form-check">
+                    <input type="checkbox" name="admin" id="admin" class="form-check-input">
+                    <label class="form-check-label" for="admin">Admin Login</label>
+                </div> -->
                 <div class="mb-3">
                     <button type="submit" class="btn"
                         style='background-color: rgb(0, 78, 74); color: white'>Submit</button>

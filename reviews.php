@@ -70,21 +70,25 @@ $conn->close();
             <?php else: ?>
                 All Reviews
             <?php endif; ?>
-            
+
             <?php if ($average_rating > 0): ?>
-                (<span><small><?= number_format($average_rating, 1) ?> <i class="fas fa-star" style="color: gold" aria-hidden="true"></i></small></span>)
+                (<span><small><?= number_format($average_rating, 1) ?> <i class="fas fa-star" style="color: gold"
+                            aria-hidden="true"></i></small></span>)
                 <h2><span><small>Average Pricing: <?= $pricingSymbols; ?></small></span></h2>
-                
+
             <?php else: ?>
                 <small>(No reviews yet)</small>
             <?php endif; ?>
         </h1>
 
         <div style="display: inline-block; margin-right: 20px;">
-            <?php if (isset($_SESSION['email'])): ?>
+            <?php if (isset($_SESSION['email']) && $_SESSION['admin'] == "No"): ?>
                 <p>
-                    <a href="new_review.php?restaurant=<?= urlencode($_GET['restaurant']) ?>" class='btn' style='background-color: rgb(0, 146, 131); color: white'>Write a Review!</a>
+                    <a href="new_review.php?restaurant=<?= urlencode($_GET['restaurant']) ?>" class='btn'
+                        style='background-color: rgb(0, 146, 131); color: white'>Write a Review!</a>
                 </p>
+            <?php elseif ($_SESSION['admin'] == "Yes"): ?>
+
             <?php else: ?>
                 <div>
                     <p>
@@ -101,7 +105,9 @@ $conn->close();
                     <div class="card-body">
                         <h3 class="card-title"><?= htmlspecialchars($review['name']) ?></h3>
                         <p class="card-text"><?= htmlspecialchars($review['restaurantName']) ?></p>
-                        <p class="card-text"><?= str_repeat('<i class="fas fa-star" style="color: gold" aria-hidden="true"></i>', $review['rating']) ?></p>
+                        <p class="card-text">
+                            <?= str_repeat('<i class="fas fa-star" style="color: gold" aria-hidden="true"></i>', $review['rating']) ?>
+                        </p>
                         <p class="card-text"><?= str_repeat("$", $review['restaurantPricing']) ?></p>
                         <p class="card-text"><?= htmlspecialchars($review['comment']) ?></p>
                         <p class="text-muted">Posted on <?= $review['created_at'] ?></p>
@@ -109,16 +115,24 @@ $conn->close();
                             <p class="text-muted"><small>Edited on <?= $review['edited_at'] ?></small></p>
                         <?php endif; ?>
 
-                        <?php if (isset($_SESSION['fname']) && $_SESSION['email'] == $review['email']): ?>
+                        <?php if (isset($_SESSION['fname']) && $_SESSION['email'] == $review['email'] && $_SESSION['admin'] == "No"): ?>
                             <div class="icon-container" style="position: absolute; top: 20px; right: 20px;">
-                            <p>
-                            <a href="edit_review.php?id=<?= $review['id'] ?>&restaurantName=<?= urlencode($review['restaurantName']) ?>" aria-label="EditReview">
-                            <i class="fas fa-edit" style="font-size: 35px; color: green;"></i></a>                            
-                            <a href="delete_review.php?id=<?= $review['id'] ?>&restaurantName=<?= urlencode($review['restaurantName']) ?>" aria-label="DeleteReview">
-                            <i class="fas fa-trash-alt" style="font-size: 35px; color: dark grey;"></i>
-                            </a>
-                            
-                            </p>
+                                <p>
+                                    <a href="edit_review.php?id=<?= $review['id'] ?>&restaurantName=<?= urlencode($review['restaurantName']) ?>"
+                                        aria-label="EditReview">
+                                        <i class="fas fa-edit" style="font-size: 35px; color: green;"></i></a>
+                                    <a href="delete_review.php?id=<?= $review['id'] ?>&restaurantName=<?= urlencode($review['restaurantName']) ?>"
+                                        aria-label="DeleteReview" onclick="return confirm('Are you sure?')">
+                                        <i class="fas fa-trash-alt" style="font-size: 35px; color: dark grey;"></i>
+                                    </a>
+                                </p>
+                            </div>
+                        <?php elseif ($_SESSION['admin'] == "Yes"): ?>
+                            <div class="icon-container" style="position: absolute; top: 20px; right: 20px;">
+                                <p><a href="delete_review.php?id=<?= $review['id'] ?>&restaurantName=<?= urlencode($review['restaurantName']) ?>"
+                                        aria-label="DeleteReview" onclick="return confirm('Are you sure?')">
+                                        <i class="fas fa-trash-alt" style="font-size: 35px; color: dark grey;"></i>
+                                    </a></p>
                             </div>
                         <?php endif; ?>
                     </div>

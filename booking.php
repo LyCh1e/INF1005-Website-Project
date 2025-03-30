@@ -27,7 +27,7 @@ session_start();
             <!-- New Booking Form -->
             <div class="tab-pane fade show active" id="new-booking" role="tabpanel">
                 <form action="processbooking.php" method="POST" class="mt-3" style="width: 30%;">
-                    <?php if (isset($_SESSION['email'])): ?>
+                    <?php if (isset($_SESSION['email']) && $_SESSION['admin'] == "No"): ?>
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="name" name="name" aria-label="name"
@@ -91,6 +91,8 @@ session_start();
                         </div>
                         <button type="submit" class="btn" style='background-color: rgb(0, 146, 131); color: white'>Book
                             Now</button>
+                    <?php elseif ($_SESSION['admin'] == "Yes"): ?> 
+                        <h2><small>Admins cannot make bookings!</small></h2>
                     <?php else: ?>
                         <h2><small><a href="login.php">Please login to make booking.</a></small></h2>
                     <?php endif; ?>
@@ -113,6 +115,8 @@ session_start();
                             <?php
                             if (!isset($_SESSION['fname'])) {
                                 echo "<tr><td colspan='4'>Please login to view bookings.</td></tr>";
+                            }elseif($_SESSION['admin'] == "Yes"){
+                                echo "<tr><td colspan='4'>Admins cannot make bookings.</td></tr>";
                             }
                             $config = parse_ini_file('/var/www/private/db-config.ini');
                             if (!$config) {

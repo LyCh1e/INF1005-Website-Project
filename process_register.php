@@ -56,6 +56,7 @@ if (empty($_POST["email"])) {
         $errorMsg .= "Invalid email format.";
         $success = false;
     }
+    
 }
 function sanitize_input($data)
 {
@@ -90,6 +91,13 @@ function saveMemberToDB()
         $stmt->bind_param("ss", $email, $ph);
         $stmt->execute();
         $result = $stmt->get_result();
+        $domain = substr(strrchr($email, "@"), 1);
+        $adminEmail = "gastronome.guide.com";
+        if ($domain === $adminEmail){
+            $isAdmin = "Yes";
+        }else{
+            $isAdmin = "No";
+        }
         
         if($result->num_rows > 0){
             $errorMsg = "Phone number or email already exists.";
@@ -97,10 +105,9 @@ function saveMemberToDB()
         }else {
             // Prepare the statement:
             $stmt = $conn->prepare("INSERT INTO world_of_pets_members
-(fname, lname, email, phone_number, password) VALUES (?, ?, ?, ?, ?)");
+(fname, lname, email, phone_number, password, admin) VALUES (?, ?, ?, ?, ?, ?)");
             // Bind & execute the query statement:
-            
-            $stmt->bind_param("sssss", $fname, $lname, $email, $ph, $hash);
+            $stmt->bind_param("ssssss", $fname, $lname, $email, $ph, $hash, $isAdmin);
             if (!$stmt->execute()) {
                 $errorMsg = "Execute failed: (" . $stmt->errno . ") " .
                     $stmt->error;

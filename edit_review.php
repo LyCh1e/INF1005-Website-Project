@@ -77,7 +77,7 @@ $conn->close();
     <main>
         <div class="container mt-5">
             <h1 class="text-center">Edit Your Review</h1>
-            <?php if (isset($_SESSION['email'])): ?>
+            <?php if (isset($_SESSION['email']) && $_SESSION['admin'] == "No"): ?>
             <form method="POST" class="mb-4">
                 <div class="mb-3">
                     <label class="form-label"><strong>Name:</strong></label>
@@ -119,6 +119,8 @@ $conn->close();
                 <a href="reviews.php?restaurant=<?= urlencode($review['restaurantName']) ?>"
                     class="btn btn-secondary">Cancel</a>
             </form>
+            <?php elseif ($_SESSION['admin'] == "Yes"): ?>
+                <h5><small><a href="profile.php">Admins cannot edit review. Click to check for inappriopriate reviews.</a></small></h5> 
             <?php else: ?>
                 <h5><small><a href="login.php">Please login to edit review.</a></small></h5> 
             <?php endif; ?>     

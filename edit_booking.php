@@ -76,6 +76,7 @@ $conn->close();
         <div class="container mt-5">
             <h1 class="text-center">Edit Your Booking</h1>
             <!-- Edit booking form -->
+             <?php if($_SESSION['admin'] == "No"):?>
             <form method="POST" class="mb-4">
                 <div class="mb-3">
                     <label class="form-label"><strong>Name:</strong></label>
@@ -115,6 +116,9 @@ $conn->close();
                 <button type="submit" class="btn btn-success">Save Changes</button>
                 <a href="booking.php" class="btn btn-secondary">Cancel</a>
             </form>
+            <?php else:?>
+                <h2 class="text-center">Admins cannot make booking!</h2>
+            <?php endif;?>
         </div>
     </main>
     <?php

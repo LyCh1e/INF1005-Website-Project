@@ -174,10 +174,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
         </section>
 
         <section class="add-review-section">
-            <?php if (isset($_SESSION['email'])): ?>
+            <?php if (($_SESSION['admin']) == "Yes"): ?>
+                <h2 style="font-size: 24px">
+                    <a href="new_review.php" style="color: rgb(0, 78, 74);">Add requested restaurant!</a>
+                </h2>
+            <?php elseif (isset($_SESSION['email'])): ?>
                 <h2 style="font-size: 24px">
                     Can't find the restaurant?
-                    <a href="new_review.php" style="color: rgb(0, 78, 74);">Click here to add the review!</a>
+                    <a href="request_restForm.php" style="color: rgb(0, 78, 74);">Click here send request to admin to add
+                        the restaurant!</a>
                 </h2>
             <?php else: ?>
                 <div class="login-prompt">
@@ -237,7 +242,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
                                                 <span class="pricing">Average Pricing: <?= $pricingSymbols; ?></span>
                                             </p>
                                         <?php else: ?>
-                                            <p class="card-text"><small>(No reviews yet)</small></p>
+                                            <p class="card-text">
+                                                <a href="reviews.php?restaurant=<?php echo urlencode($restaurant['name']); ?>"><i
+                                                        class="fas fa-star" aria-hidden="true"></i> (No reviews yet)</a>
+                                            </p>
+                                            <p class="card-text">
+                                                <i class="fas fa-money-bill" aria-hidden="true"></i>
+                                                <span class="pricing">Average Pricing: Not Applicable</span>
+                                            </p>
                                         <?php endif; ?>
                                         <p class="card-text"><i class="fas fa-globe" aria-hidden="true"></i> <a
                                                 href="<?= htmlspecialchars($restaurant['website']) ?>"
