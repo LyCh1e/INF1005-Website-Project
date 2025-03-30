@@ -1,10 +1,10 @@
 <?php
 session_start();
-if (!isset($_SESSION['fname'])) {
-    echo "Admins only!";
-} elseif ($_SESSION['admin'] == "No") {
-    echo "Admins only!";
-}
+// if (!isset($_SESSION['fname'])) {
+//     echo "Admins only!";
+// } elseif ($_SESSION['admin'] == "No") {
+//     echo "Admins only!";
+// }
 $config = parse_ini_file('/var/www/private/db-config.ini');
 if (!$config) {
     die("Failed to read database config file.");
@@ -43,7 +43,7 @@ $rest_req = $result->fetch_all(MYSQLI_ASSOC);
         </strong>
         <?php if (!empty($rest_req)): ?>
             <?php foreach ($rest_req as $requests): ?>
-                <?php if ($requests['admin_added'] == "No"): ?>
+                <?php if ($_SESSION['admin'] == "Yes" && $requests['admin_added'] == "No"): ?>
                     <div class="container d-flex justify-content-center align-items-center">
                         <div class="card mb-3">
                             <div class="card-body shadow">
@@ -65,6 +65,9 @@ $rest_req = $result->fetch_all(MYSQLI_ASSOC);
                     </div>
                 <?php endif; ?>
             <?php endforeach; ?>
+            <?php if (!$_SESSION['email'] || $_SESSION['admin'] == "No"): ?>
+                <h2 class="text-center">Admins Only!</h2>
+            <?php endif; ?>
         <?php endif; ?>
 
     </main>

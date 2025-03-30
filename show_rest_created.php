@@ -34,11 +34,11 @@ $rest_req = $result->fetch_all(MYSQLI_ASSOC);
     <?php include "inc/head.inc.php"; ?>
     <title>Restaurants to Create</title>
     <style>
-    .card:hover {
-      background-color: rgb(197, 197, 197);
-      transition: background-color 0.3s ease; 
-    }
-  </style>
+        .card:hover {
+            background-color: rgb(197, 197, 197);
+            transition: background-color 0.3s ease;
+        }
+    </style>
 </head>
 
 <body>
@@ -47,26 +47,32 @@ $rest_req = $result->fetch_all(MYSQLI_ASSOC);
         <strong>
             <h1 class="text-center mb-4">Restaurants Created by Admin</h1>
         </strong>
-        <?php if (!empty($rest_req)): ?>
-            <?php foreach ($rest_req as $requests): ?>
-                <?php if ($requests['admin_added'] == "Yes"): ?>
-                    <div class="container d-flex justify-content-center align-items-center">
-                        <div class="card mb-3">
-                            <div class="card-body shadow">
-                                <a href='reviews.php?restaurant=<?php echo urlencode($requests['restaurantName']); ?>' style="text-decoration: none;">
-                                <h3 class="card-title"><strong>Restaurant Name:
-                                    </strong><?= htmlspecialchars($requests['restaurantName']) ?></h3>
-                                <p class="card-text"><strong>Website: </strong><?= htmlspecialchars($requests['website']) ?></p>
-                                <p class="card-text"><strong>Address: </strong><?= htmlspecialchars($requests['address']) ?></p>
-                                <p class="card-text"><strong>Contact: </strong><?= htmlspecialchars($requests['phoneNumber']) ?></p>
-                                <p class="card-text"><strong>Cuisine: </strong><?= htmlspecialchars($requests['cuisine']) ?></p>
-                                </a>
+        <?php if ($_SESSION['admin'] == "Yes"): ?>
+            <?php if (!empty($rest_req)): ?>
+                <?php foreach ($rest_req as $requests): ?>
+                    <?php if ($requests['admin_added'] == "Yes"): ?>
+                        <div class="container d-flex justify-content-center align-items-center">
+                            <div class="card mb-3">
+                                <div class="card-body shadow">
+                                    <a href='reviews.php?restaurant=<?php echo urlencode($requests['restaurantName']); ?>'
+                                        style="text-decoration: none;">
+                                        <h3 class="card-title"><strong>Restaurant Name:
+                                            </strong><?= htmlspecialchars($requests['restaurantName']) ?></h3>
+                                        <p class="card-text"><strong>Website: </strong><?= htmlspecialchars($requests['website']) ?></p>
+                                        <p class="card-text"><strong>Address: </strong><?= htmlspecialchars($requests['address']) ?></p>
+                                        <p class="card-text"><strong>Contact: </strong><?= htmlspecialchars($requests['phoneNumber']) ?>
+                                        </p>
+                                        <p class="card-text"><strong>Cuisine: </strong><?= htmlspecialchars($requests['cuisine']) ?></p>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                <?php endif; ?>
-            <?php endforeach; ?>
-        <?php endif; ?>
 
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        <?php else:?>
+            <h2 class="text-center">Admins Only!</h2>
+        <?php endif; ?>
     </main>
 </body>

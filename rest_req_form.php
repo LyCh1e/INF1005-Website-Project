@@ -60,9 +60,10 @@ function saveRest()
             $errorMsg = "Execute failed: (" . $stmt->errno . ") " .
                 $stmt->error;
             $success = false;
-        }    echo "<script>alert('Add restaurant request sent successfully!'); window.location.href='new_restaurants.php';</script>";
+        }
+        echo "<script>alert('Add restaurant request sent successfully!'); window.location.href='new_restaurants.php';</script>";
 
-        
+
         $stmt->close();
     }
     $conn->close();
@@ -110,6 +111,10 @@ function saveRest()
                     <button type="submit" class="btn btn-success">Send request</button>
                 </form>
             </div>
+        <?php elseif ($_SESSION['admin'] == "Yes"): ?>
+            <h2 class="text-center">Admins cannot send requests.</h2>
+        <?php elseif (!$_SESSION['email']): ?>
+            <a href="login.php"> <h2 class="text-center">Please log in to send requests.</h2></a>
         <?php endif; ?>
     </main>
 </body>
