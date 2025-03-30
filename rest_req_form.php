@@ -1,6 +1,9 @@
 <?php
 session_start();
-$restaurantName = $phoneNumber = $website = $address = $cuisine = "";
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+$restaurantName = $phoneNumber = $website = $address = $cuisine = $adminAdded = "";
 $success = true;
 $errors = [];
 
@@ -21,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phoneNumber = isset($_POST['phoneNumber']) ? sanitize_input($_POST['phoneNumber']) : '';
     $website = isset($_POST['website']) ? sanitize_input($_POST['website']) : '';
     $cuisine = isset($_POST['cuisine']) ? sanitize_input($_POST['cuisine']) : '';
+    $adminAdded = isset($_POST['admin_added']) ? sanitize_input($_POST['admin_added']) : '';
     if ($success) {
         saveRest();
     }
@@ -34,7 +38,7 @@ function sanitize_input($data)
 }
 function saveRest()
 {
-    global $restaurantName, $phoneNumber, $website, $address, $cuisine, $errorMsg, $success;
+    global $restaurantName, $phoneNumber, $website, $address, $cuisine, $adminAdded, $errorMsg, $success;
     // Create database connection.
     $config = parse_ini_file('/var/www/private/db-config.ini');
     if (!$config) {
@@ -53,9 +57,9 @@ function saveRest()
             $success = false;
         }
         $stmt = $conn->prepare("INSERT INTO add_restaurant
-(restaurantName, phoneNumber, website, address, cuisine) VALUES (?, ?, ?, ?, ?)");
+(restaurantName, phoneNumber, website, address, cuisine, admin_added) VALUES (?, ?, ?, ?, ?, ?)");
         // Bind & execute the query statement:
-        $stmt->bind_param("sssss", $restaurantName, $phoneNumber, $website, $address, $cuisine);
+        $stmt->bind_param("ssssss", $restaurantName, $phoneNumber, $website, $address, $cuisine, $adminAdded);
         if (!$stmt->execute()) {
             $errorMsg = "Execute failed: (" . $stmt->errno . ") " .
                 $stmt->error;
@@ -107,6 +111,9 @@ function saveRest()
                     <div class="mb-3">
                         <label class="form-label"><strong>Cuisine:</strong></label>
                         <input type="text" name="cuisine" class="form-control" aria-label="cusine">
+                    </div>
+                    <div class="mb-3">
+                        <input type="hidden" name="admin_added" class="form-control" aria-label="admin_added" value="No">
                     </div>
                     <button type="submit" class="btn btn-success">Send request</button>
                 </form>
