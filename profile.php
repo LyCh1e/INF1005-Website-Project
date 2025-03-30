@@ -67,10 +67,10 @@ $conn->close();
             </div>
             <hr style="border: 2px solid black;">
             <section id="userReview" class="w3-container menu w3-padding">
-                <?php if($_SESSION['admin'] == "No"): ?>
-                <h2 style="text-align: center;">Reviews created</h2>
-                <p style="text-align: center;">Want to view your bookings? <a href="booking.php"
-                        style='color: rgb(0, 78, 74)'>Click here!</a></p>
+                <?php if ($_SESSION['admin'] == "No"): ?>
+                    <h2 style="text-align: center;">Reviews created</h2>
+                    <p style="text-align: center;">Want to view your bookings? <a href="booking.php"
+                            style='color: rgb(0, 78, 74)'>Click here!</a></p>
                 <?php else: ?>
                     <h2 style="text-align: center;">Reviews</h2>
                 <?php endif; ?>

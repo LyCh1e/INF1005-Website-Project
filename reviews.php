@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+session_start();
 
 $config = parse_ini_file('/var/www/private/db-config.ini');
 if (!$config) {
@@ -87,7 +85,7 @@ $conn->close();
                     <a href="new_review.php?restaurant=<?= urlencode($_GET['restaurant']) ?>" class='btn'
                         style='background-color: rgb(0, 146, 131); color: white'>Write a Review!</a>
                 </p>
-            <?php elseif ($_SESSION['admin'] == "Yes"): ?>
+            <?php elseif (isset($_SESSION['email']) && $_SESSION['admin'] == "Yes"): ?>
 
             <?php else: ?>
                 <div>

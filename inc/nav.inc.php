@@ -32,6 +32,14 @@
             </li>
         </ul>
         <ul class="navbar-nav">
+            <?php if (isset($_SESSION['email']) && $_SESSION['admin'] == "Yes"): ?>
+                <li class="nav-item">
+                    <div style="display: inline-block; padding: 5px; padding-top: 10px; white-space: nowrap;">
+                        <a href="rest_req.php" aria-label="rest_req">
+                        <i class="fas fa-bell" style="font-size: 35px; color: white;"></i></a>
+                    </div>
+                </li>
+            <?php endif; ?>
             <?php if (isset($_SESSION['fname'])): ?>
                 <li class="nav-item">
                 <div style="font-size: 24px; align-content: center; padding-top: 10px;">

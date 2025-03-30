@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+session_start();
 
 $config = parse_ini_file('/var/www/private/db-config.ini');
 if (!$config) {
@@ -174,14 +172,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
         </section>
 
         <section class="add-review-section">
-            <?php if (($_SESSION['admin']) == "Yes"): ?>
+            <?php if (isset($_SESSION['email']) && ($_SESSION['admin']) == "Yes"): ?>
                 <h2 style="font-size: 24px">
-                    <a href="new_review.php" style="color: rgb(0, 78, 74);">Add requested restaurant!</a>
+                    <a href="show_rest_created.php" style="color: rgb(0, 78, 74);">View created restaurants!</a>
                 </h2>
+                <br>
             <?php elseif (isset($_SESSION['email'])): ?>
                 <h2 style="font-size: 24px">
                     Can't find the restaurant?
-                    <a href="request_restForm.php" style="color: rgb(0, 78, 74);">Click here send request to admin to add
+                    <a href="rest_req_form.php" style="color: rgb(0, 78, 74);">Click here send request to admin to add
                         the restaurant!</a>
                 </h2>
             <?php else: ?>

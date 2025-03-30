@@ -113,6 +113,29 @@ if ($_SESSION['admin'] == "No") {
 // Fetch all reviews
 $result = $conn->query("SELECT * FROM reviews ORDER BY created_at DESC");
 $reviews = $result->fetch_all(MYSQLI_ASSOC);
+
+if (isset($_GET['id']) && !empty($_GET['id'])) {
+    $rid = trim($_GET['id']);
+}
+
+$stmt3 = $conn->prepare("SELECT * FROM add_restaurant WHERE id = ?");
+$stmt3->bind_param("i", $rid);
+$stmt3->execute();
+$result1 = $stmt3->get_result();
+while ($rows = $result1->fetch_assoc()) {
+    $rest_req[] = $rows;
+}
+$stmt3->close();
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    $rid = intval($_POST['id']);
+    $adminAdded = "Yes";
+    $stmt4 = $conn->prepare("UPDATE add_restaurant SET admin_added = ? WHERE id = ?");
+    $stmt4->bind_param("si", $adminAdded, $rid);
+    $stmt4->execute();
+    $stmt4->close();
+}
+// $rest_req = $result->fetch_all(MYSQLI_ASSOC);
+// print_r($rest_req);
 $conn->close();
 ?>
 
@@ -185,32 +208,52 @@ $conn->close();
             </div>
         <?php endif; ?>
         <?php if (!isset($_GET['restaurant']) && $_SESSION['admin'] == "Yes"): ?>
-            <div class="container mt-5">
-                <h1 class="text-center">Add new restaurant</h1>
-                <form method="POST" class="mb-4">
-                    <div class="mb-3">
-                        <label class="form-label"><strong>Restaurant Name:</strong></label>
-                        <input type="text" name="restaurantName" class="form-control" aria-label="Rname" required>
+            <?php foreach ($rest_req as $restreq): ?>
+                <?php if ($restreq['admin_added'] == "No"): ?>
+                    <div class="container mt-5">
+                        <h1 class="text-center">Add new restaurant</h1>
+                        <form method="POST" class="mb-4">
+                            <div class="mb-3">
+                                <label class="form-label"><strong>Restaurant Name:</strong></label>
+                                <input type="text" name="restaurantName" class="form-control" aria-label="Rname"
+                                    value="<?= htmlspecialchars($restreq['restaurantName']) ?>" required>
+                                <input type="hidden" name="name" value="<?= htmlspecialchars($restreq['restaurantName']) ?>">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label"><strong>Website:</strong></label>
+                                <input type="text" name="website" class="form-control" aria-label="web"
+                                    value="<?= htmlspecialchars($restreq['website']) ?>" required>
+                                <input type="hidden" name="website" value="<?= htmlspecialchars($restreq['website']) ?>">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label"><strong>Address:</strong></label>
+                                <input type="text" name="address" class="form-control" aria-label="add"
+                                    value="<?= htmlspecialchars($restreq['address']) ?>" required>
+                                <input type="hidden" name="address" value="<?= htmlspecialchars($restreq['address']) ?>">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label"><strong>Phone Number:</strong></label>
+                                <input type="text" name="phone" class="form-control" aria-label="phone"
+                                    value="<?= htmlspecialchars($restreq['phoneNumber']) ?>" required>
+                                <input type="hidden" name="phone" value="<?= htmlspecialchars($restreq['phoneNumber']) ?>">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label"><strong>Cuisine:</strong></label>
+                                <input type="text" name="cuisine" class="form-control" aria-label="cusine"
+                                    value="<?= htmlspecialchars($restreq['cuisine']) ?>" required>
+                                <input type="hidden" name="cuisine" value="<?= htmlspecialchars($restreq['cuisine']) ?>">
+                            </div>
+                            <div class="mb-3">
+                                <input type="hidden" name="id" value="<?=htmlspecialchars($restreq['id'])?> ">
+                                <input type="hidden" name="admin_added" class="form-control" aria-label="admin_added"
+                                    value="Yes" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-success">Add Restaurant</button>
+                        </form>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label"><strong>Website:</strong></label>
-                        <input type="text" name="website" class="form-control" aria-label="web" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label"><strong>Address:</strong></label>
-                        <input type="text" name="address" class="form-control" aria-label="add" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label"><strong>Phone Number:</strong></label>
-                        <input type="text" name="phone" class="form-control" aria-label="phone" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label"><strong>Cuisine:</strong></label>
-                        <input type="text" name="cuisine" class="form-control" aria-label="cusine" required>
-                    </div>
-                    <button type="submit" class="btn btn-success">Add Restaurant</button>
-                </form>
-            </div>
+                <?php endif; ?>
+            <?php endforeach; ?>
         <?php endif; ?>
     </main>
     <?php
