@@ -107,7 +107,7 @@ function saveRest()
                         <label class="form-label"><strong>Cuisine:</strong></label>
                         <input type="text" name="cuisine" class="form-control" aria-label="cusine">
                     </div>
-                    <button type="submit" class="btn btn-success">Add Restaurant</button>
+                    <button type="submit" class="btn btn-success">Send request</button>
                 </form>
             </div>
         <?php endif; ?>
