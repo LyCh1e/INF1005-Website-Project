@@ -67,6 +67,14 @@ $rest_req = $result->fetch_all(MYSQLI_ASSOC);
                                         </p>
                                         <p class="card-text"><strong>Cuisine: </strong><?= htmlspecialchars($requests['cuisine']) ?></p>
                                     </a>
+                                    <div class="icon-container" style="position: absolute; top: 20px; right: 20px;">
+                                        <p>
+                                            <a href="delete_rest.php?id=<?= $requests['id'] ?>&restaurantName=<?= urlencode($requests['restaurantName']) ?>"
+                                                aria-label="DeleteRest" onclick="return confirm('Are you sure?')">
+                                                <i class="fas fa-trash-alt" style="font-size: 35px; color: dark grey;"></i>
+                                            </a>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +82,7 @@ $rest_req = $result->fetch_all(MYSQLI_ASSOC);
                     <?php endif; ?>
                 <?php endforeach; ?>
             <?php endif; ?>
-        <?php else:?>
+        <?php else: ?>
             <h2 class="text-center">Admins Only!</h2>
         <?php endif; ?>
     </main>
