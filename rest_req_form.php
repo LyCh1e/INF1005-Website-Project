@@ -1,8 +1,8 @@
 <?php
 session_start();
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 $restaurantName = $phoneNumber = $website = $address = $cuisine = $adminAdded = "";
 $success = true;
 $errors = [];
@@ -118,9 +118,9 @@ function saveRest()
                     <button type="submit" class="btn btn-success">Send request</button>
                 </form>
             </div>
-        <?php elseif ($_SESSION['admin'] == "Yes"): ?>
+        <?php elseif (isset($_SESSION['email']) && $_SESSION['admin'] == "Yes"): ?>
             <h2 class="text-center">Admins cannot send requests.</h2>
-        <?php elseif (!$_SESSION['email']): ?>
+        <?php elseif (!isset($_SESSION['email'])): ?>
             <a href="login.php"> <h2 class="text-center">Please log in to send requests.</h2></a>
         <?php endif; ?>
     </main>
