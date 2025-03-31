@@ -1,10 +1,6 @@
 <?php
 session_start();
-// if (!isset($_SESSION['fname'])) {
-//     echo "Admins only!";
-// } elseif ($_SESSION['admin'] == "No") {
-//     echo "Admins only!";
-// }
+
 $config = parse_ini_file('/var/www/private/db-config.ini');
 if (!$config) {
     die("Failed to read database config file.");
