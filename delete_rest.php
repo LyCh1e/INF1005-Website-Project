@@ -57,7 +57,4 @@ if (isset($_GET['id']) && isset($_SESSION['email'])) {
 
     $conn->close();
 }
-// else {
-// echo "<script>alert('Unauthorized access.'); window.location.href='reviews.php?restaurant=" . htmlspecialchars($_GET['restaurantName']) . "';</script>";
-// }
 ?>
