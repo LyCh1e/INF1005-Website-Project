@@ -56,7 +56,7 @@ if (empty($_POST["email"])) {
         $errorMsg .= "Invalid email format.";
         $success = false;
     }
-    
+
 }
 function sanitize_input($data)
 {
@@ -92,17 +92,31 @@ function saveMemberToDB()
         $stmt->execute();
         $result = $stmt->get_result();
         $domain = substr(strrchr($email, "@"), 1);
-        $adminEmail = "gastronome.guide.com";
-        if ($domain === $adminEmail){
+        $adminEmail = "gastronome.guide";
+        if ($domain === $adminEmail) {
             $isAdmin = "Yes";
-        }else{
+        } else {
             $isAdmin = "No";
         }
-        
-        if($result->num_rows > 0){
-            $errorMsg = "Phone number or email already exists.";
-            $success = false;
-        }else {
+
+        if ($result->num_rows > 0) {
+            $adminExist = "SELECT COUNT(*) AS count FROM world_of_pets_members WHERE admin = 'Yes'";
+            $isAdminExist = $conn->query($adminExist);
+            if ($isAdminExist) {
+                $row = $isAdminExist->fetch_assoc();
+                $adminCount = $row['count'];
+                if ($adminCount >= 1) {
+                    $errorMsg = "Admin already exists!";
+                    $success = false;
+                    exit();
+                    // return;
+                } else {
+                    $errorMsg = "Phone number or email already exists.";
+                    $success = false;
+                }
+            }
+            // $success = false;
+        } else {
             // Prepare the statement:
             $stmt = $conn->prepare("INSERT INTO world_of_pets_members
 (fname, lname, email, phone_number, password, admin) VALUES (?, ?, ?, ?, ?, ?)");
@@ -140,6 +154,7 @@ if ($success) {
             padding: 0;
             background-color: #f8f9fa;
         }
+
         h1 {
             color: rgb(0, 146, 131);
             margin-bottom: 10px;
@@ -176,18 +191,18 @@ if ($success) {
     <?php include "inc/nav.inc.php"; ?>
     <main>
         <div style="text-align: center;  padding-top: 10px">
-        <?php if ($success) { ?>
-            <!-- Successful Authentication View -->
-            <h1>Your registration is successful!!</h1>
-            <h3>Thank you for signing up, <?php echo $fname; ?>.</h3>
-            <p><a href="login.php"><button class="loginbutton">Login</button></a></p>
-        <?php } else { ?>
-            <!-- Failed Authentication View -->
-            <h1>Oops!</h1>
-            <h3>The following errors were detected:</h3>
-            <p><?php echo $errorMsg; ?></p>
-            <p><a href="register.php"><button class="regbutton">Return Sign Up</button></a></p>
-        <?php } ?>
+            <?php if ($success) { ?>
+                <!-- Successful Authentication View -->
+                <h1>Your registration is successful!!</h1>
+                <h3>Thank you for signing up, <?php echo $fname; ?>.</h3>
+                <p><a href="login.php"><button class="loginbutton">Login</button></a></p>
+            <?php } else { ?>
+                <!-- Failed Authentication View -->
+                <h1>Oops!</h1>
+                <h3>The following errors were detected:</h3>
+                <p><?php echo $errorMsg; ?></p>
+                <p><a href="register.php"><button class="regbutton">Return Sign Up</button></a></p>
+            <?php } ?>
         </div>
     </main>
 
