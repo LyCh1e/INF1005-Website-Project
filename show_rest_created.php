@@ -56,7 +56,7 @@ $rest_req = $result->fetch_all(MYSQLI_ASSOC);
                                             </strong><?= htmlspecialchars($requests['restaurantName']) ?></h3>
                                         <p class="card-text"><strong>Website: </strong><?= htmlspecialchars($requests['website']) ?></p>
                                         <p class="card-text"><strong>Address: </strong><?= htmlspecialchars($requests['address']) ?></p>
-                                        <p class="card-text"><strong>Contact: </strong><?= htmlspecialchars($requests['phoneNumber']) ?>
+                                        <p class="card-text"><strong>Contact: </strong><?= htmlspecialchars($requests['phone']) ?>
                                         </p>
                                         <p class="card-text"><strong>Cuisine: </strong><?= htmlspecialchars($requests['cuisine']) ?></p>
                                     </a>

@@ -128,9 +128,14 @@ while ($rows = $result1->fetch_assoc()) {
 $stmt3->close();
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $rid = intval($_POST['id']);
+    $restaurantName = trim($_POST['restaurantName']);
+    $website = trim($_POST['website']);
+    $address = trim($_POST['address']);
+    $phoneNumber = trim($_POST['phone']);
+    $cuisine = trim($_POST['cuisine']);
     $adminAdded = "Yes";
-    $stmt4 = $conn->prepare("UPDATE add_restaurant SET admin_added = ? WHERE id = ?");
-    $stmt4->bind_param("si", $adminAdded, $rid);
+    $stmt4 = $conn->prepare("UPDATE add_restaurant SET restaurantName = ?, website = ?, address = ?, phone = ?, cuisine = ?, admin_added = ? WHERE id = ?");
+    $stmt4->bind_param("ssssssi", $restaurantName,$website, $address, $phoneNumber, $cuisine,  $adminAdded, $rid);
     $stmt4->execute();
     $stmt4->close();
 }
@@ -215,33 +220,28 @@ $conn->close();
                         <form method="POST" class="mb-4">
                             <div class="mb-3">
                                 <label class="form-label"><strong>Restaurant Name:</strong></label>
-                                <input type="text" name="restaurantName" class="form-control" aria-label="Rname"
+                                <input type="text" name="restaurantName" class="form-control" aria-label="restaurantName"
                                     value="<?= htmlspecialchars($restreq['restaurantName']) ?>" required>
-                                <input type="hidden" name="name" value="<?= htmlspecialchars($restreq['restaurantName']) ?>">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label"><strong>Website:</strong></label>
-                                <input type="text" name="website" class="form-control" aria-label="web"
+                                <input type="text" name="website" class="form-control" aria-label="website"
                                     value="<?= htmlspecialchars($restreq['website']) ?>" required>
-                                <input type="hidden" name="website" value="<?= htmlspecialchars($restreq['website']) ?>">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label"><strong>Address:</strong></label>
-                                <input type="text" name="address" class="form-control" aria-label="add"
+                                <input type="text" name="address" class="form-control" aria-label="address"
                                     value="<?= htmlspecialchars($restreq['address']) ?>" required>
-                                <input type="hidden" name="address" value="<?= htmlspecialchars($restreq['address']) ?>">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label"><strong>Phone Number:</strong></label>
                                 <input type="text" name="phone" class="form-control" aria-label="phone"
-                                    value="<?= htmlspecialchars($restreq['phoneNumber']) ?>" required>
-                                <input type="hidden" name="phone" value="<?= htmlspecialchars($restreq['phoneNumber']) ?>">
+                                    value="<?= htmlspecialchars($restreq['phone']) ?>" required>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label"><strong>Cuisine:</strong></label>
                                 <input type="text" name="cuisine" class="form-control" aria-label="cusine"
                                     value="<?= htmlspecialchars($restreq['cuisine']) ?>" required>
-                                <input type="hidden" name="cuisine" value="<?= htmlspecialchars($restreq['cuisine']) ?>">
                             </div>
                             <div class="mb-3">
                                 <input type="hidden" name="id" value="<?=htmlspecialchars($restreq['id'])?> ">

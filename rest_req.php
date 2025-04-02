@@ -16,7 +16,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$stmt = $conn->prepare("SELECT id, restaurantName, website, address, phoneNumber, cuisine, admin_added FROM add_restaurant");
+$stmt = $conn->prepare("SELECT id, restaurantName, website, address, phone, cuisine, admin_added FROM add_restaurant");
 $stmt->execute();
 $result = $stmt->get_result();
 $rest_req = $result->fetch_all(MYSQLI_ASSOC);
@@ -47,7 +47,7 @@ $rest_req = $result->fetch_all(MYSQLI_ASSOC);
                                     </strong><?= htmlspecialchars($requests['restaurantName']) ?></h3>
                                 <p class="card-text"><strong>Website: </strong><?= htmlspecialchars($requests['website']) ?></p>
                                 <p class="card-text"><strong>Address: </strong><?= htmlspecialchars($requests['address']) ?></p>
-                                <p class="card-text"><strong>Contact: </strong><?= htmlspecialchars($requests['phoneNumber']) ?></p>
+                                <p class="card-text"><strong>Contact: </strong><?= htmlspecialchars($requests['phone']) ?></p>
                                 <p class="card-text"><strong>Cuisine: </strong><?= htmlspecialchars($requests['cuisine']) ?></p>
                             </div>
                             <div class="icon-container" style="position: absolute; top: 20px; right: 20px;">

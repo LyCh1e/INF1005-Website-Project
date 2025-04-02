@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $address = sanitize_input($_POST["address"]);
     }
-    $phoneNumber = isset($_POST['phoneNumber']) ? sanitize_input($_POST['phoneNumber']) : '';
+    $phoneNumber = isset($_POST['phone']) ? sanitize_input($_POST['phone']) : '';
     $website = isset($_POST['website']) ? sanitize_input($_POST['website']) : '';
     $cuisine = isset($_POST['cuisine']) ? sanitize_input($_POST['cuisine']) : '';
     $adminAdded = isset($_POST['admin_added']) ? sanitize_input($_POST['admin_added']) : '';
@@ -55,7 +55,7 @@ function saveRest()
             $success = false;
         }
         $stmt = $conn->prepare("INSERT INTO add_restaurant
-(restaurantName, phoneNumber, website, address, cuisine, admin_added) VALUES (?, ?, ?, ?, ?, ?)");
+(restaurantName, phone, website, address, cuisine, admin_added) VALUES (?, ?, ?, ?, ?, ?)");
         // Bind & execute the query statement:
         $stmt->bind_param("ssssss", $restaurantName, $phoneNumber, $website, $address, $cuisine, $adminAdded);
         if (!$stmt->execute()) {
@@ -104,7 +104,7 @@ function saveRest()
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><strong>Phone Number:</strong></label>
-                        <input type="text" name="phoneNumber" class="form-control" aria-label="phoneNumber">
+                        <input type="text" name="phone" class="form-control" aria-label="phone">
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><strong>Cuisine:</strong></label>
