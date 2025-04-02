@@ -60,6 +60,29 @@ if (isset($_GET['email']) && isset($_GET['token'])) {
 <head>
     <?php include "inc/head.inc.php"; ?>
     <title>Reset Password - Gastronome's Guide</title>
+    <style>
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .is-invalid {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25) !important;
+        }
+
+        .password-length-error,
+        .password-uppercase-error,
+        .password-lowercase-error,
+        .password-special-char-error {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -69,7 +92,7 @@ if (isset($_GET['email']) && isset($_GET['token'])) {
 
         <?php if ($validToken): ?>
             <p>Your identity has been verified. Please enter your new password below.</p>
-            <form action="process_reset_password.php" method="post">
+            <form id="resetPasswordForm" action="process_reset_password.php" method="post">
                 <input type="hidden" name="email" value="<?= htmlspecialchars($email) ?>">
                 <input type="hidden" name="token" value="<?= htmlspecialchars($token) ?>">
 
@@ -82,6 +105,18 @@ if (isset($_GET['email']) && isset($_GET['token'])) {
                             style="background: none; border: none; padding-left: 10px"><i class="fas fa-eye"
                                 id="eyeIcon"></i></button>
                     </div>
+                    <div id="passwordLengthError" class="password-length-error">
+                        Password must be at least 8 characters long
+                    </div>
+                    <div id="passwordUppercaseError" class="password-uppercase-error">
+                        Password must contain at least one uppercase letter
+                    </div>
+                    <div id="passwordLowercaseError" class="password-lowercase-error">
+                        Password must contain at least one lowercase letter
+                    </div>
+                    <div id="passwordSpecialCharError" class="password-special-char-error">
+                        Password must contain at least one special character (e.g., !@#$%^&*)
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="pwd_confirm" class="form-label">Confirm New Password:</label>
@@ -92,6 +127,7 @@ if (isset($_GET['email']) && isset($_GET['token'])) {
                             style="background: none; border: none; padding-left: 10px"><i class="fas fa-eye"
                                 id="CeyeIcon"></i></button>
                     </div>
+                    <div id="passwordError" class="error-message">Passwords do not match</div>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn" style='background-color: rgb(0, 146, 131); color: white'>Update
@@ -107,6 +143,125 @@ if (isset($_GET['email']) && isset($_GET['token'])) {
         <?php endif; ?>
     </main>
     <?php include "inc/footer.inc.php"; ?>
+    <script src="js/main.js"></script>
+    <script>
+        // Add reset password form validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const resetPasswordForm = document.getElementById('resetPasswordForm');
+            if (resetPasswordForm) {
+                // Get password related elements
+                const passwordField = document.getElementById('pwd');
+                const confirmPasswordField = document.getElementById('pwd_confirm');
+                const passwordError = document.getElementById('passwordError');
+                const passwordLengthError = document.getElementById('passwordLengthError');
+                const passwordUppercaseError = document.getElementById('passwordUppercaseError');
+                const passwordLowercaseError = document.getElementById('passwordLowercaseError');
+                const passwordSpecialCharError = document.getElementById('passwordSpecialCharError');
+
+                // Function to validate password
+                const validatePassword = function(password) {
+                    let isValid = true;
+
+                    // Check password length
+                    if (password.length < 8) {
+                        passwordLengthError.style.display = 'block';
+                        isValid = false;
+                    } else {
+                        passwordLengthError.style.display = 'none';
+                    }
+
+                    // Check for at least one uppercase letter
+                    if (!/[A-Z]/.test(password)) {
+                        passwordUppercaseError.style.display = 'block';
+                        isValid = false;
+                    } else {
+                        passwordUppercaseError.style.display = 'none';
+                    }
+
+                    // Check for at least one lowercase letter
+                    if (!/[a-z]/.test(password)) {
+                        passwordLowercaseError.style.display = 'block';
+                        isValid = false;
+                    } else {
+                        passwordLowercaseError.style.display = 'none';
+                    }
+
+                    // Check for at least one special character
+                    if (!/[!@#$%^&*]/.test(password)) {
+                        passwordSpecialCharError.style.display = 'block';
+                        isValid = false;
+                    } else {
+                        passwordSpecialCharError.style.display = 'none';
+                    }
+
+                    return isValid;
+                };
+
+                resetPasswordForm.addEventListener('submit', function(event) {
+                    const password = passwordField.value;
+                    const confirmPassword = confirmPasswordField.value;
+
+                    let isValid = true;
+
+                    // Reset error messages
+                    passwordError.style.display = 'none';
+                    passwordLengthError.style.display = 'none';
+                    passwordUppercaseError.style.display = 'none';
+                    passwordLowercaseError.style.display = 'none';
+                    passwordSpecialCharError.style.display = 'none';
+
+                    // Validate password
+                    if (!validatePassword(password)) {
+                        event.preventDefault(); // Prevent form submission
+                        passwordField.classList.add('is-invalid');
+                        isValid = false;
+                    } else {
+                        passwordField.classList.remove('is-invalid');
+                    }
+
+                    // Check if passwords match
+                    if (password !== confirmPassword) {
+                        event.preventDefault(); // Prevent form submission
+                        passwordError.style.display = 'block';
+                        confirmPasswordField.classList.add('is-invalid');
+                        isValid = false;
+                    } else {
+                        confirmPasswordField.classList.remove('is-invalid');
+                    }
+
+                    return isValid;
+                });
+
+                // Real-time password validation
+                if (passwordField) {
+                    passwordField.addEventListener('input', function() {
+                        validatePassword(passwordField.value);
+                    });
+                }
+
+                // Real-time password match validation
+                if (confirmPasswordField && passwordField) {
+                    // Function to check password match
+                    const checkPasswordMatch = function() {
+                        const password = passwordField.value;
+                        const confirmPassword = confirmPasswordField.value;
+
+                        if (confirmPassword !== '' && password !== confirmPassword) {
+                            passwordError.style.display = 'block';
+                            confirmPasswordField.classList.add('is-invalid');
+                        } else {
+                            passwordError.style.display = 'none';
+                            confirmPasswordField.classList.remove('is-invalid');
+                        }
+                    };
+
+                    // Add input listeners
+                    confirmPasswordField.addEventListener('input', checkPasswordMatch);
+                    passwordField.addEventListener('input', checkPasswordMatch);
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

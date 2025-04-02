@@ -26,6 +26,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $errorMsg .= "Password must be at least 8 characters long.<br>";
             $success = false;
         }
+        // Check for uppercase letter
+        if (!preg_match('/[A-Z]/', $pwd)) {
+            $errorMsg .= "Password must contain at least one uppercase letter.<br>";
+            $success = false;
+        }
+        // Check for lowercase letter
+        if (!preg_match('/[a-z]/', $pwd)) {
+            $errorMsg .= "Password must contain at least one lowercase letter.<br>";
+            $success = false;
+        }
+        // Check for special character
+        if (!preg_match('/[!@#$%^&*]/', $pwd)) {
+            $errorMsg .= "Password must contain at least one special character (e.g., !@#$%^&*).<br>";
+            $success = false;
+        }
     }
 
     // Validate password confirmation
