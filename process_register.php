@@ -108,14 +108,10 @@ function saveMemberToDB()
                 if ($adminCount >= 1) {
                     $errorMsg = "Admin already exists!";
                     $success = false;
-                    exit();
-                    // return;
-                } else {
-                    $errorMsg = "Phone number or email already exists.";
-                    $success = false;
                 }
             }
-            // $success = false;
+            $errorMsg = "Phone number or email already exists.";
+            $success = false;
         } else {
             // Prepare the statement:
             $stmt = $conn->prepare("INSERT INTO world_of_pets_members
